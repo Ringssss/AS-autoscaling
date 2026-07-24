@@ -1,0 +1,1990 @@
+[
+  {
+    "path": ".git/HEAD",
+    "extension": "",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 21
+  },
+  {
+    "path": ".git/config",
+    "extension": "",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 92
+  },
+  {
+    "path": ".git/description",
+    "extension": "",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 73
+  },
+  {
+    "path": ".git/hooks/applypatch-msg.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 478
+  },
+  {
+    "path": ".git/hooks/commit-msg.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 896
+  },
+  {
+    "path": ".git/hooks/fsmonitor-watchman.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 4655
+  },
+  {
+    "path": ".git/hooks/post-update.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 189
+  },
+  {
+    "path": ".git/hooks/pre-applypatch.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 424
+  },
+  {
+    "path": ".git/hooks/pre-commit.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 1643
+  },
+  {
+    "path": ".git/hooks/pre-merge-commit.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 416
+  },
+  {
+    "path": ".git/hooks/pre-push.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 1374
+  },
+  {
+    "path": ".git/hooks/pre-rebase.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 4898
+  },
+  {
+    "path": ".git/hooks/pre-receive.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 544
+  },
+  {
+    "path": ".git/hooks/prepare-commit-msg.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 1492
+  },
+  {
+    "path": ".git/hooks/push-to-checkout.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2783
+  },
+  {
+    "path": ".git/hooks/update.sample",
+    "extension": ".sample",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 3650
+  },
+  {
+    "path": ".git/info/exclude",
+    "extension": "",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 240
+  },
+  {
+    "path": ".gitignore",
+    "extension": "",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 183
+  },
+  {
+    "path": ".pytest_cache/.gitignore",
+    "extension": "",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 37
+  },
+  {
+    "path": ".pytest_cache/CACHEDIR.TAG",
+    "extension": ".tag",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 191
+  },
+  {
+    "path": ".pytest_cache/README.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 302
+  },
+  {
+    "path": ".pytest_cache/v/cache/lastfailed",
+    "extension": "",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2
+  },
+  {
+    "path": ".pytest_cache/v/cache/nodeids",
+    "extension": "",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2714
+  },
+  {
+    "path": "README.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 1183
+  },
+  {
+    "path": "agentshift/__init__.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 184
+  },
+  {
+    "path": "agentshift/__pycache__/__init__.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 289
+  },
+  {
+    "path": "agentshift/controller/__init__.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 958
+  },
+  {
+    "path": "agentshift/controller/__pycache__/__init__.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 864
+  },
+  {
+    "path": "agentshift/controller/__pycache__/baselines.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2787
+  },
+  {
+    "path": "agentshift/controller/__pycache__/migration.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 9214
+  },
+  {
+    "path": "agentshift/controller/__pycache__/migration.cpython-313.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 11331
+  },
+  {
+    "path": "agentshift/controller/__pycache__/placement.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 5962
+  },
+  {
+    "path": "agentshift/controller/__pycache__/tiered.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 6446
+  },
+  {
+    "path": "agentshift/controller/baselines.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 2939
+  },
+  {
+    "path": "agentshift/controller/migration.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 15057
+  },
+  {
+    "path": "agentshift/controller/placement.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 6704
+  },
+  {
+    "path": "agentshift/controller/tiered.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 9430
+  },
+  {
+    "path": "agentshift/engine/__init__.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 98
+  },
+  {
+    "path": "agentshift/engine/__pycache__/__init__.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 215
+  },
+  {
+    "path": "agentshift/engine/__pycache__/sglang.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 7573
+  },
+  {
+    "path": "agentshift/engine/__pycache__/sglang.cpython-313.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 6330
+  },
+  {
+    "path": "agentshift/engine/sglang.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 9116
+  },
+  {
+    "path": "agentshift/runtime/__init__.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 328
+  },
+  {
+    "path": "agentshift/runtime/__pycache__/__init__.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 430
+  },
+  {
+    "path": "agentshift/runtime/__pycache__/effects.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 1679
+  },
+  {
+    "path": "agentshift/runtime/__pycache__/executor.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 1789
+  },
+  {
+    "path": "agentshift/runtime/__pycache__/mailbox.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 970
+  },
+  {
+    "path": "agentshift/runtime/__pycache__/ownership.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 732
+  },
+  {
+    "path": "agentshift/runtime/effects.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 2019
+  },
+  {
+    "path": "agentshift/runtime/executor.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 1803
+  },
+  {
+    "path": "agentshift/runtime/mailbox.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 457
+  },
+  {
+    "path": "agentshift/runtime/ownership.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 349
+  },
+  {
+    "path": "agentshift/state/__init__.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 242
+  },
+  {
+    "path": "agentshift/state/__pycache__/__init__.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 338
+  },
+  {
+    "path": "agentshift/state/__pycache__/schema.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2623
+  },
+  {
+    "path": "agentshift/state/__pycache__/store.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 17680
+  },
+  {
+    "path": "agentshift/state/schema.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 1664
+  },
+  {
+    "path": "agentshift/state/store.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 23993
+  },
+  {
+    "path": "agentshift/workloads/__init__.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 167
+  },
+  {
+    "path": "agentshift/workloads/__pycache__/__init__.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 267
+  },
+  {
+    "path": "agentshift/workloads/__pycache__/traces.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2530
+  },
+  {
+    "path": "agentshift/workloads/traces.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 2659
+  },
+  {
+    "path": "docs/evaluation_report_20260721.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 13472
+  },
+  {
+    "path": "docs/implementation_plan.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 8850
+  },
+  {
+    "path": "paper_rewriting_output/paper_spine_config.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "draft",
+    "size_bytes": 1036
+  },
+  {
+    "path": "paper_rewriting_output/paper_spine_config.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "draft",
+    "size_bytes": 997
+  },
+  {
+    "path": "paper_rewriting_output/reference_materials/agentix_nsdi26.pdf",
+    "extension": ".pdf",
+    "file_type": "pdf",
+    "role_hint": "material",
+    "size_bytes": 1388969
+  },
+  {
+    "path": "paper_rewriting_output/reference_materials/blitzscale_osdi25.pdf",
+    "extension": ".pdf",
+    "file_type": "pdf",
+    "role_hint": "material",
+    "size_bytes": 5418392
+  },
+  {
+    "path": "paper_rewriting_output/reference_materials/continuum.pdf",
+    "extension": ".pdf",
+    "file_type": "pdf",
+    "role_hint": "material",
+    "size_bytes": 1008345
+  },
+  {
+    "path": "paper_rewriting_output/reference_materials/fastserve_atc23.pdf",
+    "extension": ".pdf",
+    "file_type": "pdf",
+    "role_hint": "material",
+    "size_bytes": 617185
+  },
+  {
+    "path": "paper_rewriting_output/reference_materials/llumnix_osdi24.pdf",
+    "extension": ".pdf",
+    "file_type": "pdf",
+    "role_hint": "material",
+    "size_bytes": 1940597
+  },
+  {
+    "path": "paper_rewriting_output/reference_materials/symphony_nsdi26.pdf",
+    "extension": ".pdf",
+    "file_type": "pdf",
+    "role_hint": "material",
+    "size_bytes": 1788114
+  },
+  {
+    "path": "paper_rewriting_output/reference_materials/tokencake.pdf",
+    "extension": ".pdf",
+    "file_type": "pdf",
+    "role_hint": "material",
+    "size_bytes": 2035712
+  },
+  {
+    "path": "pyproject.toml",
+    "extension": ".toml",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 396
+  },
+  {
+    "path": "results/REPORT.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 3084
+  },
+  {
+    "path": "results/REPORT_ASYNC.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 9430
+  },
+  {
+    "path": "results/agent-workloads-1784819110111467791.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 9549
+  },
+  {
+    "path": "results/agent-workloads-run.log",
+    "extension": ".log",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 0
+  },
+  {
+    "path": "results/async-smoke-256-1784534049476103195.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 49152
+  },
+  {
+    "path": "results/async-smoke-256b-1784534362844639324.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 49152
+  },
+  {
+    "path": "results/benchmark-state-1784487016551485114.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 98304
+  },
+  {
+    "path": "results/benchmark-state-1784487057599804629.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 135168
+  },
+  {
+    "path": "results/benchmark-state-1784487115380324710.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 163840
+  },
+  {
+    "path": "results/benchmark-state-1784487198155014779.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 147456
+  },
+  {
+    "path": "results/benchmark-state-1784487249779635918.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 1171456
+  },
+  {
+    "path": "results/benchmark-state-1784535897272461014.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 106496
+  },
+  {
+    "path": "results/benchmark-state-1784535972500008106.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 106496
+  },
+  {
+    "path": "results/benchmark-state-1784536043945909143.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 3411968
+  },
+  {
+    "path": "results/benchmark-state-1784536283544910545.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 1388544
+  },
+  {
+    "path": "results/benchmark-state-1784537094922632456.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 1003520
+  },
+  {
+    "path": "results/benchmark-state-1784539611517605548.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 1019904
+  },
+  {
+    "path": "results/blocked-window-1784534753735209137.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 6886
+  },
+  {
+    "path": "results/blocked-window-1784535297296983765.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 138066
+  },
+  {
+    "path": "results/blocked-window-1784536919459548545.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 49031
+  },
+  {
+    "path": "results/blocked-window-1784539937523322519.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 25949
+  },
+  {
+    "path": "results/blocked-window-1784546849251150322.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 10268
+  },
+  {
+    "path": "results/blocked-window-1784546926146472183-summary.csv",
+    "extension": ".csv",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 2128
+  },
+  {
+    "path": "results/blocked-window-1784546926146472183-summary.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 7015
+  },
+  {
+    "path": "results/blocked-window-1784546926146472183-summary.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 1232
+  },
+  {
+    "path": "results/blocked-window-1784546926146472183.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 13151
+  },
+  {
+    "path": "results/blocked-window-1784547958552330795-summary.csv",
+    "extension": ".csv",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 34214
+  },
+  {
+    "path": "results/blocked-window-1784547958552330795-summary.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 113020
+  },
+  {
+    "path": "results/blocked-window-1784547958552330795-summary.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 15584
+  },
+  {
+    "path": "results/blocked-window-1784547958552330795.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 497080
+  },
+  {
+    "path": "results/blocked-window-1784560242254269484.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 6235
+  },
+  {
+    "path": "results/blocked-window-1784565792789187724-summary.csv",
+    "extension": ".csv",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 17096
+  },
+  {
+    "path": "results/blocked-window-1784565792789187724-summary.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 56799
+  },
+  {
+    "path": "results/blocked-window-1784565792789187724-summary.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 7943
+  },
+  {
+    "path": "results/blocked-window-1784565792789187724.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 290056
+  },
+  {
+    "path": "results/blocked-window-1784566204404099436-summary.csv",
+    "extension": ".csv",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 1168
+  },
+  {
+    "path": "results/blocked-window-1784566204404099436-summary.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 3838
+  },
+  {
+    "path": "results/blocked-window-1784566204404099436-summary.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 819
+  },
+  {
+    "path": "results/blocked-window-1784566204404099436.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 27910
+  },
+  {
+    "path": "results/blocked-window-state-1784534749963240437.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 262144
+  },
+  {
+    "path": "results/blocked-window-state-1784535106234997918.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 12365824
+  },
+  {
+    "path": "results/blocked-window-state-1784536832269856093.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 3383296
+  },
+  {
+    "path": "results/blocked-window-state-1784539825658361980.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 5144576
+  },
+  {
+    "path": "results/blocked-window-state-1784546843097327436.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 131072
+  },
+  {
+    "path": "results/blocked-window-state-1784546919861670926.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 151552
+  },
+  {
+    "path": "results/blocked-window-state-1784547113830403474.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 14983168
+  },
+  {
+    "path": "results/blocked-window-state-1784560239186126437.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 172032
+  },
+  {
+    "path": "results/blocked-window-state-1784565318869916954.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 10416128
+  },
+  {
+    "path": "results/blocked-window-state-1784566141712393221.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2842624
+  },
+  {
+    "path": "results/burst-matrix-1784535901184452004.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 3308
+  },
+  {
+    "path": "results/burst-matrix-1784535981998276893.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 3517
+  },
+  {
+    "path": "results/burst-matrix-1784536247087227712.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 21995
+  },
+  {
+    "path": "results/burst-matrix-1784536382649192042.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 14883
+  },
+  {
+    "path": "results/cleanup-smoke-1-1784537778899677315.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 90112
+  },
+  {
+    "path": "results/cleanup-smoke-2-1784537864582348520.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 212992
+  },
+  {
+    "path": "results/control-1000-1784819179323934499.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 622592
+  },
+  {
+    "path": "results/control-10000-1784819183936214529.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 1630208
+  },
+  {
+    "path": "results/control-100000-1784819192084085917.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 9023488
+  },
+  {
+    "path": "results/control-plane-1784819214062797714.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 15342
+  },
+  {
+    "path": "results/correctness-state-1784487535648480103.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 81920
+  },
+  {
+    "path": "results/correctness-state-1784487809892025746.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 81920
+  },
+  {
+    "path": "results/correctness-state-1784534389303840415.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 90112
+  },
+  {
+    "path": "results/correctness-state-1784537072633022075.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 90112
+  },
+  {
+    "path": "results/correctness-state-1784538525101928424.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 376832
+  },
+  {
+    "path": "results/correctness-state-1784539567544681245.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 376832
+  },
+  {
+    "path": "results/e2e-1784487019734013576.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 6330
+  },
+  {
+    "path": "results/e2e-1784487068844093674.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 2337
+  },
+  {
+    "path": "results/e2e-1784487134221135834.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 2336
+  },
+  {
+    "path": "results/e2e-1784487212601425644.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 2340
+  },
+  {
+    "path": "results/e2e-1784487320239905011.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 23836
+  },
+  {
+    "path": "results/e2e-1784537113268610412.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 14916
+  },
+  {
+    "path": "results/e2e-1784539658778872653.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 17509
+  },
+  {
+    "path": "results/effect-1784565271980404187.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 12288
+  },
+  {
+    "path": "results/effect-1784565931387279736.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 12288
+  },
+  {
+    "path": "results/elasticity-state-1784819551324237478.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 4747264
+  },
+  {
+    "path": "results/evaluation-environment-20260721.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 2061
+  },
+  {
+    "path": "results/fault-matrix-1784565271983652228.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 1791
+  },
+  {
+    "path": "results/fault-matrix-1784565931955792893.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 1923
+  },
+  {
+    "path": "results/fault-state-1784565269426093607.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 376832
+  },
+  {
+    "path": "results/fault-state-1784565928937126031.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 376832
+  },
+  {
+    "path": "results/final-smoke-1784488312730292323.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 49152
+  },
+  {
+    "path": "results/hotspot-1784560643761496524.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 9580
+  },
+  {
+    "path": "results/hotspot-1784562048129109124-summary.csv",
+    "extension": ".csv",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 9487
+  },
+  {
+    "path": "results/hotspot-1784562048129109124-summary.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 37039
+  },
+  {
+    "path": "results/hotspot-1784562048129109124-summary.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 4885
+  },
+  {
+    "path": "results/hotspot-1784562048129109124.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 154213
+  },
+  {
+    "path": "results/hotspot-1784563149712125542.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 1105
+  },
+  {
+    "path": "results/hotspot-1784563423928706158-summary.csv",
+    "extension": ".csv",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 1143
+  },
+  {
+    "path": "results/hotspot-1784563423928706158-summary.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 4149
+  },
+  {
+    "path": "results/hotspot-1784563423928706158-summary.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 661
+  },
+  {
+    "path": "results/hotspot-1784563423928706158.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 15456
+  },
+  {
+    "path": "results/hotspot-1784566696908767902-summary.csv",
+    "extension": ".csv",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 1146
+  },
+  {
+    "path": "results/hotspot-1784566696908767902-summary.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 4152
+  },
+  {
+    "path": "results/hotspot-1784566696908767902-summary.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 661
+  },
+  {
+    "path": "results/hotspot-1784566696908767902.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 24912
+  },
+  {
+    "path": "results/hotspot-state-1784560626709979061.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 192512
+  },
+  {
+    "path": "results/hotspot-state-1784560768011578609.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 18296832
+  },
+  {
+    "path": "results/hotspot-state-1784563138342843228.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 49152
+  },
+  {
+    "path": "results/hotspot-state-1784563208463374430.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 4157440
+  },
+  {
+    "path": "results/hotspot-state-1784566329199540328.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 6795264
+  },
+  {
+    "path": "results/interference-1784534649423960522.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 2722
+  },
+  {
+    "path": "results/interference-1784534986077328311.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 39653
+  },
+  {
+    "path": "results/interference-1784564046361063009-summary.csv",
+    "extension": ".csv",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 5150
+  },
+  {
+    "path": "results/interference-1784564046361063009-summary.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 16450
+  },
+  {
+    "path": "results/interference-1784564046361063009-summary.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 2874
+  },
+  {
+    "path": "results/interference-1784564046361063009.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 59318
+  },
+  {
+    "path": "results/interference-1784565193748286362-summary.csv",
+    "extension": ".csv",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 2078
+  },
+  {
+    "path": "results/interference-1784565193748286362-summary.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 6404
+  },
+  {
+    "path": "results/interference-1784565193748286362-summary.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 1117
+  },
+  {
+    "path": "results/interference-1784565193748286362.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 21806
+  },
+  {
+    "path": "results/interference-1784566871298243631-summary.csv",
+    "extension": ".csv",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 874
+  },
+  {
+    "path": "results/interference-1784566871298243631-summary.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 2530
+  },
+  {
+    "path": "results/interference-1784566871298243631-summary.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 526
+  },
+  {
+    "path": "results/interference-1784566871298243631.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 12405
+  },
+  {
+    "path": "results/interference-state-1784534644989676833.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 131072
+  },
+  {
+    "path": "results/interference-state-1784534810055655846.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 4968448
+  },
+  {
+    "path": "results/interference-state-1784563580222209870.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 7290880
+  },
+  {
+    "path": "results/interference-state-1784564290690122830.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 868352
+  },
+  {
+    "path": "results/interference-state-1784564402031428728.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 704512
+  },
+  {
+    "path": "results/interference-state-1784565021474436133.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 4489216
+  },
+  {
+    "path": "results/interference-state-1784566773705261692.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2678784
+  },
+  {
+    "path": "results/real-tools-1784536577133783842.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 5930
+  },
+  {
+    "path": "results/real-tools-1784536691098166342.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 49812
+  },
+  {
+    "path": "results/real-tools-all-1784548309730652954.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 31481
+  },
+  {
+    "path": "results/real-tools-all-1784548799599095961-summary.csv",
+    "extension": ".csv",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 19266
+  },
+  {
+    "path": "results/real-tools-all-1784548799599095961-summary.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 58316
+  },
+  {
+    "path": "results/real-tools-all-1784548799599095961-summary.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 9099
+  },
+  {
+    "path": "results/real-tools-all-1784548799599095961.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 249265
+  },
+  {
+    "path": "results/real-tools-all-state-1784548288848065708.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 282624
+  },
+  {
+    "path": "results/real-tools-all-state-1784548324990183580.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 7725056
+  },
+  {
+    "path": "results/real-tools-state-1784536571911865922.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 192512
+  },
+  {
+    "path": "results/real-tools-state-1784536592540190889.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 4968448
+  },
+  {
+    "path": "results/recovery-state-1784535818911157971.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 90112
+  },
+  {
+    "path": "results/recovery-state-1784538068899360049.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 90112
+  },
+  {
+    "path": "results/smoke-001-1784486842436203238.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 40960
+  },
+  {
+    "path": "results/smoke-16k-1784486872280431995.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 204800
+  },
+  {
+    "path": "results/smoke-4k-1784486854324024086.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 81920
+  },
+  {
+    "path": "results/smoke-tp2-4k-1784487789873972496.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 81920
+  },
+  {
+    "path": "results/sync-smoke-4k-1784534483491761437.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 90112
+  },
+  {
+    "path": "results/tier-validation-1784546545884533316.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 1341
+  },
+  {
+    "path": "results/tier-validation-1784546579077290007.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 2333
+  },
+  {
+    "path": "results/tp4-qwen32-smoke-1784538835460165117.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 90112
+  },
+  {
+    "path": "results/tp4-qwen32-smoke-fixed-1784539534567719424.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 90112
+  },
+  {
+    "path": "results/trace-analysis-1784487419038306012.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 2240
+  },
+  {
+    "path": "results/ttl-pressure-1784562190431269804.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 7032
+  },
+  {
+    "path": "results/ttl-pressure-1784562510024897140.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 18639
+  },
+  {
+    "path": "results/ttl-pressure-1784562956744594834-summary.csv",
+    "extension": ".csv",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 1564
+  },
+  {
+    "path": "results/ttl-pressure-1784562956744594834-summary.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 5989
+  },
+  {
+    "path": "results/ttl-pressure-1784562956744594834-summary.md",
+    "extension": ".md",
+    "file_type": "word_text",
+    "role_hint": "material",
+    "size_bytes": 996
+  },
+  {
+    "path": "results/ttl-pressure-1784562956744594834.json",
+    "extension": ".json",
+    "file_type": "data",
+    "role_hint": "material",
+    "size_bytes": 18626
+  },
+  {
+    "path": "results/ttl-pressure-state-1784562121164154954.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 151552
+  },
+  {
+    "path": "results/ttl-pressure-state-1784562227705309070.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2109440
+  },
+  {
+    "path": "results/ttl-pressure-state-1784562685483487109.db",
+    "extension": ".db",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2109440
+  },
+  {
+    "path": "scripts/__pycache__/analyze_agent_workloads.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 13321
+  },
+  {
+    "path": "scripts/__pycache__/analyze_traces.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 5130
+  },
+  {
+    "path": "scripts/__pycache__/benchmark_blocked_window.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 12767
+  },
+  {
+    "path": "scripts/__pycache__/benchmark_burst_matrix.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 3282
+  },
+  {
+    "path": "scripts/__pycache__/benchmark_control_plane.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 6579
+  },
+  {
+    "path": "scripts/__pycache__/benchmark_e2e.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 12956
+  },
+  {
+    "path": "scripts/__pycache__/benchmark_elasticity.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 12776
+  },
+  {
+    "path": "scripts/__pycache__/benchmark_hotspot.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 16371
+  },
+  {
+    "path": "scripts/__pycache__/benchmark_interference.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 8004
+  },
+  {
+    "path": "scripts/__pycache__/benchmark_real_tools.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 5725
+  },
+  {
+    "path": "scripts/__pycache__/benchmark_real_tools_all.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 12120
+  },
+  {
+    "path": "scripts/__pycache__/benchmark_ttl_pressure.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 13384
+  },
+  {
+    "path": "scripts/__pycache__/smoke_e2e.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 3255
+  },
+  {
+    "path": "scripts/__pycache__/summarize_hotspot.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 4725
+  },
+  {
+    "path": "scripts/__pycache__/summarize_interference.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 3974
+  },
+  {
+    "path": "scripts/__pycache__/summarize_ttl_pressure.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 4914
+  },
+  {
+    "path": "scripts/__pycache__/validate_correctness.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 3072
+  },
+  {
+    "path": "scripts/__pycache__/validate_fault_matrix.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 10243
+  },
+  {
+    "path": "scripts/__pycache__/validate_recovery.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2798
+  },
+  {
+    "path": "scripts/__pycache__/validate_tier_baselines.cpython-310.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 6099
+  },
+  {
+    "path": "scripts/analyze_agent_workloads.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 15956
+  },
+  {
+    "path": "scripts/analyze_traces.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 5344
+  },
+  {
+    "path": "scripts/benchmark_blocked_window.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 22455
+  },
+  {
+    "path": "scripts/benchmark_burst_matrix.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 3727
+  },
+  {
+    "path": "scripts/benchmark_control_plane.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 7302
+  },
+  {
+    "path": "scripts/benchmark_e2e.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 15551
+  },
+  {
+    "path": "scripts/benchmark_elasticity.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 14020
+  },
+  {
+    "path": "scripts/benchmark_hotspot.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 21593
+  },
+  {
+    "path": "scripts/benchmark_interference.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 9258
+  },
+  {
+    "path": "scripts/benchmark_real_tools.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 7076
+  },
+  {
+    "path": "scripts/benchmark_real_tools_all.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 20275
+  },
+  {
+    "path": "scripts/benchmark_ttl_pressure.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 15431
+  },
+  {
+    "path": "scripts/smoke_e2e.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 4223
+  },
+  {
+    "path": "scripts/summarize_blocked_window.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 5821
+  },
+  {
+    "path": "scripts/summarize_hotspot.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 5311
+  },
+  {
+    "path": "scripts/summarize_interference.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 4685
+  },
+  {
+    "path": "scripts/summarize_real_tools_all.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 5053
+  },
+  {
+    "path": "scripts/summarize_ttl_pressure.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 5648
+  },
+  {
+    "path": "scripts/validate_correctness.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 3847
+  },
+  {
+    "path": "scripts/validate_fault_matrix.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 14780
+  },
+  {
+    "path": "scripts/validate_recovery.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 3340
+  },
+  {
+    "path": "scripts/validate_tier_baselines.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 8395
+  },
+  {
+    "path": "tests/__pycache__/test_baseline_policies.cpython-310-pytest-9.0.3.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2881
+  },
+  {
+    "path": "tests/__pycache__/test_cost_benefit_placement.cpython-310-pytest-9.0.3.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 4086
+  },
+  {
+    "path": "tests/__pycache__/test_managed_executor.cpython-310-pytest-9.0.3.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 3558
+  },
+  {
+    "path": "tests/__pycache__/test_migration_coordinator.cpython-310-pytest-9.0.3.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 13204
+  },
+  {
+    "path": "tests/__pycache__/test_migration_coordinator.cpython-313.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 5516
+  },
+  {
+    "path": "tests/__pycache__/test_state_store.cpython-310-pytest-9.0.3.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 7041
+  },
+  {
+    "path": "tests/__pycache__/test_tiered_coordinator.cpython-310-pytest-9.0.3.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 8993
+  },
+  {
+    "path": "tests/__pycache__/test_traces.cpython-310-pytest-9.0.3.pyc",
+    "extension": ".pyc",
+    "file_type": "other",
+    "role_hint": "material",
+    "size_bytes": 2722
+  },
+  {
+    "path": "tests/test_baseline_policies.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 1868
+  },
+  {
+    "path": "tests/test_cost_benefit_placement.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 1903
+  },
+  {
+    "path": "tests/test_managed_executor.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 2182
+  },
+  {
+    "path": "tests/test_migration_coordinator.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 6819
+  },
+  {
+    "path": "tests/test_state_store.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 3957
+  },
+  {
+    "path": "tests/test_tiered_coordinator.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 5671
+  },
+  {
+    "path": "tests/test_traces.py",
+    "extension": ".py",
+    "file_type": "code",
+    "role_hint": "material",
+    "size_bytes": 1132
+  }
+]

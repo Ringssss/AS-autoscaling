@@ -1,0 +1,72 @@
+{
+  "config": {
+    "destination": "http://127.0.0.1:31001",
+    "first_output_tokens": 4,
+    "output_dir": "results",
+    "output_tokens": 8,
+    "poll_interval": 0.002,
+    "prefix_lengths": [
+      16384,
+      32768
+    ],
+    "source": "http://127.0.0.1:31000",
+    "tool_result_tokens": 32
+  },
+  "records": [
+    {
+      "bytes_each_direction": 2416508928,
+      "cached_tokens": 16388,
+      "completed_tokens": 16388,
+      "next_turn_seconds": 0.18087471555918455,
+      "offload_wall_seconds": 1.819257402792573,
+      "offload_worker_seconds": 1.8115599863231182,
+      "outputs_equal": true,
+      "path": "private_cpu_round_trip",
+      "prefix_length": 16384,
+      "restore_wall_seconds": 0.06424064002931118,
+      "restore_worker_seconds": 0.0538678178563714
+    },
+    {
+      "bytes_each_direction": 2416508928,
+      "cached_tokens": 16388,
+      "checkpoint_bytes": 2416508928,
+      "completed_tokens": 16388,
+      "export_wall_seconds": 1.9708501752465963,
+      "export_worker_seconds": 1.9625011999160051,
+      "import_wall_seconds": 0.5481668682768941,
+      "import_worker_seconds": 0.5366497645154595,
+      "next_turn_seconds": 0.17932813428342342,
+      "outputs_equal": true,
+      "path": "shared_memory_remote_prefetch",
+      "prefix_length": 16384
+    },
+    {
+      "bytes_each_direction": 4832428032,
+      "cached_tokens": 32772,
+      "completed_tokens": 32772,
+      "next_turn_seconds": 0.18458856642246246,
+      "offload_wall_seconds": 3.591946793720126,
+      "offload_worker_seconds": 3.581669069826603,
+      "outputs_equal": true,
+      "path": "private_cpu_round_trip",
+      "prefix_length": 32768,
+      "restore_wall_seconds": 0.11617185361683369,
+      "restore_worker_seconds": 0.10236797947436571
+    },
+    {
+      "bytes_each_direction": 4832428032,
+      "cached_tokens": 32772,
+      "checkpoint_bytes": 4832428032,
+      "completed_tokens": 32772,
+      "export_wall_seconds": 3.894464540295303,
+      "export_worker_seconds": 3.8800229160115123,
+      "import_wall_seconds": 1.0628233635798097,
+      "import_worker_seconds": 1.0470224050804973,
+      "next_turn_seconds": 0.184320448897779,
+      "outputs_equal": true,
+      "path": "shared_memory_remote_prefetch",
+      "prefix_length": 32768
+    }
+  ],
+  "shared_prefix_directory": "/dev/shm/agentshift-prefixes"
+}

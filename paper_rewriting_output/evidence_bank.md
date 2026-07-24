@@ -1,0 +1,22 @@
+# Evidence Bank
+
+| Evidence ID | Source file | Claim supported | Figure/table | Verification needed |
+|---|---|---|---|---|
+| E1 | `results/agent-workloads-1784819110111467791.json` | Kimi K2.5 has long request contexts: 29.3% at least 16K and 12.5% at least 32K | Fig. workload (a) | Kimi CSV has no session labels |
+| E2 | same | FlowPrefill p90 cumulative prefix grows from 5.5K at turn 1 to 11.8K at turn 10; p99 session length is 8 turns | Fig. workload (b) | Inter-turn time is a proxy, not tool duration |
+| E3 | same | Return-proxy clustering grows with aggregation window; 500 ms windows reach p99 5 and max 8 arrivals | Fig. workload (c) | Child arrivals are return proxies |
+| E4 | `results/blocked-window-1784566204404099436.json` | At 32K/500 ms, AgentShift is 52.4 ms versus reroute 1260.5 ms and on-return 126.1 ms | Main latency table | Five repeats; Sticky difference is run noise |
+| E5 | `results/blocked-window-1784565792789187724.json` | Mobility value grows with prefix and a 100 ms gap hides the tested 32K transfer | Figs. context and gap | Single-node NVLink only |
+| E6 | `results/hotspot-1784566696908767902.json` | Eight-agent 32K makespan is 0.731 s, versus 5.580 s reroute, 2.196 s TokenCake-Source, and 1.250 s on-return | Fig. hotspot | TokenCake-Source is mechanism-equivalent |
+| E7 | `results/ttl-pressure-1784562956744594834.json` | At TTL expiry under pressure, AgentShift improves makespan 1.45x and mean post-tool latency 2.12x | TTL table | Continuum-style, not official artifact |
+| E8 | `results/real-tools-all-1784548799599095961.json` | Two 403--488 ms coding tools hide 32K migration; an 8.9 ms command does not | Tool table | Three tools only |
+| E9 | `results/interference-1784566871298243631.json` | Async copy leaves throughput and steady TPOT effectively unchanged but adds 10.6 ms arrival TTFT over no migration | Fig. interference | One 32K migration, eight streams |
+| E10 | `results/fault-matrix-1784829560507240459.json` | Eight fault cases pass; a real 16,388-token transfer aborts safely at DEST_READY, and source shadow recovers in 48.1 ms versus 523.2 ms cold | Fault table | Deterministic controller faults; engines stay alive |
+| E11 | `results/e2e-1784537113268610412.json`, `results/e2e-1784539658778872653.json` | Full-hit relocation works at TP=2 and TP=4; Qwen3-32B TP=4 is 13.58x faster than reroute and 1.8 ms above Sticky | Generality table | Full matrix remains TP=1 |
+| E12 | `results/elasticity-1784820101002154448.json` | Warm scale-out relocates 50% owners with full hits; semantic scale-in drains all eight owners with zero historical re-prefill | Fig. elasticity | Target engines are already model-ready |
+| E13 | same | Scale-out is 3.71x faster than semantic reroute and 1.27x faster than on-return; scale-in is 6.43x and 1.55x faster | Fig. elasticity | Three repeats, Qwen3-8B TP=1 |
+| E14 | `results/control-plane-1784819214062797714.json` | At 100K agents, one-client ownership CAS is 1105 ops/s with 1.8 ms p99; 32 clients sustain 806 ops/s but reach 930 ms p99 | Fig. control plane | Central SQLite is not a production multi-controller store |
+| E15 | `tests/`, SGLang tests | AgentShift has 39 passing local tests; SGLang has 14 passing prefix/TP tests | Implementation validation | Re-run after implementation changes |
+| E16 | `results/coding-agent-replay-1784829317183895026.json` | In an eight-agent three-turn coding replay, AgentShift moves 50% of owners with 100% full hits and completes in 5.002 s versus 7.169 s Sticky, 6.264 s reroute, and 5.318 s on-return | Fig. replay (a) | Controlled subprocess tools, not full SWE-agent |
+| E17 | `results/migration-policy-1784829520064490654.json` | Admissible-first ordering completes 83.3% of six heterogeneous handoffs in-gap versus 33.3--50.0% for simple orders; every policy retains full hits | Fig. replay (b) | One serialized trace; coverage and tail are a tradeoff |
+| E18 | `results/isolate-32k-1784828581644876294.db` | An isolated 32K handoff copies and hits all 32,772 tokens; immediate pinning is required to preserve blocked-agent candidates under later prefill pressure | Debug validation | DB plus smoke output; not a headline result |

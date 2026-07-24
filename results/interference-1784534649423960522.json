@@ -1,0 +1,84 @@
+{
+  "config": {
+    "destination": "http://127.0.0.1:31001",
+    "first_output_tokens": 4,
+    "foreground_concurrencies": [
+      1
+    ],
+    "foreground_output_tokens": 64,
+    "foreground_prompt_tokens": 128,
+    "modes": [
+      "no-migration",
+      "sync",
+      "async"
+    ],
+    "output_dir": "results",
+    "poll_interval": 0.005,
+    "prefix_lengths": [
+      4096
+    ],
+    "repeats": 1,
+    "source": "http://127.0.0.1:31000",
+    "transfer_port": 29940
+  },
+  "records": [
+    {
+      "concurrency": 1,
+      "foreground_throughput_tokens_per_second": 51.02804398645539,
+      "foreground_tokens": 64,
+      "max_token_gap_seconds": 0.0195079343393445,
+      "migration_bytes": 0,
+      "migration_queue_seconds": 0.0,
+      "migration_wall_seconds": 0.0,
+      "migration_worker_seconds": 0.0,
+      "mode": "no-migration",
+      "prefix_length": 4096,
+      "repeat": 0,
+      "tpot_mean_seconds": 0.01909142904101856,
+      "tpot_p50_seconds": 0.019078299403190613,
+      "tpot_p95_seconds": 0.019263810478150845,
+      "tpot_p99_seconds": 0.0195079343393445,
+      "ttft_p50_seconds": 0.05139885190874338,
+      "ttft_p95_seconds": 0.05139885190874338
+    },
+    {
+      "concurrency": 1,
+      "foreground_throughput_tokens_per_second": 49.437886117273,
+      "foreground_tokens": 64,
+      "max_token_gap_seconds": 0.041633015498518944,
+      "migration_bytes": 604569600,
+      "migration_queue_seconds": 0.0,
+      "migration_wall_seconds": 0.06385463010519743,
+      "migration_worker_seconds": 0.038074614480137825,
+      "mode": "sync",
+      "prefix_length": 4096,
+      "repeat": 0,
+      "tpot_mean_seconds": 0.019803353614868627,
+      "tpot_p50_seconds": 0.019343878142535686,
+      "tpot_p95_seconds": 0.020460058003664017,
+      "tpot_p99_seconds": 0.041633015498518944,
+      "ttft_p50_seconds": 0.04687545169144869,
+      "ttft_p95_seconds": 0.04687545169144869
+    },
+    {
+      "concurrency": 1,
+      "foreground_throughput_tokens_per_second": 50.54710853015976,
+      "foreground_tokens": 64,
+      "max_token_gap_seconds": 0.025047599337995052,
+      "migration_bytes": 604569600,
+      "migration_queue_seconds": 0.00020170677453279495,
+      "migration_wall_seconds": 0.06520158052444458,
+      "migration_worker_seconds": 0.029226580634713173,
+      "mode": "async",
+      "prefix_length": 4096,
+      "repeat": 0,
+      "tpot_mean_seconds": 0.019428336874596656,
+      "tpot_p50_seconds": 0.019309171475470066,
+      "tpot_p95_seconds": 0.019944611005485058,
+      "tpot_p99_seconds": 0.025047599337995052,
+      "ttft_p50_seconds": 0.0420744800940156,
+      "ttft_p95_seconds": 0.0420744800940156
+    }
+  ],
+  "state_db": "results/interference-state-1784534644989676833.db"
+}

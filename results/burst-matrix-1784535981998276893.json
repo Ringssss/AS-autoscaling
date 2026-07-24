@@ -1,0 +1,111 @@
+{
+  "config": {
+    "background_concurrency": 4,
+    "background_output_tokens": 128,
+    "background_prompt_tokens": 128,
+    "burst_concurrency": 8,
+    "burst_context_lengths": [
+      2048
+    ],
+    "burst_output_tokens": 64,
+    "burst_repeats": 1,
+    "destination": "http://127.0.0.1:31001",
+    "first_output_tokens": 4,
+    "output_dir": "results",
+    "source": "http://127.0.0.1:31000",
+    "sync_transfer": false,
+    "tool_gap_seconds": 0.25,
+    "tool_result_tokens": 32,
+    "tp_size": 1,
+    "transfer_port": 29991
+  },
+  "records": [
+    {
+      "background_concurrency": 4,
+      "concurrency": 8,
+      "context_length": 2048,
+      "exposed_migration_seconds": 0.0,
+      "historical_cache_hits": 16416,
+      "historical_reprefilled_tokens": 0,
+      "historical_tokens": 16416,
+      "kind": "burst",
+      "makespan_seconds": 1.3128210538998246,
+      "mean_cached_tokens": 2052,
+      "mean_request_seconds": 1.3112566280178726,
+      "migration_total_seconds": 0,
+      "on_return_post_tool_makespan_seconds": 1.3128210538998246,
+      "output_tokens": 64,
+      "p95_request_seconds": 1.312446041032672,
+      "post_tool_makespan_seconds": 1.3128210538998246,
+      "repeat": 0,
+      "scenario": "sticky"
+    },
+    {
+      "background_concurrency": 4,
+      "concurrency": 8,
+      "context_length": 2048,
+      "exposed_migration_seconds": 0.0,
+      "historical_cache_hits": 8208,
+      "historical_reprefilled_tokens": 8208,
+      "historical_tokens": 16416,
+      "kind": "burst",
+      "makespan_seconds": 1.4873804775997996,
+      "mean_cached_tokens": 1026,
+      "mean_request_seconds": 1.379356560879387,
+      "migration_total_seconds": 0,
+      "on_return_post_tool_makespan_seconds": 1.4873804775997996,
+      "output_tokens": 64,
+      "p95_request_seconds": 1.4870433704927564,
+      "post_tool_makespan_seconds": 1.4873804775997996,
+      "repeat": 0,
+      "scenario": "reroute"
+    },
+    {
+      "background_concurrency": 4,
+      "concurrency": 8,
+      "context_length": 2048,
+      "exposed_migration_seconds": 0.0,
+      "historical_cache_hits": 16416,
+      "historical_reprefilled_tokens": 0,
+      "historical_tokens": 16416,
+      "kind": "burst",
+      "makespan_seconds": 1.4295305898413062,
+      "mean_cached_tokens": 2052,
+      "mean_request_seconds": 1.3703001514077187,
+      "migration_total_seconds": 0.13526554871350527,
+      "on_return_post_tool_makespan_seconds": 1.5647961385548115,
+      "output_tokens": 64,
+      "p95_request_seconds": 1.4291919153183699,
+      "post_tool_makespan_seconds": 1.4295305898413062,
+      "repeat": 0,
+      "scenario": "agentshift"
+    }
+  ],
+  "state_db": "results/benchmark-state-1784535972500008106.db",
+  "summary": {
+    "2048": {
+      "agentshift": {
+        "makespan_mean_seconds": 1.4295305898413062,
+        "p95_mean_seconds": 1.4291919153183699,
+        "post_tool_mean_seconds": 1.4295305898413062,
+        "reprefilled_tokens_mean": 0
+      },
+      "reroute": {
+        "makespan_mean_seconds": 1.4873804775997996,
+        "p95_mean_seconds": 1.4870433704927564,
+        "post_tool_mean_seconds": 1.4873804775997996,
+        "reprefilled_tokens_mean": 8208
+      },
+      "speedup": {
+        "reroute": 1.0404677508614317,
+        "sticky": 0.9183581402378821
+      },
+      "sticky": {
+        "makespan_mean_seconds": 1.3128210538998246,
+        "p95_mean_seconds": 1.312446041032672,
+        "post_tool_mean_seconds": 1.3128210538998246,
+        "reprefilled_tokens_mean": 0
+      }
+    }
+  }
+}

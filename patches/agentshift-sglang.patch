@@ -1,0 +1,2339 @@
+diff --git a/python/sglang/srt/entrypoints/http_server.py b/python/sglang/srt/entrypoints/http_server.py
+index 759e6a832..bd39db20d 100644
+--- a/python/sglang/srt/entrypoints/http_server.py
++++ b/python/sglang/srt/entrypoints/http_server.py
+@@ -109,6 +109,16 @@ from sglang.srt.environ import envs
+ from sglang.srt.function_call.function_call_parser import FunctionCallParser
+ from sglang.srt.managers.io_struct import (
+     AbortReq,
++    AgentShiftInitTransferGroupReqInput,
++    AgentShiftCleanupTransferReqInput,
++    AgentShiftPinPrefixReqInput,
++    AgentShiftReleasePrefixReqInput,
++    AgentShiftRebindPrefixReqInput,
++    AgentShiftTierCleanupReqInput,
++    AgentShiftTierOperationReqInput,
++    AgentShiftTierStatusReqInput,
++    AgentShiftTransferPrefixReqInput,
++    AgentShiftTransferStatusReqInput,
+     AttachHiCacheStorageReqInput,
+     CheckWeightsReqInput,
+     CloseSessionReqInput,
+@@ -1085,6 +1095,84 @@ async def init_weights_send_group_for_remote_instance(
+         return ORJSONResponse(content, status_code=HTTPStatus.BAD_REQUEST)
+
+
++def _agentshift_response(result):
++    content = dataclasses.asdict(result)
++    return ORJSONResponse(
++        content,
++        status_code=200 if result.success else HTTPStatus.BAD_REQUEST,
++    )
++
++
++@app.post("/agentshift/prefix/pin")
++@auth_level(AuthLevel.ADMIN_OPTIONAL)
++async def agentshift_pin_prefix(obj: AgentShiftPinPrefixReqInput):
++    result = await _global_state.tokenizer_manager.agentshift_pin_prefix(obj)
++    return _agentshift_response(result)
++
++
++@app.post("/agentshift/transfer_group/init")
++@auth_level(AuthLevel.ADMIN_OPTIONAL)
++async def agentshift_init_transfer_group(obj: AgentShiftInitTransferGroupReqInput):
++    result = await _global_state.tokenizer_manager.agentshift_init_transfer_group(obj)
++    return _agentshift_response(result)
++
++
++@app.post("/agentshift/prefix/transfer")
++@auth_level(AuthLevel.ADMIN_OPTIONAL)
++async def agentshift_transfer_prefix(obj: AgentShiftTransferPrefixReqInput):
++    result = await _global_state.tokenizer_manager.agentshift_transfer_prefix(obj)
++    return _agentshift_response(result)
++
++
++@app.post("/agentshift/prefix/transfer/status")
++@auth_level(AuthLevel.ADMIN_OPTIONAL)
++async def agentshift_transfer_status(obj: AgentShiftTransferStatusReqInput):
++    result = await _global_state.tokenizer_manager.agentshift_transfer_status(obj)
++    return _agentshift_response(result)
++
++
++@app.post("/agentshift/prefix/transfer/cleanup")
++@auth_level(AuthLevel.ADMIN_OPTIONAL)
++async def agentshift_cleanup_transfer(obj: AgentShiftCleanupTransferReqInput):
++    result = await _global_state.tokenizer_manager.agentshift_cleanup_transfer(obj)
++    return _agentshift_response(result)
++
++
++@app.post("/agentshift/prefix/tier/start")
++@auth_level(AuthLevel.ADMIN_OPTIONAL)
++async def agentshift_tier_operation(obj: AgentShiftTierOperationReqInput):
++    result = await _global_state.tokenizer_manager.agentshift_tier_operation(obj)
++    return _agentshift_response(result)
++
++
++@app.post("/agentshift/prefix/tier/status")
++@auth_level(AuthLevel.ADMIN_OPTIONAL)
++async def agentshift_tier_status(obj: AgentShiftTierStatusReqInput):
++    result = await _global_state.tokenizer_manager.agentshift_tier_status(obj)
++    return _agentshift_response(result)
++
++
++@app.post("/agentshift/prefix/tier/cleanup")
++@auth_level(AuthLevel.ADMIN_OPTIONAL)
++async def agentshift_tier_cleanup(obj: AgentShiftTierCleanupReqInput):
++    result = await _global_state.tokenizer_manager.agentshift_tier_cleanup(obj)
++    return _agentshift_response(result)
++
++
++@app.post("/agentshift/prefix/release")
++@auth_level(AuthLevel.ADMIN_OPTIONAL)
++async def agentshift_release_prefix(obj: AgentShiftReleasePrefixReqInput):
++    result = await _global_state.tokenizer_manager.agentshift_release_prefix(obj)
++    return _agentshift_response(result)
++
++
++@app.post("/agentshift/prefix/rebind")
++@auth_level(AuthLevel.ADMIN_OPTIONAL)
++async def agentshift_rebind_prefix(obj: AgentShiftRebindPrefixReqInput):
++    result = await _global_state.tokenizer_manager.agentshift_rebind_prefix(obj)
++    return _agentshift_response(result)
++
++
+ @app.post("/send_weights_to_remote_instance")
+ @auth_level(AuthLevel.ADMIN_OPTIONAL)
+ async def send_weights_to_remote_instance(
+diff --git a/python/sglang/srt/managers/agentshift_control.py b/python/sglang/srt/managers/agentshift_control.py
+new file mode 100644
+index 000000000..0d078678d
+--- /dev/null
++++ b/python/sglang/srt/managers/agentshift_control.py
+@@ -0,0 +1,67 @@
++"""Result aggregation helpers for AgentShift control operations."""
++
++from __future__ import annotations
++
++import dataclasses
++from typing import Iterable, Sequence
++
++
++_TRANSFER_STATE_ORDER = {
++    "QUEUED": 0,
++    "COPYING": 1,
++    "COPY_DONE": 2,
++    "INSTALLING": 3,
++    "COMPLETE": 4,
++}
++
++
++def aggregate_agentshift_results(
++    results: Sequence,
++    *,
++    consistent_fields: Iterable[str] = (),
++    sum_fields: Iterable[str] = (),
++    max_fields: Iterable[str] = (),
++    aggregate_state: bool = False,
++):
++    """Merge one AgentShift control result from every participating rank."""
++    if not results:
++        raise ValueError("cannot aggregate an empty AgentShift result set")
++
++    failed = next((result for result in results if not result.success), None)
++    if failed is not None:
++        return failed
++
++    first = results[0]
++    for field in consistent_fields:
++        values = {getattr(result, field) for result in results}
++        if len(values) != 1:
++            changes = {
++                "success": False,
++                "message": f"AgentShift ranks disagree on {field}: {sorted(values)}",
++            }
++            if hasattr(first, "state"):
++                changes["state"] = "FAILED"
++            return dataclasses.replace(first, **changes)
++
++    changes = {
++        field: sum(getattr(result, field) for result in results)
++        for field in sum_fields
++    }
++    changes.update(
++        {
++            field: max(getattr(result, field) for result in results)
++            for field in max_fields
++        }
++    )
++    if aggregate_state:
++        states = [result.state for result in results]
++        unknown = [state for state in states if state not in _TRANSFER_STATE_ORDER]
++        if unknown:
++            return dataclasses.replace(
++                first,
++                success=False,
++                message=f"unknown AgentShift transfer states: {sorted(set(unknown))}",
++                state="FAILED",
++            )
++        changes["state"] = min(states, key=_TRANSFER_STATE_ORDER.__getitem__)
++    return dataclasses.replace(first, **changes)
+diff --git a/python/sglang/srt/managers/io_struct.py b/python/sglang/srt/managers/io_struct.py
+index 54bb82898..8ce4dd65d 100644
+--- a/python/sglang/srt/managers/io_struct.py
++++ b/python/sglang/srt/managers/io_struct.py
+@@ -1264,6 +1264,171 @@ class FlushCacheReqOutput(BaseReq):
+     message: str = ""
+
+
++@dataclass
++class AgentShiftPinPrefixReqInput(BaseReq):
++    agent_id: str
++    owner_epoch: int
++    token_ids: List[int]
++    extra_key: Optional[str] = None
++
++
++@dataclass
++class AgentShiftPinPrefixReqOutput(BaseReq):
++    success: bool
++    message: str = ""
++    token_count: int = 0
++    bytes_transferred: int = 0
++
++
++@dataclass
++class AgentShiftInitTransferGroupReqInput(BaseReq):
++    master_address: str
++    ports: str
++    group_rank: int
++    world_size: int
++    group_name: str
++    backend: str = "nccl"
++
++
++@dataclass
++class AgentShiftInitTransferGroupReqOutput(BaseReq):
++    success: bool
++    message: str = ""
++
++
++@dataclass
++class AgentShiftTransferPrefixReqInput(BaseReq):
++    role: str
++    migration_id: str
++    agent_id: str
++    owner_epoch: int
++    token_ids: List[int]
++    group_name: str
++    ports: str
++    extra_key: Optional[str] = None
++    async_transfer: bool = False
++
++
++@dataclass
++class AgentShiftTransferPrefixReqOutput(BaseReq):
++    success: bool
++    message: str = ""
++    token_count: int = 0
++    bytes_transferred: int = 0
++    transfer_seconds: float = 0.0
++    queue_seconds: float = 0.0
++    state: str = "COMPLETE"
++    role: str = ""
++
++
++@dataclass
++class AgentShiftTransferStatusReqInput(BaseReq):
++    migration_id: str
++
++
++@dataclass
++class AgentShiftTransferStatusReqOutput(BaseReq):
++    success: bool
++    message: str = ""
++    migration_id: str = ""
++    state: str = ""
++    role: str = ""
++    token_count: int = 0
++    bytes_transferred: int = 0
++    transfer_seconds: float = 0.0
++    queue_seconds: float = 0.0
++
++
++@dataclass
++class AgentShiftCleanupTransferReqInput(BaseReq):
++    migration_id: str
++
++
++@dataclass
++class AgentShiftCleanupTransferReqOutput(BaseReq):
++    success: bool
++    message: str = ""
++    token_count: int = 0
++
++
++@dataclass
++class AgentShiftTierOperationReqInput(BaseReq):
++    operation: str
++    operation_id: str
++    checkpoint_id: str
++    agent_id: str
++    owner_epoch: int
++    token_ids: List[int]
++    extra_key: Optional[str] = None
++    release_gpu: bool = True
++
++
++@dataclass
++class AgentShiftTierOperationReqOutput(BaseReq):
++    success: bool
++    message: str = ""
++    operation_id: str = ""
++    operation: str = ""
++    state: str = ""
++    token_count: int = 0
++    bytes_transferred: int = 0
++    operation_seconds: float = 0.0
++    queue_seconds: float = 0.0
++
++
++@dataclass
++class AgentShiftTierStatusReqInput(BaseReq):
++    operation_id: str
++
++
++@dataclass
++class AgentShiftTierStatusReqOutput(AgentShiftTierOperationReqOutput):
++    pass
++
++
++@dataclass
++class AgentShiftTierCleanupReqInput(BaseReq):
++    operation_id: str
++    drop_checkpoint: bool = False
++
++
++@dataclass
++class AgentShiftTierCleanupReqOutput(BaseReq):
++    success: bool
++    message: str = ""
++    token_count: int = 0
++
++
++@dataclass
++class AgentShiftReleasePrefixReqInput(BaseReq):
++    agent_id: str
++    owner_epoch: int
++    evict_after_release: bool = True
++    allow_missing: bool = False
++
++
++@dataclass
++class AgentShiftReleasePrefixReqOutput(BaseReq):
++    success: bool
++    message: str = ""
++    token_count: int = 0
++    evicted_tokens: int = 0
++
++
++@dataclass
++class AgentShiftRebindPrefixReqInput(BaseReq):
++    agent_id: str
++    expected_owner_epoch: int
++    new_owner_epoch: int
++
++
++@dataclass
++class AgentShiftRebindPrefixReqOutput(BaseReq):
++    success: bool
++    message: str = ""
++    token_count: int = 0
++
++
+ @dataclass
+ class AddExternalCorpusReqInput(BaseReq):
+     corpus_id: Optional[str] = None
+diff --git a/python/sglang/srt/managers/scheduler.py b/python/sglang/srt/managers/scheduler.py
+index 868a28d43..b4c340b6c 100644
+--- a/python/sglang/srt/managers/scheduler.py
++++ b/python/sglang/srt/managers/scheduler.py
+@@ -81,12 +81,33 @@ from sglang.srt.layers.quantization.fp4_utils import initialize_fp4_gemm_config
+ from sglang.srt.layers.quantization.fp8_utils import initialize_fp8_gemm_config
+ from sglang.srt.lora.lora_drainer import LoRADrainer
+ from sglang.srt.lora.lora_overlap_loader import LoRAOverlapLoader
++from sglang.srt.managers.agentshift_control import aggregate_agentshift_results
+ from sglang.srt.managers.hisparse_coordinator import HiSparseCoordinator
+ from sglang.srt.managers.io_struct import (
+     AbortReq,
+     ActiveRanksOutput,
+     AddExternalCorpusReqInput,
+     AddExternalCorpusReqOutput,
++    AgentShiftInitTransferGroupReqInput,
++    AgentShiftInitTransferGroupReqOutput,
++    AgentShiftCleanupTransferReqInput,
++    AgentShiftCleanupTransferReqOutput,
++    AgentShiftPinPrefixReqInput,
++    AgentShiftPinPrefixReqOutput,
++    AgentShiftReleasePrefixReqInput,
++    AgentShiftReleasePrefixReqOutput,
++    AgentShiftRebindPrefixReqInput,
++    AgentShiftRebindPrefixReqOutput,
++    AgentShiftTierCleanupReqInput,
++    AgentShiftTierCleanupReqOutput,
++    AgentShiftTierOperationReqInput,
++    AgentShiftTierOperationReqOutput,
++    AgentShiftTierStatusReqInput,
++    AgentShiftTierStatusReqOutput,
++    AgentShiftTransferPrefixReqInput,
++    AgentShiftTransferPrefixReqOutput,
++    AgentShiftTransferStatusReqInput,
++    AgentShiftTransferStatusReqOutput,
+     AttachHiCacheStorageReqInput,
+     AttachHiCacheStorageReqOutput,
+     BatchTokenizedEmbeddingReqInput,
+@@ -451,6 +472,16 @@ class Scheduler(
+         self.disable_radix_cache = result.disable_radix_cache
+         self.tree_cache = result.tree_cache
+
++        from sglang.srt.mem_cache.agent_prefix_cache import AgentPrefixManager
++
++        self.agent_prefix_manager = AgentPrefixManager(
++            tree_cache=self.tree_cache,
++            token_to_kv_pool_allocator=self.token_to_kv_pool_allocator,
++            tp_rank=self.ps.tp_rank,
++            tp_size=self.ps.tp_size,
++            gpu_id=self.tp_worker.model_runner.gpu_id,
++        )
++
+         if self.enable_hisparse:
+             # Coordinator was created inside ModelRunner.initialize() before CUDA graph capture
+             self.hisparse_coordinator = self.tp_worker.model_runner.hisparse_coordinator
+@@ -1225,6 +1256,19 @@ class Scheduler(
+                 (BatchTokenizedGenerateReqInput, self.handle_batch_generate_request),
+                 (BatchTokenizedEmbeddingReqInput, self.handle_batch_embedding_request),
+                 (FlushCacheReqInput, self.flush_wrapper.handle),
++                (AgentShiftPinPrefixReqInput, self.agentshift_pin_prefix),
++                (
++                    AgentShiftInitTransferGroupReqInput,
++                    self.agentshift_init_transfer_group,
++                ),
++                (AgentShiftTransferPrefixReqInput, self.agentshift_transfer_prefix),
++                (AgentShiftTransferStatusReqInput, self.agentshift_transfer_status),
++                (AgentShiftCleanupTransferReqInput, self.agentshift_cleanup_transfer),
++                (AgentShiftTierOperationReqInput, self.agentshift_tier_operation),
++                (AgentShiftTierStatusReqInput, self.agentshift_tier_status),
++                (AgentShiftTierCleanupReqInput, self.agentshift_tier_cleanup),
++                (AgentShiftReleasePrefixReqInput, self.agentshift_release_prefix),
++                (AgentShiftRebindPrefixReqInput, self.agentshift_rebind_prefix),
+                 (ClearHiCacheReqInput, self.clear_hicache_storage_wrapped),
+                 (AttachHiCacheStorageReqInput, self.attach_hicache_storage_wrapped),
+                 (DetachHiCacheStorageReqInput, self.detach_hicache_storage_wrapped),
+@@ -1612,6 +1656,9 @@ class Scheduler(
+             pool_stats_observer=self.pool_stats_observer,
+             get_last_batch=lambda: self.last_batch,
+             get_running_batch=lambda: self.running_batch,
++            get_external_reserved_tokens=(
++                self.agent_prefix_manager.reserved_destination_tokens
++            ),
+         )
+
+     def init_kv_events_publisher(self) -> None:
+@@ -3337,6 +3384,12 @@ class Scheduler(
+     def flush_cache(self, empty_cache: bool = True):
+         """Flush memory pools (e.g., KV cache, Mamba cache) and optionally empty device allocator cache."""
+         if self.is_fully_idle():
++            if not self.agent_prefix_manager.prepare_cache_reset():
++                logging.warning(
++                    "Cache not flushed because an AgentShift background transfer "
++                    "or tier operation is still active."
++                )
++                return False
+             self.cur_batch = None
+             self.last_batch = None
+             self.tree_cache.reset()
+@@ -3700,6 +3753,272 @@ class Scheduler(
+     def close_session(self, recv_req: CloseSessionReqInput):
+         self.session_controller.close(recv_req)
+
++    def _agentshift_aggregate_tp(self, local_result, **kwargs):
++        if self.ps.tp_size == 1:
++            results = [local_result]
++        else:
++            results = [None] * self.ps.tp_size
++            torch.distributed.all_gather_object(
++                results, local_result, group=self.tp_cpu_group
++            )
++        return aggregate_agentshift_results(results, **kwargs)
++
++    def agentshift_pin_prefix(self, recv_req: AgentShiftPinPrefixReqInput):
++        try:
++            result = self.agent_prefix_manager.pin(
++                agent_id=recv_req.agent_id,
++                owner_epoch=recv_req.owner_epoch,
++                token_ids=recv_req.token_ids,
++                extra_key=recv_req.extra_key,
++            )
++            local_result = AgentShiftPinPrefixReqOutput(
++                success=True,
++                token_count=result.token_count,
++                bytes_transferred=result.bytes_transferred,
++            )
++        except Exception as exc:
++            logger.exception("AgentShift failed to pin prefix")
++            local_result = AgentShiftPinPrefixReqOutput(success=False, message=str(exc))
++        return self._agentshift_aggregate_tp(
++            local_result,
++            consistent_fields=("token_count",),
++            sum_fields=("bytes_transferred",),
++        )
++
++    def agentshift_init_transfer_group(
++        self, recv_req: AgentShiftInitTransferGroupReqInput
++    ):
++        try:
++            self.agent_prefix_manager.init_transfer_group(
++                master_address=recv_req.master_address,
++                ports=recv_req.ports,
++                group_rank=recv_req.group_rank,
++                world_size=recv_req.world_size,
++                group_name=recv_req.group_name,
++                backend=recv_req.backend,
++            )
++            local_result = AgentShiftInitTransferGroupReqOutput(success=True)
++        except Exception as exc:
++            logger.exception("AgentShift failed to initialize transfer group")
++            local_result = AgentShiftInitTransferGroupReqOutput(
++                success=False, message=str(exc)
++            )
++        return self._agentshift_aggregate_tp(local_result)
++
++    def agentshift_transfer_prefix(self, recv_req: AgentShiftTransferPrefixReqInput):
++        try:
++            args = dict(
++                role=recv_req.role,
++                migration_id=recv_req.migration_id,
++                agent_id=recv_req.agent_id,
++                owner_epoch=recv_req.owner_epoch,
++                token_ids=recv_req.token_ids,
++                group_name=recv_req.group_name,
++                ports=recv_req.ports,
++                extra_key=recv_req.extra_key,
++            )
++            if recv_req.async_transfer:
++                result = self.agent_prefix_manager.start_transfer(**args)
++            else:
++                result = self.agent_prefix_manager.transfer(**args)
++            local_result = AgentShiftTransferPrefixReqOutput(
++                success=True,
++                token_count=result.token_count,
++                bytes_transferred=result.bytes_transferred,
++                transfer_seconds=result.transfer_seconds,
++                queue_seconds=getattr(result, "queue_seconds", 0.0),
++                state=getattr(result, "state", "COMPLETE"),
++                role=recv_req.role,
++            )
++        except Exception as exc:
++            logger.exception("AgentShift failed to transfer prefix")
++            local_result = AgentShiftTransferPrefixReqOutput(
++                success=False, message=str(exc)
++            )
++        return self._agentshift_aggregate_tp(
++            local_result,
++            consistent_fields=("token_count", "role"),
++            sum_fields=("bytes_transferred",),
++            max_fields=("transfer_seconds", "queue_seconds"),
++            aggregate_state=True,
++        )
++
++    def agentshift_transfer_status(self, recv_req: AgentShiftTransferStatusReqInput):
++        try:
++            result = self.agent_prefix_manager.poll_transfer(recv_req.migration_id)
++            local_result = AgentShiftTransferStatusReqOutput(
++                success=result.state != "FAILED",
++                message=result.error or "",
++                migration_id=result.migration_id,
++                state=result.state,
++                role=result.role,
++                token_count=result.token_count,
++                bytes_transferred=result.bytes_transferred,
++                transfer_seconds=result.transfer_seconds,
++                queue_seconds=result.queue_seconds,
++            )
++        except Exception as exc:
++            logger.exception("AgentShift failed to poll prefix transfer")
++            local_result = AgentShiftTransferStatusReqOutput(
++                success=False,
++                message=str(exc),
++                migration_id=recv_req.migration_id,
++                state="FAILED",
++            )
++        return self._agentshift_aggregate_tp(
++            local_result,
++            consistent_fields=("migration_id", "token_count", "role"),
++            sum_fields=("bytes_transferred",),
++            max_fields=("transfer_seconds", "queue_seconds"),
++            aggregate_state=True,
++        )
++
++    def agentshift_cleanup_transfer(self, recv_req: AgentShiftCleanupTransferReqInput):
++        try:
++            result = self.agent_prefix_manager.cleanup_transfer(recv_req.migration_id)
++            local_result = AgentShiftCleanupTransferReqOutput(
++                success=True, token_count=result.token_count
++            )
++        except Exception as exc:
++            logger.exception("AgentShift failed to clean prefix transfer")
++            local_result = AgentShiftCleanupTransferReqOutput(
++                success=False, message=str(exc)
++            )
++        return self._agentshift_aggregate_tp(
++            local_result, consistent_fields=("token_count",)
++        )
++
++    def agentshift_tier_operation(self, recv_req: AgentShiftTierOperationReqInput):
++        try:
++            result = self.agent_prefix_manager.start_tier_operation(
++                operation=recv_req.operation,
++                operation_id=recv_req.operation_id,
++                checkpoint_id=recv_req.checkpoint_id,
++                agent_id=recv_req.agent_id,
++                owner_epoch=recv_req.owner_epoch,
++                token_ids=recv_req.token_ids,
++                extra_key=recv_req.extra_key,
++                release_gpu=recv_req.release_gpu,
++            )
++            local_result = AgentShiftTierOperationReqOutput(
++                success=result.state != "FAILED",
++                message=result.error or "",
++                operation_id=result.migration_id,
++                operation=result.role,
++                state=result.state,
++                token_count=result.token_count,
++                bytes_transferred=result.bytes_transferred,
++                operation_seconds=result.transfer_seconds,
++                queue_seconds=result.queue_seconds,
++            )
++        except Exception as exc:
++            logger.exception("AgentShift failed to start tier operation")
++            local_result = AgentShiftTierOperationReqOutput(
++                success=False,
++                message=str(exc),
++                operation_id=recv_req.operation_id,
++                operation=recv_req.operation,
++                state="FAILED",
++            )
++        return self._agentshift_aggregate_tp(
++            local_result,
++            consistent_fields=("operation_id", "operation", "token_count"),
++            sum_fields=("bytes_transferred",),
++            max_fields=("operation_seconds", "queue_seconds"),
++            aggregate_state=True,
++        )
++
++    def agentshift_tier_status(self, recv_req: AgentShiftTierStatusReqInput):
++        try:
++            result = self.agent_prefix_manager.poll_tier_operation(
++                recv_req.operation_id
++            )
++            local_result = AgentShiftTierStatusReqOutput(
++                success=result.state != "FAILED",
++                message=result.error or "",
++                operation_id=result.migration_id,
++                operation=result.role,
++                state=result.state,
++                token_count=result.token_count,
++                bytes_transferred=result.bytes_transferred,
++                operation_seconds=result.transfer_seconds,
++                queue_seconds=result.queue_seconds,
++            )
++        except Exception as exc:
++            logger.exception("AgentShift failed to poll tier operation")
++            local_result = AgentShiftTierStatusReqOutput(
++                success=False,
++                message=str(exc),
++                operation_id=recv_req.operation_id,
++                state="FAILED",
++            )
++        return self._agentshift_aggregate_tp(
++            local_result,
++            consistent_fields=("operation_id", "operation", "token_count"),
++            sum_fields=("bytes_transferred",),
++            max_fields=("operation_seconds", "queue_seconds"),
++            aggregate_state=True,
++        )
++
++    def agentshift_tier_cleanup(self, recv_req: AgentShiftTierCleanupReqInput):
++        try:
++            result = self.agent_prefix_manager.cleanup_tier_operation(
++                recv_req.operation_id,
++                drop_checkpoint=recv_req.drop_checkpoint,
++            )
++            local_result = AgentShiftTierCleanupReqOutput(
++                success=True, token_count=result.token_count
++            )
++        except Exception as exc:
++            logger.exception("AgentShift failed to clean tier operation")
++            local_result = AgentShiftTierCleanupReqOutput(
++                success=False, message=str(exc)
++            )
++        return self._agentshift_aggregate_tp(
++            local_result, consistent_fields=("token_count",)
++        )
++
++    def agentshift_release_prefix(self, recv_req: AgentShiftReleasePrefixReqInput):
++        try:
++            result = self.agent_prefix_manager.release(
++                agent_id=recv_req.agent_id,
++                owner_epoch=recv_req.owner_epoch,
++                evict_after_release=recv_req.evict_after_release,
++                allow_missing=recv_req.allow_missing,
++            )
++            local_result = AgentShiftReleasePrefixReqOutput(
++                success=True,
++                token_count=result.token_count,
++                evicted_tokens=result.evicted_tokens,
++            )
++        except Exception as exc:
++            logger.exception("AgentShift failed to release prefix")
++            local_result = AgentShiftReleasePrefixReqOutput(
++                success=False, message=str(exc)
++            )
++        return self._agentshift_aggregate_tp(
++            local_result, consistent_fields=("token_count", "evicted_tokens")
++        )
++
++    def agentshift_rebind_prefix(self, recv_req: AgentShiftRebindPrefixReqInput):
++        try:
++            result = self.agent_prefix_manager.rebind(
++                agent_id=recv_req.agent_id,
++                expected_owner_epoch=recv_req.expected_owner_epoch,
++                new_owner_epoch=recv_req.new_owner_epoch,
++            )
++            local_result = AgentShiftRebindPrefixReqOutput(
++                success=True, token_count=result.token_count
++            )
++        except Exception as exc:
++            logger.exception("AgentShift failed to rebind prefix")
++            local_result = AgentShiftRebindPrefixReqOutput(
++                success=False, message=str(exc)
++            )
++        return self._agentshift_aggregate_tp(
++            local_result, consistent_fields=("token_count",)
++        )
++
+     def maybe_sleep_on_idle(self):
+         if self.idle_sleeper is not None:
+             self.idle_sleeper.maybe_sleep()
+diff --git a/python/sglang/srt/managers/scheduler_components/invariant_checker.py b/python/sglang/srt/managers/scheduler_components/invariant_checker.py
+index 237a5a606..5515f0b19 100644
+--- a/python/sglang/srt/managers/scheduler_components/invariant_checker.py
++++ b/python/sglang/srt/managers/scheduler_components/invariant_checker.py
+@@ -50,6 +50,7 @@ class SchedulerInvariantChecker:
+     pool_stats_observer: SchedulerPoolStatsObserver
+     get_last_batch: Callable
+     get_running_batch: Callable
++    get_external_reserved_tokens: Callable[[], int]
+     count_req_pool_leak_warnings: int = 0
+     count_memory_leak_warnings: int = 0
+
+@@ -73,6 +74,7 @@ class SchedulerInvariantChecker:
+         return leak, msg
+
+     def _check_full_pool(self, ps: PoolStats, uncached: int = 0) -> Tuple[bool, str]:
++        uncached += self.get_external_reserved_tokens()
+         if self.is_hybrid_swa:
+             protected = self.tree_cache.full_protected_size()
+             session_held = self.pool_stats_observer.session_held_full_tokens()
+diff --git a/python/sglang/srt/managers/tokenizer_control_mixin.py b/python/sglang/srt/managers/tokenizer_control_mixin.py
+index 05382e073..a747eca79 100644
+--- a/python/sglang/srt/managers/tokenizer_control_mixin.py
++++ b/python/sglang/srt/managers/tokenizer_control_mixin.py
+@@ -15,10 +15,31 @@ from typing import (
+
+ import fastapi
+
++from sglang.srt.managers.agentshift_control import aggregate_agentshift_results
+ from sglang.srt.managers.communicator import FanOutCommunicator
+ from sglang.srt.managers.io_struct import (
+     AddExternalCorpusReqInput,
+     AddExternalCorpusReqOutput,
++    AgentShiftInitTransferGroupReqInput,
++    AgentShiftInitTransferGroupReqOutput,
++    AgentShiftCleanupTransferReqInput,
++    AgentShiftCleanupTransferReqOutput,
++    AgentShiftPinPrefixReqInput,
++    AgentShiftPinPrefixReqOutput,
++    AgentShiftReleasePrefixReqInput,
++    AgentShiftReleasePrefixReqOutput,
++    AgentShiftRebindPrefixReqInput,
++    AgentShiftRebindPrefixReqOutput,
++    AgentShiftTierCleanupReqInput,
++    AgentShiftTierCleanupReqOutput,
++    AgentShiftTierOperationReqInput,
++    AgentShiftTierOperationReqOutput,
++    AgentShiftTierStatusReqInput,
++    AgentShiftTierStatusReqOutput,
++    AgentShiftTransferPrefixReqInput,
++    AgentShiftTransferPrefixReqOutput,
++    AgentShiftTransferStatusReqInput,
++    AgentShiftTransferStatusReqOutput,
+     AttachHiCacheStorageReqInput,
+     AttachHiCacheStorageReqOutput,
+     CheckWeightsReqInput,
+@@ -108,6 +129,16 @@ _COMMUNICATOR_SPECS = [
+     ("check_weights", CheckWeightsReqOutput),
+     ("slow_down", SlowDownReqOutput),
+     ("flush_cache", FlushCacheReqOutput),
++    ("agentshift_pin_prefix", AgentShiftPinPrefixReqOutput),
++    ("agentshift_init_transfer_group", AgentShiftInitTransferGroupReqOutput),
++    ("agentshift_transfer_prefix", AgentShiftTransferPrefixReqOutput),
++    ("agentshift_transfer_status", AgentShiftTransferStatusReqOutput),
++    ("agentshift_cleanup_transfer", AgentShiftCleanupTransferReqOutput),
++    ("agentshift_tier_operation", AgentShiftTierOperationReqOutput),
++    ("agentshift_tier_status", AgentShiftTierStatusReqOutput),
++    ("agentshift_tier_cleanup", AgentShiftTierCleanupReqOutput),
++    ("agentshift_release_prefix", AgentShiftReleasePrefixReqOutput),
++    ("agentshift_rebind_prefix", AgentShiftRebindPrefixReqOutput),
+     ("add_external_corpus", AddExternalCorpusReqOutput),
+     ("remove_external_corpus", RemoveExternalCorpusReqOutput),
+     ("list_external_corpora", ListExternalCorporaReqOutput),
+@@ -124,6 +155,28 @@ _COMMUNICATOR_SPECS = [
+ ]
+
+
++def _aggregate_agentshift_transfer_results(
++    results: List[AgentShiftTransferPrefixReqOutput],
++) -> AgentShiftTransferPrefixReqOutput:
++    return aggregate_agentshift_results(
++        results,
++        consistent_fields=("token_count", "role"),
++        max_fields=("bytes_transferred", "transfer_seconds", "queue_seconds"),
++        aggregate_state=True,
++    )
++
++
++def _aggregate_agentshift_transfer_status(
++    results: List[AgentShiftTransferStatusReqOutput],
++) -> AgentShiftTransferStatusReqOutput:
++    return aggregate_agentshift_results(
++        results,
++        consistent_fields=("migration_id", "token_count", "role"),
++        max_fields=("bytes_transferred", "transfer_seconds", "queue_seconds"),
++        aggregate_state=True,
++    )
++
++
+ class TokenizerControlMixin:
+     """Mixin for TokenizerManager's control-plane operations (weights, cache, lora,
+     profile, internal state, etc.) -- everything that talks to the scheduler via
+@@ -260,6 +313,68 @@ class TokenizerControlMixin:
+             await self.flush_cache_communicator(FlushCacheReqInput(timeout_s=timeout_s))
+         )[0]
+
++    async def agentshift_pin_prefix(
++        self: TokenizerManager, obj: AgentShiftPinPrefixReqInput
++    ) -> AgentShiftPinPrefixReqOutput:
++        self.auto_create_handle_loop()
++        return (await self.agentshift_pin_prefix_communicator(obj))[0]
++
++    async def agentshift_init_transfer_group(
++        self: TokenizerManager, obj: AgentShiftInitTransferGroupReqInput
++    ) -> AgentShiftInitTransferGroupReqOutput:
++        self.auto_create_handle_loop()
++        return (await self.agentshift_init_transfer_group_communicator(obj))[0]
++
++    async def agentshift_transfer_prefix(
++        self: TokenizerManager, obj: AgentShiftTransferPrefixReqInput
++    ) -> AgentShiftTransferPrefixReqOutput:
++        self.auto_create_handle_loop()
++        results = await self.agentshift_transfer_prefix_communicator(obj)
++        return _aggregate_agentshift_transfer_results(results)
++
++    async def agentshift_transfer_status(
++        self: TokenizerManager, obj: AgentShiftTransferStatusReqInput
++    ) -> AgentShiftTransferStatusReqOutput:
++        self.auto_create_handle_loop()
++        results = await self.agentshift_transfer_status_communicator(obj)
++        return _aggregate_agentshift_transfer_status(results)
++
++    async def agentshift_cleanup_transfer(
++        self: TokenizerManager, obj: AgentShiftCleanupTransferReqInput
++    ) -> AgentShiftCleanupTransferReqOutput:
++        self.auto_create_handle_loop()
++        return (await self.agentshift_cleanup_transfer_communicator(obj))[0]
++
++    async def agentshift_tier_operation(
++        self: TokenizerManager, obj: AgentShiftTierOperationReqInput
++    ) -> AgentShiftTierOperationReqOutput:
++        self.auto_create_handle_loop()
++        return (await self.agentshift_tier_operation_communicator(obj))[0]
++
++    async def agentshift_tier_status(
++        self: TokenizerManager, obj: AgentShiftTierStatusReqInput
++    ) -> AgentShiftTierStatusReqOutput:
++        self.auto_create_handle_loop()
++        return (await self.agentshift_tier_status_communicator(obj))[0]
++
++    async def agentshift_tier_cleanup(
++        self: TokenizerManager, obj: AgentShiftTierCleanupReqInput
++    ) -> AgentShiftTierCleanupReqOutput:
++        self.auto_create_handle_loop()
++        return (await self.agentshift_tier_cleanup_communicator(obj))[0]
++
++    async def agentshift_release_prefix(
++        self: TokenizerManager, obj: AgentShiftReleasePrefixReqInput
++    ) -> AgentShiftReleasePrefixReqOutput:
++        self.auto_create_handle_loop()
++        return (await self.agentshift_release_prefix_communicator(obj))[0]
++
++    async def agentshift_rebind_prefix(
++        self: TokenizerManager, obj: AgentShiftRebindPrefixReqInput
++    ) -> AgentShiftRebindPrefixReqOutput:
++        self.auto_create_handle_loop()
++        return (await self.agentshift_rebind_prefix_communicator(obj))[0]
++
+     async def clear_hicache_storage(self: TokenizerManager) -> ClearHiCacheReqOutput:
+         """Clear the hierarchical cache storage."""
+         self.auto_create_handle_loop()
+diff --git a/python/sglang/srt/mem_cache/agent_prefix_cache.py b/python/sglang/srt/mem_cache/agent_prefix_cache.py
+new file mode 100644
+index 000000000..5ba172bd1
+--- /dev/null
++++ b/python/sglang/srt/mem_cache/agent_prefix_cache.py
+@@ -0,0 +1,1118 @@
++"""Completed-turn prefix mobility for AgentShift.
++
++This module intentionally does not migrate active requests. It pins an existing
++RadixCache prefix, transfers the corresponding MHA KV rows between identical
++SGLang instances, and installs the copied rows under the same token key.
++"""
++
++from __future__ import annotations
++
++import logging
++import os
++import queue
++import re
++import threading
++import time
++from array import array
++from dataclasses import dataclass
++from datetime import timedelta
++from typing import Dict, List, Optional
++
++import torch
++import torch.distributed as dist
++
++from sglang.srt.mem_cache.base_prefix_cache import (
++    EvictParams,
++    InsertParams,
++    MatchPrefixParams,
++)
++from sglang.srt.mem_cache.radix_cache import RadixKey
++from sglang.srt.utils.common import init_custom_process_group
++from sglang.srt.utils.network import NetworkAddress
++
++logger = logging.getLogger(__name__)
++
++_CHECKPOINT_ID_RE = re.compile(r"^[A-Za-z0-9_.-]+$")
++_SHARED_PREFIX_DIR = "/dev/shm/agentshift-prefixes"
++
++
++@dataclass(slots=True)
++class PinnedAgentPrefix:
++    agent_id: str
++    owner_epoch: int
++    token_ids: tuple[int, ...]
++    kv_indices: torch.Tensor
++    last_node: object
++    extra_key: Optional[str]
++
++
++@dataclass(slots=True)
++class PrefixOperationResult:
++    token_count: int
++    bytes_transferred: int = 0
++    transfer_seconds: float = 0.0
++    evicted_tokens: int = 0
++
++
++@dataclass(slots=True)
++class TransferStatusResult:
++    migration_id: str
++    state: str
++    role: str
++    token_count: int
++    bytes_transferred: int
++    transfer_seconds: float = 0.0
++    queue_seconds: float = 0.0
++    error: Optional[str] = None
++
++
++@dataclass(slots=True)
++class BackgroundTransfer:
++    migration_id: str
++    role: str
++    agent_id: str
++    owner_epoch: int
++    token_ids: tuple[int, ...]
++    group_name: str
++    ports: str
++    extra_key: Optional[str]
++    token_count: int
++    bytes_transferred: int
++    source_indices: Optional[torch.Tensor] = None
++    destination_indices: Optional[torch.Tensor] = None
++    state: str = "QUEUED"
++    queued_at: float = 0.0
++    started_at: float = 0.0
++    finished_at: float = 0.0
++    error: Optional[str] = None
++
++
++@dataclass(slots=True)
++class HostAgentPrefix:
++    checkpoint_id: str
++    agent_id: str
++    owner_epoch: int
++    token_ids: tuple[int, ...]
++    k_layers: tuple[torch.Tensor, ...]
++    v_layers: tuple[torch.Tensor, ...]
++    extra_key: Optional[str]
++
++
++@dataclass(slots=True)
++class BackgroundTierOperation:
++    operation_id: str
++    operation: str
++    checkpoint_id: str
++    agent_id: str
++    owner_epoch: int
++    token_ids: tuple[int, ...]
++    extra_key: Optional[str]
++    release_gpu: bool
++    token_count: int
++    bytes_transferred: int
++    source_indices: Optional[torch.Tensor] = None
++    destination_indices: Optional[torch.Tensor] = None
++    host_prefix: Optional[HostAgentPrefix] = None
++    state: str = "QUEUED"
++    queued_at: float = 0.0
++    started_at: float = 0.0
++    finished_at: float = 0.0
++    error: Optional[str] = None
++
++
++class AgentPrefixManager:
++    """Scheduler-local registry and transfer lifecycle for warm Agent prefixes."""
++
++    def __init__(
++        self,
++        *,
++        tree_cache,
++        token_to_kv_pool_allocator,
++        tp_rank: int,
++        tp_size: int,
++        gpu_id: int,
++    ):
++        self.tree_cache = tree_cache
++        self.allocator = token_to_kv_pool_allocator
++        self.kv_pool = token_to_kv_pool_allocator.get_kvcache()
++        self.tp_rank = tp_rank
++        self.tp_size = tp_size
++        self.gpu_id = gpu_id
++        self.prefixes: Dict[str, PinnedAgentPrefix] = {}
++        self.transfer_groups: Dict[str, dist.ProcessGroup] = {}
++        self.background_transfers: Dict[str, BackgroundTransfer] = {}
++        self.host_prefixes: Dict[str, HostAgentPrefix] = {}
++        self.tier_operations: Dict[str, BackgroundTierOperation] = {}
++        self._transfer_queue: queue.Queue[BackgroundTransfer] = queue.Queue(maxsize=8)
++        self._tier_queue: queue.Queue[BackgroundTierOperation] = queue.Queue(maxsize=8)
++        self._transfer_lock = threading.Lock()
++        self._transfer_worker: Optional[threading.Thread] = None
++        self._transfer_stream: Optional[torch.cuda.Stream] = None
++        self._tier_worker: Optional[threading.Thread] = None
++        self._tier_stream: Optional[torch.cuda.Stream] = None
++
++    def prepare_cache_reset(self) -> bool:
++        """Drop AgentShift metadata immediately before the owning cache resets."""
++        with self._transfer_lock:
++            active_transfers = any(
++                transfer.state not in ("COMPLETE", "FAILED")
++                for transfer in self.background_transfers.values()
++            )
++            active_tier_operations = any(
++                operation.state not in ("COMPLETE", "FAILED")
++                for operation in self.tier_operations.values()
++            )
++            if active_transfers or active_tier_operations:
++                return False
++            self.prefixes.clear()
++            self.background_transfers.clear()
++            self.tier_operations.clear()
++            self.host_prefixes.clear()
++        return True
++
++    def _validate_supported_cache(self) -> None:
++        if not all(
++            hasattr(self.tree_cache, name)
++            for name in ("match_prefix", "insert", "inc_lock_ref", "dec_lock_ref")
++        ):
++            raise RuntimeError("AgentShift requires a RadixCache-compatible prefix cache")
++        if not hasattr(self.kv_pool, "k_buffer") or not hasattr(
++            self.kv_pool, "v_buffer"
++        ):
++            raise RuntimeError("AgentShift PoC currently supports MHA KV pools only")
++        if len(self.kv_pool.k_buffer) != len(self.kv_pool.v_buffer):
++            raise RuntimeError("mismatched K/V layer count")
++
++    def _key(self, token_ids: List[int], extra_key: Optional[str]) -> RadixKey:
++        return RadixKey(array("q", token_ids), extra_key).page_aligned(
++            self.tree_cache.page_size
++        )
++
++    def _bytes_for_tokens(self, token_count: int) -> int:
++        if token_count == 0:
++            return 0
++        per_token = sum(
++            k[0].nbytes + v[0].nbytes
++            for k, v in zip(self.kv_pool.k_buffer, self.kv_pool.v_buffer)
++        )
++        return token_count * per_token
++
++    def pin(
++        self,
++        *,
++        agent_id: str,
++        owner_epoch: int,
++        token_ids: List[int],
++        extra_key: Optional[str] = None,
++    ) -> PrefixOperationResult:
++        self._validate_supported_cache()
++        current = self.prefixes.get(agent_id)
++        if current is not None:
++            same_prefix = (
++                tuple(token_ids[: len(current.token_ids)]) == current.token_ids
++            )
++            if current.owner_epoch == owner_epoch and same_prefix:
++                return PrefixOperationResult(
++                    token_count=len(current.token_ids),
++                    bytes_transferred=self._bytes_for_tokens(len(current.token_ids)),
++                )
++            raise RuntimeError(
++                f"agent {agent_id} is already pinned at epoch {current.owner_epoch}"
++            )
++
++        key = self._key(token_ids, extra_key)
++        match = self.tree_cache.match_prefix(MatchPrefixParams(key=key))
++        token_count = len(match.device_indices)
++        if token_count == 0:
++            raise RuntimeError(f"no resident completed prefix found for agent {agent_id}")
++
++        self.tree_cache.inc_lock_ref(match.last_device_node)
++        self.prefixes[agent_id] = PinnedAgentPrefix(
++            agent_id=agent_id,
++            owner_epoch=owner_epoch,
++            token_ids=tuple(token_ids[:token_count]),
++            kv_indices=match.device_indices.to(dtype=torch.int64, copy=True),
++            last_node=match.last_device_node,
++            extra_key=extra_key,
++        )
++        return PrefixOperationResult(
++            token_count=token_count,
++            bytes_transferred=self._bytes_for_tokens(token_count),
++        )
++
++    def release(
++        self,
++        *,
++        agent_id: str,
++        owner_epoch: int,
++        evict_after_release: bool = True,
++        allow_missing: bool = False,
++    ) -> PrefixOperationResult:
++        prefix = self.prefixes.get(agent_id)
++        if prefix is None:
++            if allow_missing:
++                return PrefixOperationResult(token_count=0)
++            raise KeyError(f"agent prefix is not pinned: {agent_id}")
++        if prefix.owner_epoch != owner_epoch:
++            raise RuntimeError(
++                f"stale prefix release for {agent_id}: got epoch {owner_epoch}, "
++                f"expected {prefix.owner_epoch}"
++            )
++        self.tree_cache.dec_lock_ref(prefix.last_node)
++        del self.prefixes[agent_id]
++        evicted_tokens = 0
++        if evict_after_release:
++            result = self.tree_cache.evict(EvictParams(num_tokens=len(prefix.token_ids)))
++            evicted_tokens = result.num_tokens_evicted
++        return PrefixOperationResult(
++            token_count=len(prefix.token_ids), evicted_tokens=evicted_tokens
++        )
++
++    def rebind(
++        self, *, agent_id: str, expected_owner_epoch: int, new_owner_epoch: int
++    ) -> PrefixOperationResult:
++        prefix = self.prefixes.get(agent_id)
++        if prefix is None:
++            raise KeyError(f"agent prefix is not pinned: {agent_id}")
++        if prefix.owner_epoch == new_owner_epoch:
++            return PrefixOperationResult(token_count=len(prefix.token_ids))
++        if prefix.owner_epoch != expected_owner_epoch:
++            raise RuntimeError(
++                f"stale prefix rebind for {agent_id}: got epoch "
++                f"{expected_owner_epoch}, current is {prefix.owner_epoch}"
++            )
++        if new_owner_epoch <= expected_owner_epoch:
++            raise ValueError("new prefix epoch must increase")
++        prefix.owner_epoch = new_owner_epoch
++        return PrefixOperationResult(token_count=len(prefix.token_ids))
++
++    def init_transfer_group(
++        self,
++        *,
++        master_address: str,
++        ports: str,
++        group_rank: int,
++        world_size: int,
++        group_name: str,
++        backend: str = "nccl",
++    ) -> None:
++        if world_size != 2:
++            raise ValueError("AgentShift warm handoff requires a two-rank transfer group")
++        ports_list = ports.split(",")
++        if len(ports_list) != self.tp_size:
++            raise ValueError(
++                f"expected {self.tp_size} transfer ports, got {len(ports_list)}"
++            )
++        port = int(ports_list[self.tp_rank])
++        key = self._group_key(group_name, ports)
++        if key in self.transfer_groups:
++            return
++        address = NetworkAddress(master_address, port)
++        group = init_custom_process_group(
++            backend=backend,
++            init_method=address.to_tcp(),
++            timeout=timedelta(seconds=120),
++            world_size=world_size,
++            rank=group_rank,
++            group_name=key,
++            device_id=torch.device("cuda", self.gpu_id),
++        )
++        dist.barrier(group=group)
++        self.transfer_groups[key] = group
++        logger.info(
++            "AgentShift initialized transfer group %s for TP rank %d", key, self.tp_rank
++        )
++
++    def _group_key(self, group_name: str, ports: str) -> str:
++        port = ports.split(",")[self.tp_rank]
++        return f"{group_name}_{port}_{self.tp_rank}"
++
++    def _get_group(self, group_name: str, ports: str) -> dist.ProcessGroup:
++        key = self._group_key(group_name, ports)
++        try:
++            return self.transfer_groups[key]
++        except KeyError as exc:
++            raise RuntimeError(f"transfer group is not initialized: {key}") from exc
++
++    def _allocate_destination(self, token_count: int) -> torch.Tensor:
++        indices = self.allocator.alloc(token_count)
++        if indices is not None:
++            return indices.to(dtype=torch.int64)
++        shortage = token_count - self.allocator.available_size()
++        if shortage > 0:
++            self.tree_cache.evict(EvictParams(num_tokens=shortage))
++        indices = self.allocator.alloc(token_count)
++        if indices is None:
++            raise RuntimeError(
++                f"destination cannot reserve {token_count} KV slots; "
++                f"available={self.allocator.available_size()}"
++            )
++        return indices.to(dtype=torch.int64)
++
++    def reserved_destination_tokens(self) -> int:
++        """Return allocated destination slots not yet owned by RadixCache."""
++        with self._transfer_lock:
++            transfer_tokens = sum(
++                len(transfer.destination_indices)
++                for transfer in self.background_transfers.values()
++                if transfer.destination_indices is not None
++            )
++            tier_tokens = sum(
++                len(operation.destination_indices)
++                for operation in self.tier_operations.values()
++                if operation.destination_indices is not None
++            )
++            return transfer_tokens + tier_tokens
++
++    def _ensure_transfer_worker(self) -> None:
++        if self._transfer_worker is not None:
++            return
++        with self._transfer_lock:
++            if self._transfer_worker is not None:
++                return
++            self._transfer_stream = torch.cuda.Stream(device=self.gpu_id)
++            self._transfer_worker = threading.Thread(
++                target=self._transfer_worker_loop,
++                name=f"agentshift-transfer-tp{self.tp_rank}",
++                daemon=True,
++            )
++            self._transfer_worker.start()
++
++    def _transfer_worker_loop(self) -> None:
++        while True:
++            transfer = self._transfer_queue.get()
++            with self._transfer_lock:
++                transfer.state = "COPYING"
++                transfer.started_at = time.perf_counter()
++            try:
++                self._copy_kv_background(transfer)
++            except Exception as exc:
++                logger.exception(
++                    "AgentShift background transfer failed: migration=%s role=%s",
++                    transfer.migration_id,
++                    transfer.role,
++                )
++                with self._transfer_lock:
++                    transfer.error = str(exc)
++                    transfer.finished_at = time.perf_counter()
++                    transfer.state = "FAILED"
++            else:
++                with self._transfer_lock:
++                    transfer.source_indices = None
++                    transfer.finished_at = time.perf_counter()
++                    transfer.state = (
++                        "COPY_DONE" if transfer.role == "destination" else "COMPLETE"
++                    )
++            finally:
++                self._transfer_queue.task_done()
++
++    def _copy_kv_background(self, transfer: BackgroundTransfer) -> None:
++        group = self._get_group(transfer.group_name, transfer.ports)
++        stream = self._transfer_stream
++        assert stream is not None
++        with torch.cuda.device(self.gpu_id), torch.cuda.stream(stream):
++            for k_buffer, v_buffer in zip(
++                self.kv_pool.k_buffer, self.kv_pool.v_buffer
++            ):
++                if transfer.role == "source":
++                    k_staging = k_buffer[transfer.source_indices].contiguous()
++                    v_staging = v_buffer[transfer.source_indices].contiguous()
++                    dist.send(k_staging, dst=1, group=group)
++                    dist.send(v_staging, dst=1, group=group)
++                else:
++                    k_staging = torch.empty(
++                        (transfer.token_count, *k_buffer.shape[1:]),
++                        dtype=k_buffer.dtype,
++                        device=k_buffer.device,
++                    )
++                    v_staging = torch.empty(
++                        (transfer.token_count, *v_buffer.shape[1:]),
++                        dtype=v_buffer.dtype,
++                        device=v_buffer.device,
++                    )
++                    dist.recv(k_staging, src=0, group=group)
++                    dist.recv(v_staging, src=0, group=group)
++                    k_buffer[transfer.destination_indices] = k_staging
++                    v_buffer[transfer.destination_indices] = v_staging
++                del k_staging, v_staging
++        stream.synchronize()
++
++    def start_transfer(
++        self,
++        *,
++        role: str,
++        migration_id: str,
++        agent_id: str,
++        owner_epoch: int,
++        token_ids: List[int],
++        group_name: str,
++        ports: str,
++        extra_key: Optional[str] = None,
++    ) -> TransferStatusResult:
++        self._validate_supported_cache()
++        if role not in ("source", "destination"):
++            raise ValueError(f"invalid transfer role: {role}")
++        self._get_group(group_name, ports)
++        token_count = len(self._key(token_ids, extra_key))
++        if token_count == 0:
++            raise ValueError("cannot transfer an empty prefix")
++        with self._transfer_lock:
++            current = self.background_transfers.get(migration_id)
++            if current is not None:
++                if current.role != role or current.agent_id != agent_id:
++                    raise RuntimeError("migration id is already used by another transfer")
++                return self._transfer_status(current)
++
++        source_indices = None
++        destination_indices = None
++        if role == "source":
++            prefix = self.prefixes.get(agent_id)
++            if prefix is None:
++                raise KeyError(f"source prefix is not pinned: {agent_id}")
++            if prefix.owner_epoch != owner_epoch:
++                raise RuntimeError("source prefix epoch does not match")
++            if prefix.token_ids != tuple(token_ids):
++                raise RuntimeError("source token key changed after pin")
++            source_indices = prefix.kv_indices
++        else:
++            if agent_id in self.prefixes:
++                raise RuntimeError(f"destination already has agent prefix {agent_id}")
++            destination_indices = self._allocate_destination(token_count)
++
++        transfer = BackgroundTransfer(
++            migration_id=migration_id,
++            role=role,
++            agent_id=agent_id,
++            owner_epoch=owner_epoch,
++            token_ids=tuple(token_ids),
++            group_name=group_name,
++            ports=ports,
++            extra_key=extra_key,
++            token_count=token_count,
++            bytes_transferred=self._bytes_for_tokens(token_count),
++            source_indices=source_indices,
++            destination_indices=destination_indices,
++            queued_at=time.perf_counter(),
++        )
++        self._ensure_transfer_worker()
++        with self._transfer_lock:
++            self.background_transfers[migration_id] = transfer
++        try:
++            self._transfer_queue.put_nowait(transfer)
++        except queue.Full:
++            with self._transfer_lock:
++                del self.background_transfers[migration_id]
++            if destination_indices is not None:
++                self.allocator.free(destination_indices)
++            raise RuntimeError("AgentShift transfer queue is full")
++        return self._transfer_status(transfer)
++
++    def _install_destination_prefix(
++        self,
++        *,
++        agent_id: str,
++        owner_epoch: int,
++        token_ids: tuple[int, ...],
++        extra_key: Optional[str],
++        destination_indices: torch.Tensor,
++    ) -> None:
++        token_count = len(token_ids)
++        inserted = False
++        try:
++            key = self._key(list(token_ids), extra_key)
++            insert = self.tree_cache.insert(
++                InsertParams(key=key, value=destination_indices)
++            )
++            inserted = True
++            if insert.prefix_len:
++                self.allocator.free(destination_indices[: insert.prefix_len])
++            match = self.tree_cache.match_prefix(MatchPrefixParams(key=key))
++            if len(match.device_indices) != token_count:
++                raise RuntimeError(
++                    f"installed prefix has {len(match.device_indices)} tokens, "
++                    f"expected {token_count}"
++                )
++            self.tree_cache.inc_lock_ref(match.last_device_node)
++            self.prefixes[agent_id] = PinnedAgentPrefix(
++                agent_id=agent_id,
++                owner_epoch=owner_epoch,
++                token_ids=token_ids,
++                kv_indices=match.device_indices.to(dtype=torch.int64, copy=True),
++                last_node=match.last_device_node,
++                extra_key=extra_key,
++            )
++        except Exception:
++            if not inserted:
++                self.allocator.free(destination_indices)
++            raise
++
++    def _install_background_destination(self, transfer: BackgroundTransfer) -> None:
++        destination_indices = transfer.destination_indices
++        self._install_destination_prefix(
++            agent_id=transfer.agent_id,
++            owner_epoch=transfer.owner_epoch,
++            token_ids=transfer.token_ids,
++            extra_key=transfer.extra_key,
++            destination_indices=destination_indices,
++        )
++        transfer.destination_indices = None
++
++    def poll_transfer(self, migration_id: str) -> TransferStatusResult:
++        with self._transfer_lock:
++            try:
++                transfer = self.background_transfers[migration_id]
++            except KeyError as exc:
++                raise KeyError(f"unknown migration: {migration_id}") from exc
++            should_install = transfer.state == "COPY_DONE"
++            if should_install:
++                transfer.state = "INSTALLING"
++
++        if should_install:
++            try:
++                self._install_background_destination(transfer)
++            except Exception as exc:
++                logger.exception(
++                    "AgentShift destination install failed: migration=%s", migration_id
++                )
++                with self._transfer_lock:
++                    transfer.destination_indices = None
++                    transfer.error = str(exc)
++                    transfer.state = "FAILED"
++            else:
++                with self._transfer_lock:
++                    transfer.state = "COMPLETE"
++        with self._transfer_lock:
++            return self._transfer_status(transfer)
++
++    def cleanup_transfer(self, migration_id: str) -> PrefixOperationResult:
++        with self._transfer_lock:
++            try:
++                transfer = self.background_transfers[migration_id]
++            except KeyError as exc:
++                raise KeyError(f"unknown migration: {migration_id}") from exc
++            if transfer.state not in ("COMPLETE", "FAILED"):
++                raise RuntimeError(
++                    f"cannot clean migration {migration_id} in state {transfer.state}"
++                )
++            destination_indices = transfer.destination_indices
++            transfer.destination_indices = None
++            transfer.source_indices = None
++            del self.background_transfers[migration_id]
++        if destination_indices is not None:
++            self.allocator.free(destination_indices)
++        return PrefixOperationResult(token_count=transfer.token_count)
++
++    def _shared_checkpoint_path(self, checkpoint_id: str) -> str:
++        if not _CHECKPOINT_ID_RE.fullmatch(checkpoint_id):
++            raise ValueError(f"invalid checkpoint id: {checkpoint_id}")
++        return os.path.join(
++            _SHARED_PREFIX_DIR, f"{checkpoint_id}.tp{self.tp_rank}.bin"
++        )
++
++    def _ensure_tier_worker(self) -> None:
++        if self._tier_worker is not None:
++            return
++        with self._transfer_lock:
++            if self._tier_worker is not None:
++                return
++            self._tier_stream = torch.cuda.Stream(device=self.gpu_id)
++            self._tier_worker = threading.Thread(
++                target=self._tier_worker_loop,
++                name=f"agentshift-tier-tp{self.tp_rank}",
++                daemon=True,
++            )
++            self._tier_worker.start()
++
++    def _copy_prefix_to_private_host(
++        self, operation: BackgroundTierOperation
++    ) -> None:
++        stream = self._tier_stream
++        assert stream is not None
++        k_layers = []
++        v_layers = []
++        with torch.cuda.device(self.gpu_id), torch.cuda.stream(stream):
++            for k_buffer, v_buffer in zip(
++                self.kv_pool.k_buffer, self.kv_pool.v_buffer
++            ):
++                k_staging = k_buffer[operation.source_indices].contiguous()
++                v_staging = v_buffer[operation.source_indices].contiguous()
++                k_host = torch.empty(
++                    k_staging.shape,
++                    dtype=k_staging.dtype,
++                    device="cpu",
++                    pin_memory=True,
++                )
++                v_host = torch.empty(
++                    v_staging.shape,
++                    dtype=v_staging.dtype,
++                    device="cpu",
++                    pin_memory=True,
++                )
++                k_host.copy_(k_staging, non_blocking=True)
++                v_host.copy_(v_staging, non_blocking=True)
++                stream.synchronize()
++                k_layers.append(k_host)
++                v_layers.append(v_host)
++                del k_staging, v_staging
++        operation.host_prefix = HostAgentPrefix(
++            checkpoint_id=operation.checkpoint_id,
++            agent_id=operation.agent_id,
++            owner_epoch=operation.owner_epoch,
++            token_ids=operation.token_ids,
++            k_layers=tuple(k_layers),
++            v_layers=tuple(v_layers),
++            extra_key=operation.extra_key,
++        )
++
++    def _copy_private_host_to_prefix(
++        self, operation: BackgroundTierOperation
++    ) -> None:
++        checkpoint = operation.host_prefix
++        assert checkpoint is not None
++        stream = self._tier_stream
++        assert stream is not None
++        with torch.cuda.device(self.gpu_id), torch.cuda.stream(stream):
++            for k_buffer, v_buffer, k_host, v_host in zip(
++                self.kv_pool.k_buffer,
++                self.kv_pool.v_buffer,
++                checkpoint.k_layers,
++                checkpoint.v_layers,
++            ):
++                k_staging = k_host.to(k_buffer.device, non_blocking=True)
++                v_staging = v_host.to(v_buffer.device, non_blocking=True)
++                k_buffer[operation.destination_indices] = k_staging
++                v_buffer[operation.destination_indices] = v_staging
++                stream.synchronize()
++                del k_staging, v_staging
++
++    def _shared_checkpoint_layout(self, token_count: int):
++        dtype = self.kv_pool.k_buffer[0].dtype
++        layout = []
++        offset = 0
++        for k_buffer, v_buffer in zip(
++            self.kv_pool.k_buffer, self.kv_pool.v_buffer
++        ):
++            if k_buffer.dtype != dtype or v_buffer.dtype != dtype:
++                raise RuntimeError("shared checkpoint requires one KV dtype")
++            for buffer in (k_buffer, v_buffer):
++                shape = (token_count, *buffer.shape[1:])
++                numel = token_count
++                for dimension in buffer.shape[1:]:
++                    numel *= dimension
++                layout.append((offset, numel, shape))
++                offset += numel
++        return dtype, layout, offset
++
++    def _export_prefix_to_shared(self, operation: BackgroundTierOperation) -> None:
++        dtype, layout, total_numel = self._shared_checkpoint_layout(
++            operation.token_count
++        )
++        os.makedirs(_SHARED_PREFIX_DIR, mode=0o700, exist_ok=True)
++        path = self._shared_checkpoint_path(operation.checkpoint_id)
++        fd = os.open(path, os.O_CREAT | os.O_TRUNC | os.O_RDWR, 0o600)
++        try:
++            os.ftruncate(fd, total_numel * torch.empty((), dtype=dtype).element_size())
++        finally:
++            os.close(fd)
++        mapped = torch.from_file(path, shared=True, size=total_numel, dtype=dtype)
++        stream = self._tier_stream
++        assert stream is not None
++        position = 0
++        with torch.cuda.device(self.gpu_id), torch.cuda.stream(stream):
++            for k_buffer, v_buffer in zip(
++                self.kv_pool.k_buffer, self.kv_pool.v_buffer
++            ):
++                for buffer in (k_buffer, v_buffer):
++                    offset, numel, shape = layout[position]
++                    staging = buffer[operation.source_indices].contiguous()
++                    mapped[offset : offset + numel].view(shape).copy_(staging)
++                    del staging
++                    position += 1
++        stream.synchronize()
++        del mapped
++
++    def _import_shared_to_prefix(self, operation: BackgroundTierOperation) -> None:
++        dtype, layout, total_numel = self._shared_checkpoint_layout(
++            operation.token_count
++        )
++        path = self._shared_checkpoint_path(operation.checkpoint_id)
++        expected_bytes = total_numel * torch.empty((), dtype=dtype).element_size()
++        if os.path.getsize(path) != expected_bytes:
++            raise RuntimeError(
++                f"shared checkpoint has {os.path.getsize(path)} bytes, "
++                f"expected {expected_bytes}"
++            )
++        mapped = torch.from_file(path, shared=True, size=total_numel, dtype=dtype)
++        stream = self._tier_stream
++        assert stream is not None
++        position = 0
++        with torch.cuda.device(self.gpu_id), torch.cuda.stream(stream):
++            for k_buffer, v_buffer in zip(
++                self.kv_pool.k_buffer, self.kv_pool.v_buffer
++            ):
++                for buffer in (k_buffer, v_buffer):
++                    offset, numel, shape = layout[position]
++                    staging = mapped[offset : offset + numel].view(shape).to(
++                        buffer.device
++                    )
++                    buffer[operation.destination_indices] = staging
++                    del staging
++                    position += 1
++        stream.synchronize()
++        del mapped
++
++    def _tier_worker_loop(self) -> None:
++        while True:
++            operation = self._tier_queue.get()
++            with self._transfer_lock:
++                operation.state = "COPYING"
++                operation.started_at = time.perf_counter()
++            try:
++                if operation.operation == "private_offload":
++                    self._copy_prefix_to_private_host(operation)
++                elif operation.operation == "private_restore":
++                    self._copy_private_host_to_prefix(operation)
++                elif operation.operation == "shared_export":
++                    self._export_prefix_to_shared(operation)
++                elif operation.operation == "shared_import":
++                    self._import_shared_to_prefix(operation)
++                else:
++                    raise ValueError(f"unknown tier operation: {operation.operation}")
++            except Exception as exc:
++                logger.exception(
++                    "AgentShift tier operation failed: operation=%s id=%s",
++                    operation.operation,
++                    operation.operation_id,
++                )
++                with self._transfer_lock:
++                    operation.error = str(exc)
++                    operation.finished_at = time.perf_counter()
++                    operation.state = "FAILED"
++            else:
++                with self._transfer_lock:
++                    operation.source_indices = None
++                    operation.finished_at = time.perf_counter()
++                    operation.state = "COPY_DONE"
++            finally:
++                self._tier_queue.task_done()
++
++    def start_tier_operation(
++        self,
++        *,
++        operation: str,
++        operation_id: str,
++        checkpoint_id: str,
++        agent_id: str,
++        owner_epoch: int,
++        token_ids: List[int],
++        extra_key: Optional[str] = None,
++        release_gpu: bool = True,
++    ) -> TransferStatusResult:
++        self._validate_supported_cache()
++        if operation not in (
++            "private_offload",
++            "private_restore",
++            "shared_export",
++            "shared_import",
++        ):
++            raise ValueError(f"unknown tier operation: {operation}")
++        self._shared_checkpoint_path(checkpoint_id)
++        token_count = len(self._key(token_ids, extra_key))
++        if token_count == 0:
++            raise ValueError("cannot move an empty prefix")
++        with self._transfer_lock:
++            current = self.tier_operations.get(operation_id)
++            if current is not None:
++                if current.operation != operation or current.agent_id != agent_id:
++                    raise RuntimeError("operation id is already used")
++                return self._tier_status(current)
++
++        source_indices = None
++        destination_indices = None
++        host_prefix = None
++        if operation in ("private_offload", "shared_export"):
++            prefix = self.prefixes.get(agent_id)
++            if prefix is None:
++                raise KeyError(f"source prefix is not pinned: {agent_id}")
++            if prefix.owner_epoch != owner_epoch:
++                raise RuntimeError("source prefix epoch does not match")
++            if prefix.token_ids != tuple(token_ids):
++                raise RuntimeError("source token key changed after pin")
++            source_indices = prefix.kv_indices
++        elif operation == "private_restore":
++            if agent_id in self.prefixes:
++                raise RuntimeError(f"engine already has agent prefix {agent_id}")
++            try:
++                host_prefix = self.host_prefixes[checkpoint_id]
++            except KeyError as exc:
++                raise KeyError(f"unknown host checkpoint: {checkpoint_id}") from exc
++            if host_prefix.agent_id != agent_id:
++                raise RuntimeError("host checkpoint belongs to another agent")
++            if host_prefix.owner_epoch != owner_epoch:
++                raise RuntimeError("host checkpoint epoch does not match")
++            if host_prefix.token_ids != tuple(token_ids):
++                raise RuntimeError("host checkpoint token key does not match")
++            destination_indices = self._allocate_destination(token_count)
++        else:
++            if agent_id in self.prefixes:
++                raise RuntimeError(f"engine already has agent prefix {agent_id}")
++            path = self._shared_checkpoint_path(checkpoint_id)
++            if not os.path.exists(path):
++                raise KeyError(f"shared checkpoint is not ready: {checkpoint_id}")
++            destination_indices = self._allocate_destination(token_count)
++
++        tier_operation = BackgroundTierOperation(
++            operation_id=operation_id,
++            operation=operation,
++            checkpoint_id=checkpoint_id,
++            agent_id=agent_id,
++            owner_epoch=owner_epoch,
++            token_ids=tuple(token_ids),
++            extra_key=extra_key,
++            release_gpu=release_gpu,
++            token_count=token_count,
++            bytes_transferred=self._bytes_for_tokens(token_count),
++            source_indices=source_indices,
++            destination_indices=destination_indices,
++            host_prefix=host_prefix,
++            queued_at=time.perf_counter(),
++        )
++        self._ensure_tier_worker()
++        with self._transfer_lock:
++            self.tier_operations[operation_id] = tier_operation
++        try:
++            self._tier_queue.put_nowait(tier_operation)
++        except queue.Full:
++            with self._transfer_lock:
++                del self.tier_operations[operation_id]
++            if destination_indices is not None:
++                self.allocator.free(destination_indices)
++            raise RuntimeError("AgentShift tier queue is full")
++        return self._tier_status(tier_operation)
++
++    def _finalize_tier_operation(self, operation: BackgroundTierOperation) -> None:
++        if operation.operation == "private_offload":
++            assert operation.host_prefix is not None
++            self.host_prefixes[operation.checkpoint_id] = operation.host_prefix
++            if operation.release_gpu:
++                self.release(
++                    agent_id=operation.agent_id,
++                    owner_epoch=operation.owner_epoch,
++                    evict_after_release=True,
++                )
++        elif operation.operation == "shared_export":
++            if operation.release_gpu:
++                self.release(
++                    agent_id=operation.agent_id,
++                    owner_epoch=operation.owner_epoch,
++                    evict_after_release=True,
++                )
++        else:
++            destination_indices = operation.destination_indices
++            self._install_destination_prefix(
++                agent_id=operation.agent_id,
++                owner_epoch=operation.owner_epoch,
++                token_ids=operation.token_ids,
++                extra_key=operation.extra_key,
++                destination_indices=destination_indices,
++            )
++            operation.destination_indices = None
++
++    def poll_tier_operation(self, operation_id: str) -> TransferStatusResult:
++        with self._transfer_lock:
++            try:
++                operation = self.tier_operations[operation_id]
++            except KeyError as exc:
++                raise KeyError(f"unknown tier operation: {operation_id}") from exc
++            should_finalize = operation.state == "COPY_DONE"
++            if should_finalize:
++                operation.state = "INSTALLING"
++
++        if should_finalize:
++            try:
++                self._finalize_tier_operation(operation)
++            except Exception as exc:
++                logger.exception(
++                    "AgentShift tier finalization failed: operation=%s", operation_id
++                )
++                with self._transfer_lock:
++                    operation.destination_indices = None
++                    operation.error = str(exc)
++                    operation.state = "FAILED"
++            else:
++                with self._transfer_lock:
++                    operation.state = "COMPLETE"
++        with self._transfer_lock:
++            return self._tier_status(operation)
++
++    def cleanup_tier_operation(
++        self, operation_id: str, *, drop_checkpoint: bool = False
++    ) -> PrefixOperationResult:
++        with self._transfer_lock:
++            try:
++                operation = self.tier_operations[operation_id]
++            except KeyError as exc:
++                raise KeyError(f"unknown tier operation: {operation_id}") from exc
++            if operation.state not in ("COMPLETE", "FAILED"):
++                raise RuntimeError(
++                    f"cannot clean tier operation {operation_id} in "
++                    f"state {operation.state}"
++                )
++            destination_indices = operation.destination_indices
++            operation.destination_indices = None
++            operation.source_indices = None
++            del self.tier_operations[operation_id]
++            if drop_checkpoint:
++                self.host_prefixes.pop(operation.checkpoint_id, None)
++        if destination_indices is not None:
++            self.allocator.free(destination_indices)
++        if drop_checkpoint:
++            path = self._shared_checkpoint_path(operation.checkpoint_id)
++            try:
++                os.unlink(path)
++            except FileNotFoundError:
++                pass
++        return PrefixOperationResult(token_count=operation.token_count)
++
++    @staticmethod
++    def _tier_status(operation: BackgroundTierOperation) -> TransferStatusResult:
++        queue_seconds = 0.0
++        operation_seconds = 0.0
++        if operation.started_at:
++            queue_seconds = operation.started_at - operation.queued_at
++        if operation.finished_at:
++            operation_seconds = operation.finished_at - operation.started_at
++        return TransferStatusResult(
++            migration_id=operation.operation_id,
++            state=operation.state,
++            role=operation.operation,
++            token_count=operation.token_count,
++            bytes_transferred=operation.bytes_transferred,
++            transfer_seconds=operation_seconds,
++            queue_seconds=queue_seconds,
++            error=operation.error,
++        )
++
++    @staticmethod
++    def _transfer_status(transfer: BackgroundTransfer) -> TransferStatusResult:
++        queue_seconds = 0.0
++        transfer_seconds = 0.0
++        if transfer.started_at:
++            queue_seconds = transfer.started_at - transfer.queued_at
++        if transfer.finished_at:
++            transfer_seconds = transfer.finished_at - transfer.started_at
++        return TransferStatusResult(
++            migration_id=transfer.migration_id,
++            state=transfer.state,
++            role=transfer.role,
++            token_count=transfer.token_count,
++            bytes_transferred=transfer.bytes_transferred,
++            transfer_seconds=transfer_seconds,
++            queue_seconds=queue_seconds,
++            error=transfer.error,
++        )
++
++    def transfer(
++        self,
++        *,
++        role: str,
++        migration_id: str,
++        agent_id: str,
++        owner_epoch: int,
++        token_ids: List[int],
++        group_name: str,
++        ports: str,
++        extra_key: Optional[str] = None,
++    ) -> PrefixOperationResult:
++        self._validate_supported_cache()
++        if role not in ("source", "destination"):
++            raise ValueError(f"invalid transfer role: {role}")
++        group = self._get_group(group_name, ports)
++        token_count = len(self._key(token_ids, extra_key))
++        if token_count == 0:
++            raise ValueError("cannot transfer an empty prefix")
++
++        started = time.perf_counter()
++        destination_indices = None
++        try:
++            if role == "source":
++                prefix = self.prefixes.get(agent_id)
++                if prefix is None:
++                    raise KeyError(f"source prefix is not pinned: {agent_id}")
++                if prefix.owner_epoch != owner_epoch:
++                    raise RuntimeError("source prefix epoch does not match")
++                if prefix.token_ids != tuple(token_ids):
++                    raise RuntimeError("source token key changed after pin")
++                source_indices = prefix.kv_indices
++            else:
++                if agent_id in self.prefixes:
++                    raise RuntimeError(f"destination already has agent prefix {agent_id}")
++                destination_indices = self._allocate_destination(token_count)
++
++            for k_buffer, v_buffer in zip(
++                self.kv_pool.k_buffer, self.kv_pool.v_buffer
++            ):
++                if role == "source":
++                    k_staging = k_buffer[source_indices].contiguous()
++                    v_staging = v_buffer[source_indices].contiguous()
++                    dist.send(k_staging, dst=1, group=group)
++                    dist.send(v_staging, dst=1, group=group)
++                else:
++                    k_staging = torch.empty(
++                        (token_count, *k_buffer.shape[1:]),
++                        dtype=k_buffer.dtype,
++                        device=k_buffer.device,
++                    )
++                    v_staging = torch.empty(
++                        (token_count, *v_buffer.shape[1:]),
++                        dtype=v_buffer.dtype,
++                        device=v_buffer.device,
++                    )
++                    dist.recv(k_staging, src=0, group=group)
++                    dist.recv(v_staging, src=0, group=group)
++                    k_buffer[destination_indices] = k_staging
++                    v_buffer[destination_indices] = v_staging
++                del k_staging, v_staging
++
++            torch.cuda.synchronize(self.gpu_id)
++            dist.barrier(group=group)
++
++            if role == "destination":
++                key = self._key(token_ids, extra_key)
++                insert = self.tree_cache.insert(
++                    InsertParams(key=key, value=destination_indices)
++                )
++                if insert.prefix_len:
++                    self.allocator.free(destination_indices[: insert.prefix_len])
++                match = self.tree_cache.match_prefix(MatchPrefixParams(key=key))
++                if len(match.device_indices) != token_count:
++                    raise RuntimeError(
++                        f"installed prefix has {len(match.device_indices)} tokens, "
++                        f"expected {token_count}"
++                    )
++                self.tree_cache.inc_lock_ref(match.last_device_node)
++                self.prefixes[agent_id] = PinnedAgentPrefix(
++                    agent_id=agent_id,
++                    owner_epoch=owner_epoch,
++                    token_ids=tuple(token_ids),
++                    kv_indices=match.device_indices.to(dtype=torch.int64, copy=True),
++                    last_node=match.last_device_node,
++                    extra_key=extra_key,
++                )
++                destination_indices = None
++        except Exception:
++            if role == "destination" and destination_indices is not None:
++                self.allocator.free(destination_indices)
++            logger.exception(
++                "AgentShift prefix transfer failed: migration=%s role=%s",
++                migration_id,
++                role,
++            )
++            raise
++
++        elapsed = time.perf_counter() - started
++        return PrefixOperationResult(
++            token_count=token_count,
++            bytes_transferred=self._bytes_for_tokens(token_count),
++            transfer_seconds=elapsed,
++        )
+diff --git a/test/registered/unit/mem_cache/test_agent_prefix_cache.py b/test/registered/unit/mem_cache/test_agent_prefix_cache.py
+new file mode 100644
+index 000000000..46dc7db25
+--- /dev/null
++++ b/test/registered/unit/mem_cache/test_agent_prefix_cache.py
+@@ -0,0 +1,312 @@
++import unittest
++
++import torch
++
++from sglang.srt.managers.agentshift_control import aggregate_agentshift_results
++from sglang.srt.managers.io_struct import (
++    AgentShiftCleanupTransferReqOutput,
++    AgentShiftTransferStatusReqOutput,
++)
++from sglang.srt.mem_cache.agent_prefix_cache import (
++    AgentPrefixManager,
++    BackgroundTierOperation,
++    BackgroundTransfer,
++)
++from sglang.srt.mem_cache.base_prefix_cache import InsertParams
++from sglang.srt.mem_cache.radix_cache import RadixCache, RadixKey
++
++
++class FakeKVPool:
++    def __init__(self):
++        self.k_buffer = [torch.zeros((32, 2, 4), dtype=torch.float16)]
++        self.v_buffer = [torch.zeros((32, 2, 4), dtype=torch.float16)]
++
++
++class FakeAllocator:
++    device = "cpu"
++
++    def __init__(self):
++        self.pool = FakeKVPool()
++        self.free_slots = torch.arange(16, 32, dtype=torch.int64)
++        self.freed = []
++
++    def get_kvcache(self):
++        return self.pool
++
++    def alloc(self, count):
++        if count > len(self.free_slots):
++            return None
++        result = self.free_slots[:count]
++        self.free_slots = self.free_slots[count:]
++        return result
++
++    def available_size(self):
++        return len(self.free_slots)
++
++    def free(self, indices):
++        self.freed.extend(indices.tolist())
++        self.free_slots = torch.cat((self.free_slots, indices))
++
++
++class TestAgentPrefixManager(unittest.TestCase):
++    def setUp(self):
++        self.allocator = FakeAllocator()
++        self.cache = RadixCache.create_simulated(mock_allocator=self.allocator)
++        self.cache.insert(
++            InsertParams(
++                key=RadixKey(torch.tensor([10, 11, 12, 13]).tolist()),
++                value=torch.tensor([1, 2, 3, 4], dtype=torch.int64),
++            )
++        )
++        self.manager = AgentPrefixManager(
++            tree_cache=self.cache,
++            token_to_kv_pool_allocator=self.allocator,
++            tp_rank=0,
++            tp_size=1,
++            gpu_id=0,
++        )
++
++    def test_pin_is_idempotent_for_same_epoch(self):
++        result = self.manager.pin(
++            agent_id="agent-1", owner_epoch=4, token_ids=[10, 11, 12, 13]
++        )
++        again = self.manager.pin(
++            agent_id="agent-1", owner_epoch=4, token_ids=[10, 11, 12, 13, 99]
++        )
++        self.assertEqual(result.token_count, 4)
++        self.assertEqual(again.token_count, 4)
++        self.assertEqual(self.cache.protected_size(), 4)
++
++    def test_stale_release_is_fenced(self):
++        self.manager.pin(
++            agent_id="agent-1", owner_epoch=4, token_ids=[10, 11, 12, 13]
++        )
++        with self.assertRaisesRegex(RuntimeError, "stale prefix release"):
++            self.manager.release(agent_id="agent-1", owner_epoch=3)
++
++    def test_release_unpins_and_reclaims_cache(self):
++        self.manager.pin(
++            agent_id="agent-1", owner_epoch=4, token_ids=[10, 11, 12, 13]
++        )
++        result = self.manager.release(agent_id="agent-1", owner_epoch=4)
++        self.assertEqual(result.evicted_tokens, 4)
++        self.assertEqual(self.cache.total_size(), 0)
++
++    def test_rebind_fences_old_epoch_and_is_idempotent(self):
++        self.manager.pin(
++            agent_id="agent-1", owner_epoch=4, token_ids=[10, 11, 12, 13]
++        )
++        self.manager.rebind(
++            agent_id="agent-1", expected_owner_epoch=4, new_owner_epoch=6
++        )
++        self.manager.rebind(
++            agent_id="agent-1", expected_owner_epoch=4, new_owner_epoch=6
++        )
++        with self.assertRaisesRegex(RuntimeError, "stale prefix release"):
++            self.manager.release(agent_id="agent-1", owner_epoch=4)
++        self.manager.release(agent_id="agent-1", owner_epoch=6)
++
++    def test_allow_missing_release_is_retryable(self):
++        result = self.manager.release(
++            agent_id="missing", owner_epoch=4, allow_missing=True
++        )
++        self.assertEqual(result.token_count, 0)
++
++    def test_failed_transfer_cleanup_releases_destination_reservation(self):
++        indices = self.allocator.alloc(3)
++        self.manager.background_transfers["migration-1"] = BackgroundTransfer(
++            migration_id="migration-1",
++            role="destination",
++            agent_id="agent-1",
++            owner_epoch=5,
++            token_ids=(10, 11, 12),
++            group_name="group",
++            ports="1234",
++            extra_key=None,
++            token_count=3,
++            bytes_transferred=0,
++            destination_indices=indices,
++            state="FAILED",
++        )
++        result = self.manager.cleanup_transfer("migration-1")
++        self.assertEqual(result.token_count, 3)
++        self.assertNotIn("migration-1", self.manager.background_transfers)
++        self.assertTrue(set(indices.tolist()).issubset(self.allocator.freed))
++
++    def test_failed_tier_cleanup_releases_destination_reservation(self):
++        indices = self.allocator.alloc(3)
++        self.manager.tier_operations["tier-1"] = BackgroundTierOperation(
++            operation_id="tier-1",
++            operation="shared_import",
++            checkpoint_id="checkpoint-1",
++            agent_id="agent-1",
++            owner_epoch=5,
++            token_ids=(10, 11, 12),
++            extra_key=None,
++            release_gpu=False,
++            token_count=3,
++            bytes_transferred=64,
++            destination_indices=indices,
++            state="FAILED",
++        )
++        result = self.manager.cleanup_tier_operation("tier-1")
++        self.assertEqual(result.token_count, 3)
++        self.assertNotIn("tier-1", self.manager.tier_operations)
++        self.assertTrue(set(indices.tolist()).issubset(self.allocator.freed))
++
++    def test_tier_reservation_is_included_in_accounting(self):
++        transfer_indices = self.allocator.alloc(2)
++        tier_indices = self.allocator.alloc(3)
++        self.manager.background_transfers["migration-1"] = BackgroundTransfer(
++            migration_id="migration-1",
++            role="destination",
++            agent_id="agent-1",
++            owner_epoch=5,
++            token_ids=(10, 11),
++            group_name="group",
++            ports="1234",
++            extra_key=None,
++            token_count=2,
++            bytes_transferred=64,
++            destination_indices=transfer_indices,
++        )
++        self.manager.tier_operations["tier-1"] = BackgroundTierOperation(
++            operation_id="tier-1",
++            operation="shared_import",
++            checkpoint_id="checkpoint-1",
++            agent_id="agent-2",
++            owner_epoch=5,
++            token_ids=(12, 13, 14),
++            extra_key=None,
++            release_gpu=False,
++            token_count=3,
++            bytes_transferred=64,
++            destination_indices=tier_indices,
++        )
++        self.assertEqual(self.manager.reserved_destination_tokens(), 5)
++
++    def test_invalid_shared_checkpoint_id_is_rejected(self):
++        with self.assertRaisesRegex(ValueError, "invalid checkpoint id"):
++            self.manager.start_tier_operation(
++                operation="shared_export",
++                operation_id="tier-1",
++                checkpoint_id="../escape",
++                agent_id="agent-1",
++                owner_epoch=5,
++                token_ids=[10, 11, 12],
++            )
++
++    def test_cache_reset_clears_terminal_agent_metadata(self):
++        self.manager.pin(
++            agent_id="agent-1", owner_epoch=4, token_ids=[10, 11, 12, 13]
++        )
++        self.manager.background_transfers["migration-1"] = BackgroundTransfer(
++            migration_id="migration-1",
++            role="source",
++            agent_id="agent-1",
++            owner_epoch=4,
++            token_ids=(10, 11, 12, 13),
++            group_name="group",
++            ports="1234",
++            extra_key=None,
++            token_count=4,
++            bytes_transferred=64,
++            state="COMPLETE",
++        )
++        self.assertTrue(self.manager.prepare_cache_reset())
++        self.assertEqual(self.manager.prefixes, {})
++        self.assertEqual(self.manager.background_transfers, {})
++
++    def test_cache_reset_rejects_active_agent_transfer(self):
++        self.manager.background_transfers["migration-1"] = BackgroundTransfer(
++            migration_id="migration-1",
++            role="source",
++            agent_id="agent-1",
++            owner_epoch=4,
++            token_ids=(10, 11, 12, 13),
++            group_name="group",
++            ports="1234",
++            extra_key=None,
++            token_count=4,
++            bytes_transferred=64,
++            state="COPYING",
++        )
++        self.assertFalse(self.manager.prepare_cache_reset())
++        self.assertIn("migration-1", self.manager.background_transfers)
++
++
++class TestAgentShiftResultAggregation(unittest.TestCase):
++    def test_tp_transfer_waits_for_least_advanced_rank(self):
++        results = [
++            AgentShiftTransferStatusReqOutput(
++                success=True,
++                migration_id="migration-1",
++                state="COMPLETE",
++                role="destination",
++                token_count=4,
++                bytes_transferred=64,
++                transfer_seconds=0.1,
++            ),
++            AgentShiftTransferStatusReqOutput(
++                success=True,
++                migration_id="migration-1",
++                state="COPY_DONE",
++                role="destination",
++                token_count=4,
++                bytes_transferred=64,
++                transfer_seconds=0.2,
++            ),
++        ]
++        merged = aggregate_agentshift_results(
++            results,
++            consistent_fields=("migration_id", "token_count", "role"),
++            sum_fields=("bytes_transferred",),
++            max_fields=("transfer_seconds",),
++            aggregate_state=True,
++        )
++        self.assertEqual(merged.state, "COPY_DONE")
++        self.assertEqual(merged.bytes_transferred, 128)
++        self.assertEqual(merged.transfer_seconds, 0.2)
++
++    def test_tp_failure_is_not_hidden_by_rank_zero_success(self):
++        results = [
++            AgentShiftCleanupTransferReqOutput(success=True, token_count=4),
++            AgentShiftCleanupTransferReqOutput(
++                success=False, message="rank still copying"
++            ),
++        ]
++        merged = aggregate_agentshift_results(
++            results, consistent_fields=("token_count",)
++        )
++        self.assertFalse(merged.success)
++        self.assertEqual(merged.message, "rank still copying")
++
++    def test_tp_metadata_disagreement_fails_closed(self):
++        results = [
++            AgentShiftTransferStatusReqOutput(
++                success=True,
++                migration_id="migration-1",
++                state="COMPLETE",
++                role="destination",
++                token_count=4,
++            ),
++            AgentShiftTransferStatusReqOutput(
++                success=True,
++                migration_id="migration-1",
++                state="COMPLETE",
++                role="destination",
++                token_count=3,
++            ),
++        ]
++        merged = aggregate_agentshift_results(
++            results,
++            consistent_fields=("migration_id", "token_count", "role"),
++            aggregate_state=True,
++        )
++        self.assertFalse(merged.success)
++        self.assertEqual(merged.state, "FAILED")
++        self.assertIn("token_count", merged.message)
++
++
++if __name__ == "__main__":
++    unittest.main()

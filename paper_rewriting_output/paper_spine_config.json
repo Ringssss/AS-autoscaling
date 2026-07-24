@@ -1,0 +1,23 @@
+{
+  "workflow": "build_from_materials",
+  "scene": "conference",
+  "tier": "pro",
+  "output_language": "en",
+  "target_name": "USENIX NSDI",
+  "materials_dir": "/home/zhujianian/agentshift",
+  "draft_path": "",
+  "user_motivation": "Long-lived LLM agents become suspended but warm between turns; AgentShift safely moves their completed-prefix state and execution authority across serving engines during those blocked intervals, enabling locality-preserving load relief and stateful elasticity.",
+  "official_urls": [
+    "https://www.usenix.org/conference/nsdi26/call-for-papers",
+    "https://www.usenix.org/conferences/author-resources/paper-templates"
+  ],
+  "special_requirements": [
+    "Use concise, information-dense English with one message per paragraph.",
+    "Use the USENIX two-column LaTeX format.",
+    "Use Arial for every experimental figure label.",
+    "Do not claim official SOTA reproduction for mechanism-equivalent baselines."
+  ],
+  "word_output": "none",
+  "translation_package": "none",
+  "ui_language": "zh"
+}

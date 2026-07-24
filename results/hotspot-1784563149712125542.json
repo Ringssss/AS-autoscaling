@@ -1,0 +1,48 @@
+{
+  "baseline_implementation": "mechanism-equivalent",
+  "calibrations": {
+    "32768": {
+      "cold_service_seconds": 1.8307217489928007,
+      "recompute_seconds": 1.1967967171221972,
+      "warm_service_seconds": 0.6339250318706036
+    }
+  },
+  "config": {
+    "agent_counts": [
+      8
+    ],
+    "burst_output_tokens": 32,
+    "calibration_repeats": 3,
+    "destination": "http://127.0.0.1:31001",
+    "first_output_tokens": 4,
+    "gap_ms": 500.0,
+    "output_dir": "results",
+    "poll_interval": 0.005,
+    "prefix_lengths": [
+      32768
+    ],
+    "repeats": 3,
+    "return_patterns": [
+      "simultaneous"
+    ],
+    "scenarios": [
+      "sticky",
+      "tokencake-source",
+      "reroute",
+      "on-return",
+      "agentshift"
+    ],
+    "seed": 20260720,
+    "source": "http://127.0.0.1:31000",
+    "source_token_budget": 260000,
+    "spread_ms": 250.0,
+    "tool_result_tokens": 32,
+    "tp_size": 1,
+    "transfer_port": 30200,
+    "ttl_ms": 500.0,
+    "warm_tokencake": true
+  },
+  "records": [],
+  "state_db": "results/hotspot-state-1784563138342843228.db",
+  "tokencake_warmups": []
+}

@@ -1,0 +1,207 @@
+{
+  "config": {
+    "destination": "http://127.0.0.1:31001",
+    "max_tool_result_tokens": 1024,
+    "output_dir": "results",
+    "prefix_lengths": [
+      4096
+    ],
+    "python": "/home/zhujianian/miniconda3/envs/crossstage/bin/python",
+    "repeats": 1,
+    "source": "http://127.0.0.1:31000",
+    "tool_cwd": "/home/zhujianian/agentshift",
+    "transfer_port": 30000
+  },
+  "records": [
+    {
+      "cached_tokens": 0,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exposed_migration_seconds": 0.0,
+      "fully_hidden": false,
+      "migration_seconds": 0.0,
+      "next_turn_seconds": 0.1445104144513607,
+      "post_tool_seconds": 0.1445104144513607,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "reroute",
+      "tool": "git-status",
+      "tool_output_bytes": 103,
+      "tool_result_tokens": 26,
+      "tool_seconds": 0.0026512397453188896
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exposed_migration_seconds": 0.07323811110109091,
+      "fully_hidden": false,
+      "migration_seconds": 0.06692496594041586,
+      "next_turn_seconds": 0.04801827669143677,
+      "post_tool_seconds": 0.12125638779252768,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "on-return",
+      "tool": "git-status",
+      "tool_output_bytes": 103,
+      "tool_result_tokens": 26,
+      "tool_seconds": 0.002732733264565468
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exposed_migration_seconds": 0.04855733644217253,
+      "fully_hidden": false,
+      "migration_seconds": 0.04406381119042635,
+      "next_turn_seconds": 0.04408477246761322,
+      "post_tool_seconds": 0.09264210890978575,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "proactive",
+      "tool": "git-status",
+      "tool_output_bytes": 103,
+      "tool_result_tokens": 26,
+      "tool_seconds": 0.0031111175194382668
+    },
+    {
+      "cached_tokens": 0,
+      "command": [
+        "/home/zhujianian/miniconda3/envs/crossstage/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_state_store.py"
+      ],
+      "exposed_migration_seconds": 0.0,
+      "fully_hidden": false,
+      "migration_seconds": 0.0,
+      "next_turn_seconds": 0.13668531086295843,
+      "post_tool_seconds": 0.13668531086295843,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "reroute",
+      "tool": "state-store-tests",
+      "tool_output_bytes": 98,
+      "tool_result_tokens": 25,
+      "tool_seconds": 0.391296798363328
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "/home/zhujianian/miniconda3/envs/crossstage/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_state_store.py"
+      ],
+      "exposed_migration_seconds": 0.04923613928258419,
+      "fully_hidden": false,
+      "migration_seconds": 0.04178922809660435,
+      "next_turn_seconds": 0.049437016248703,
+      "post_tool_seconds": 0.0986731555312872,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "on-return",
+      "tool": "state-store-tests",
+      "tool_output_bytes": 98,
+      "tool_result_tokens": 25,
+      "tool_seconds": 0.3905413253232837
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "/home/zhujianian/miniconda3/envs/crossstage/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_state_store.py"
+      ],
+      "exposed_migration_seconds": 1.0700896382331848e-06,
+      "fully_hidden": true,
+      "migration_seconds": 0.03601191192865372,
+      "next_turn_seconds": 0.04897067230194807,
+      "post_tool_seconds": 0.048971742391586304,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "proactive",
+      "tool": "state-store-tests",
+      "tool_output_bytes": 98,
+      "tool_result_tokens": 25,
+      "tool_seconds": 0.3889501756057143
+    },
+    {
+      "cached_tokens": 0,
+      "command": [
+        "/home/zhujianian/miniconda3/envs/crossstage/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exposed_migration_seconds": 0.0,
+      "fully_hidden": false,
+      "migration_seconds": 0.0,
+      "next_turn_seconds": 0.14199497923254967,
+      "post_tool_seconds": 0.14199497923254967,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "reroute",
+      "tool": "control-plane-tests",
+      "tool_output_bytes": 99,
+      "tool_result_tokens": 25,
+      "tool_seconds": 0.460548366419971
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "/home/zhujianian/miniconda3/envs/crossstage/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exposed_migration_seconds": 0.048796229995787144,
+      "fully_hidden": false,
+      "migration_seconds": 0.04030008800327778,
+      "next_turn_seconds": 0.046278408728539944,
+      "post_tool_seconds": 0.09507463872432709,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "on-return",
+      "tool": "control-plane-tests",
+      "tool_output_bytes": 99,
+      "tool_result_tokens": 25,
+      "tool_seconds": 0.46633691247552633
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "/home/zhujianian/miniconda3/envs/crossstage/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exposed_migration_seconds": 1.261010766029358e-06,
+      "fully_hidden": true,
+      "migration_seconds": 0.03692609630525112,
+      "next_turn_seconds": 0.04568189289420843,
+      "post_tool_seconds": 0.04568315390497446,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "proactive",
+      "tool": "control-plane-tests",
+      "tool_output_bytes": 99,
+      "tool_result_tokens": 25,
+      "tool_seconds": 0.46345402020961046
+    }
+  ],
+  "state_db": "results/real-tools-state-1784536571911865922.db"
+}

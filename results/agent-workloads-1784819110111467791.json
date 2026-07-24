@@ -1,0 +1,428 @@
+{
+  "flowprefill": {
+    "coverage_by_prefix": [
+      {
+        "bin": "le_4k",
+        "count": 15330,
+        "fully_hidden_fraction": 1.0
+      },
+      {
+        "bin": "4k_16k",
+        "count": 4456,
+        "fully_hidden_fraction": 1.0
+      },
+      {
+        "bin": "16k_32k",
+        "count": 153,
+        "fully_hidden_fraction": 1.0
+      },
+      {
+        "bin": "gt_32k",
+        "count": 18,
+        "fully_hidden_fraction": 1.0
+      }
+    ],
+    "cumulative_prefix_tokens": {
+      "count": 43058,
+      "max": 89296,
+      "mean": 2338.789911282456,
+      "p50": 1056,
+      "p90": 6448,
+      "p95": 8816,
+      "p99": 14384
+    },
+    "estimated_fully_hidden_fraction": 1.0,
+    "inter_turn_proxy_seconds": {
+      "count": 19957,
+      "max": 4054.4559999999997,
+      "mean": 275.20287498120956,
+      "p50": 110.64499999999998,
+      "p90": 718.7159999999999,
+      "p95": 1152.8359999999993,
+      "p99": 2207.351
+    },
+    "multi_turn_requests": 19957,
+    "path": "/home/zhujianian/graphpool/third_party/FlowPrefill_trace_build/qwen_traceA_blksz_16.jsonl",
+    "prefix_by_turn": [
+      {
+        "count": 23101,
+        "growth_p50": 752,
+        "p50": 752,
+        "p90": 5472,
+        "turn": 1
+      },
+      {
+        "count": 9012,
+        "growth_p50": 416,
+        "p50": 1136,
+        "p90": 6144,
+        "turn": 2
+      },
+      {
+        "count": 4538,
+        "growth_p50": 464,
+        "p50": 1632,
+        "p90": 6576,
+        "turn": 3
+      },
+      {
+        "count": 2474,
+        "growth_p50": 496,
+        "p50": 2224,
+        "p90": 6976,
+        "turn": 4
+      },
+      {
+        "count": 1401,
+        "growth_p50": 528,
+        "p50": 2848,
+        "p90": 7696,
+        "turn": 5
+      },
+      {
+        "count": 840,
+        "growth_p50": 528,
+        "p50": 3280,
+        "p90": 8480,
+        "turn": 6
+      },
+      {
+        "count": 510,
+        "growth_p50": 512,
+        "p50": 3696,
+        "p90": 9104,
+        "turn": 7
+      },
+      {
+        "count": 328,
+        "growth_p50": 480,
+        "p50": 4112,
+        "p90": 9568,
+        "turn": 8
+      },
+      {
+        "count": 221,
+        "growth_p50": 448,
+        "p50": 4432,
+        "p90": 10176,
+        "turn": 9
+      },
+      {
+        "count": 153,
+        "growth_p50": 416,
+        "p50": 4720,
+        "p90": 11840,
+        "turn": 10
+      },
+      {
+        "count": 106,
+        "growth_p50": 416,
+        "p50": 5328,
+        "p90": 13184,
+        "turn": 11
+      },
+      {
+        "count": 77,
+        "growth_p50": 336,
+        "p50": 5232,
+        "p90": 13440,
+        "turn": 12
+      },
+      {
+        "count": 59,
+        "growth_p50": 368,
+        "p50": 6576,
+        "p90": 15312,
+        "turn": 13
+      },
+      {
+        "count": 44,
+        "growth_p50": 384,
+        "p50": 6960,
+        "p90": 16736,
+        "turn": 14
+      },
+      {
+        "count": 35,
+        "growth_p50": 336,
+        "p50": 7216,
+        "p90": 17600,
+        "turn": 15
+      },
+      {
+        "count": 26,
+        "growth_p50": 336,
+        "p50": 4384,
+        "p90": 18336,
+        "turn": 16
+      },
+      {
+        "count": 21,
+        "growth_p50": 352,
+        "p50": 4432,
+        "p90": 20800,
+        "turn": 17
+      },
+      {
+        "count": 18,
+        "growth_p50": 336,
+        "p50": 4720,
+        "p90": 31088,
+        "turn": 18
+      },
+      {
+        "count": 14,
+        "growth_p50": 208,
+        "p50": 3360,
+        "p90": 18240,
+        "turn": 19
+      },
+      {
+        "count": 12,
+        "growth_p50": 208,
+        "p50": 3552,
+        "p90": 18992,
+        "turn": 20
+      }
+    ],
+    "requests": 43058,
+    "resident_kv_gib": {
+      "count": 43058,
+      "max": 12.265933334827423,
+      "mean": 0.3212623313021586,
+      "p50": 0.14505493640899658,
+      "p90": 0.8857142329216003,
+      "p95": 1.2109889388084412,
+      "p99": 1.9758240580558777
+    },
+    "return_bursts": {
+      "10": {
+        "cluster": {
+          "count": 19614,
+          "max": 4,
+          "mean": 1.0174875089221984,
+          "p50": 1,
+          "p90": 1,
+          "p95": 1,
+          "p99": 2
+        },
+        "max_per_engine": {
+          "count": 19614,
+          "max": 2,
+          "mean": 1.0018864076679923,
+          "p50": 1,
+          "p90": 1,
+          "p95": 1,
+          "p99": 1
+        }
+      },
+      "100": {
+        "cluster": {
+          "count": 17157,
+          "max": 5,
+          "mean": 1.1631986944104447,
+          "p50": 1,
+          "p90": 2,
+          "p95": 2,
+          "p99": 3
+        },
+        "max_per_engine": {
+          "count": 17157,
+          "max": 3,
+          "mean": 1.0215655417613803,
+          "p50": 1,
+          "p90": 1,
+          "p95": 1,
+          "p99": 2
+        }
+      },
+      "50": {
+        "cluster": {
+          "count": 18492,
+          "max": 4,
+          "mean": 1.0792234479775038,
+          "p50": 1,
+          "p90": 1,
+          "p95": 2,
+          "p99": 2
+        },
+        "max_per_engine": {
+          "count": 18492,
+          "max": 2,
+          "mean": 1.0093553969284015,
+          "p50": 1,
+          "p90": 1,
+          "p95": 1,
+          "p99": 1
+        }
+      },
+      "500": {
+        "cluster": {
+          "count": 10246,
+          "max": 8,
+          "mean": 1.9477845012687878,
+          "p50": 2,
+          "p90": 3,
+          "p95": 4,
+          "p99": 5
+        },
+        "max_per_engine": {
+          "count": 10246,
+          "max": 4,
+          "mean": 1.169529572516104,
+          "p50": 1,
+          "p90": 2,
+          "p95": 2,
+          "p99": 2
+        }
+      }
+    },
+    "schema_scope": "parent-linked requests; inter-turn deltas and child arrivals are proxies for blocked windows and tool returns, not labeled tool events",
+    "sessions": 23101,
+    "turns_per_session": {
+      "count": 23101,
+      "max": 37,
+      "mean": 1.8639019955846068,
+      "p50": 1,
+      "p90": 4,
+      "p95": 5,
+      "p99": 8
+    }
+  },
+  "generated_at_unix": 1784819105.4254613,
+  "kimi_worker": {
+    "cache_hit_fraction": {
+      "count": 100000,
+      "max": 1.0,
+      "mean": 0.6057632684740171,
+      "p50": 0.6330802852541983,
+      "p90": 0.9933481152993349,
+      "p95": 0.9952153110047847,
+      "p99": 1.0
+    },
+    "cached_tokens": {
+      "count": 100000,
+      "max": 114816.0,
+      "mean": 7456.3072,
+      "p50": 5760.0,
+      "p90": 6336.0,
+      "p95": 16384.0,
+      "p99": 58240.0
+    },
+    "completion_tokens": {
+      "count": 100000,
+      "max": 16000.0,
+      "mean": 783.08724,
+      "p50": 402.0,
+      "p90": 1743.0,
+      "p95": 2727.0,
+      "p99": 6893.0
+    },
+    "e2e_seconds": {
+      "count": 100000,
+      "max": 601.3179294192232,
+      "mean": 23.004890989358923,
+      "p50": 14.501741189975291,
+      "p90": 50.646764701697975,
+      "p95": 71.30263763805851,
+      "p99": 141.7845697379671
+    },
+    "files": 24,
+    "input_tokens": {
+      "count": 100000,
+      "max": 125446.0,
+      "mean": 18282.40033,
+      "p50": 10087.0,
+      "p90": 42695.0,
+      "p95": 64339.0,
+      "p99": 103959.0
+    },
+    "observed_span_seconds": 28563.68023276329,
+    "parsed_requests": 100000,
+    "path": "/mnt/models/kimik25/kimi-k25-workers-5p3d-all-decodes_finish_fullids_redacted_2026-04-07",
+    "schema_scope": "completed inference requests with service timestamps and cache hits; conversation_id is redacted, so cross-turn sessions cannot be reconstructed",
+    "ttft_seconds": {
+      "count": 100000,
+      "max": 601.3179162410088,
+      "mean": 6.492407223756312,
+      "p50": 2.264160288963467,
+      "p90": 18.472468299092725,
+      "p95": 29.026174316648394,
+      "p99": 53.43637707736343
+    }
+  },
+  "length_traces": {
+    "kimi_k25": {
+      "context_cdf_samples": [
+        {
+          "quantile": 0.1,
+          "tokens": 5780.0
+        },
+        {
+          "quantile": 0.25,
+          "tokens": 5894.0
+        },
+        {
+          "quantile": 0.5,
+          "tokens": 8083.0
+        },
+        {
+          "quantile": 0.75,
+          "tokens": 17891.0
+        },
+        {
+          "quantile": 0.9,
+          "tokens": 38749.0
+        },
+        {
+          "quantile": 0.95,
+          "tokens": 60391.0
+        },
+        {
+          "quantile": 0.99,
+          "tokens": 102507.0
+        }
+      ],
+      "context_tokens": {
+        "count": 245555,
+        "max": 125446.0,
+        "mean": 16302.73216183747,
+        "p50": 8083.0,
+        "p90": 38749.0,
+        "p95": 60391.0,
+        "p99": 102507.0,
+        "sample_count": 200000
+      },
+      "fraction_context_ge_16k": 0.2927572234326322,
+      "fraction_context_ge_32k": 0.12516951395817638,
+      "output_tokens": {
+        "count": 245555,
+        "max": 16000.0,
+        "mean": 743.8937386736169,
+        "p50": 350.0,
+        "p90": 1669.0,
+        "p95": 2682.0,
+        "p99": 7241.0,
+        "sample_count": 200000
+      },
+      "path": "/mnt/models/kimik25/kimi-k25-trace/kimi_k25_conv_1day.csv",
+      "quantile_method": "deterministic reservoir sample; counts, means, maxima, and fractions are exact",
+      "row_limit": null,
+      "schema_scope": "request timestamps and input/output lengths; no session or tool labels"
+    }
+  },
+  "migration_calibration": {
+    "bytes_per_token": 147492.0,
+    "seconds": [
+      0.03523733001202345,
+      0.040607365779578686,
+      0.04690426494926214
+    ],
+    "source": "/home/zhujianian/agentshift/results/blocked-window-1784565792789187724.json",
+    "tokens": [
+      4096,
+      16384,
+      32768
+    ]
+  }
+}

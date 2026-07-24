@@ -1,0 +1,44 @@
+{
+  "config": {
+    "destination": "http://127.0.0.1:31001",
+    "first_output_tokens": 4,
+    "output_dir": "results",
+    "output_tokens": 8,
+    "poll_interval": 0.002,
+    "prefix_lengths": [
+      4096
+    ],
+    "source": "http://127.0.0.1:31000",
+    "tool_result_tokens": 32
+  },
+  "records": [
+    {
+      "bytes_each_direction": 604569600,
+      "cached_tokens": 4100,
+      "completed_tokens": 4100,
+      "next_turn_seconds": 0.18551580514758825,
+      "offload_wall_seconds": 0.4921462554484606,
+      "offload_worker_seconds": 0.4857092900201678,
+      "outputs_equal": true,
+      "path": "private_cpu_round_trip",
+      "prefix_length": 4096,
+      "restore_wall_seconds": 0.02016619686037302,
+      "restore_worker_seconds": 0.015949692577123642
+    },
+    {
+      "bytes_each_direction": 604569600,
+      "cached_tokens": 4100,
+      "checkpoint_bytes": 604569600,
+      "completed_tokens": 4100,
+      "export_wall_seconds": 0.5123938638716936,
+      "export_worker_seconds": 0.5053520034998655,
+      "import_wall_seconds": 0.15254445374011993,
+      "import_worker_seconds": 0.14661312382668257,
+      "next_turn_seconds": 0.18405059445649385,
+      "outputs_equal": true,
+      "path": "shared_memory_remote_prefetch",
+      "prefix_length": 4096
+    }
+  ],
+  "shared_prefix_directory": "/dev/shm/agentshift-prefixes"
+}

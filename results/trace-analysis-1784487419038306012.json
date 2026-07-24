@@ -1,0 +1,85 @@
+{
+  "benchmark": "/home/zhujianian/agentshift/results/e2e-1784487320239905011.json",
+  "flowprefill": {
+    "cumulative_prefix_tokens": {
+      "count": 43058,
+      "max": 89296,
+      "mean": 2338.789911282456,
+      "p50": 1056,
+      "p90": 6448,
+      "p95": 8816,
+      "p99": 14368
+    },
+    "estimated_fully_hidden_fraction": 1.0,
+    "estimated_migration_seconds": {
+      "count": 19957,
+      "max": 0.11170805033483096,
+      "mean": 0.015130796433111169,
+      "p50": 0.015482295459757248,
+      "p90": 0.01602307241410017,
+      "p95": 0.0166808220718748,
+      "p99": 0.022124403760244604
+    },
+    "fraction_prefix_le_40960": 0.9996284081935993,
+    "incremental_input_tokens": {
+      "count": 43058,
+      "max": 28836,
+      "mean": 1187.5870918296253,
+      "p50": 512,
+      "p90": 2858,
+      "p95": 5778,
+      "p99": 11320
+    },
+    "inter_turn_proxy_seconds": {
+      "count": 19957,
+      "max": 4054.4559999999997,
+      "mean": 275.20287498120973,
+      "p50": 110.63600000000042,
+      "p90": 718.539,
+      "p95": 1151.721,
+      "p99": 2207.339
+    },
+    "multi_turn_requests": 19957,
+    "output_tokens": {
+      "count": 43058,
+      "max": 8000,
+      "mean": 430.47259510427796,
+      "p50": 375,
+      "p90": 808,
+      "p95": 1032,
+      "p99": 1641
+    },
+    "requests": 43058,
+    "root_sessions": 23101,
+    "schema_scope": "parent-linked multi-turn requests; inter-turn delta is a blocked-window proxy and is not a labeled tool duration"
+  },
+  "kimi": {
+    "context_tokens": {
+      "count": 245555,
+      "max": 125446,
+      "mean": 16302.73216183747,
+      "p50": 8090,
+      "p90": 38738,
+      "p95": 60396,
+      "p99": 102743
+    },
+    "fraction_context_le_32768": 0.8748304860418237,
+    "fraction_context_le_40960": 0.907845492863106,
+    "output_tokens": {
+      "count": 245555,
+      "max": 16000,
+      "mean": 743.8937386736169,
+      "p50": 350,
+      "p90": 1665,
+      "p95": 2678,
+      "p99": 7233
+    },
+    "schema_scope": "request timestamp and input/output lengths; no session or tool labels"
+  },
+  "measured_migration_curve": {
+    "1024": 0.01602307241410017,
+    "16384": 0.0227276502798001,
+    "32768": 0.04099231089154879,
+    "4096": 0.011696856779356798
+  }
+}

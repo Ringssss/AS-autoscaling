@@ -1,0 +1,71 @@
+{
+  "cases": [
+    {
+      "cached_tokens": 16388,
+      "case": "post_commit_destination_failure_with_shadow",
+      "next_turn_seconds": 0.05220078770071268,
+      "passed": true,
+      "recovery_epoch": 3,
+      "recovery_owner": "engine-a",
+      "restart_action": "retain-source-shadow",
+      "source_shadow_reused": true
+    },
+    {
+      "cached_tokens": 0,
+      "case": "post_release_destination_failure_without_shadow",
+      "next_turn_seconds": 0.5227032685652375,
+      "passed": true,
+      "recovery_epoch": 3,
+      "recovery_owner": "engine-a",
+      "source_shadow_reused": false
+    },
+    {
+      "case": "commit_ack_lost_controller_retries",
+      "migration_state": "SOURCE_RELEASED",
+      "owner": "engine-b",
+      "passed": true
+    },
+    {
+      "action": "abort-to-source",
+      "case": "controller_restart_dest_ready_before_cas",
+      "migration_state": "ABORTED",
+      "owner": "engine-a",
+      "owner_epoch": 1,
+      "passed": true
+    },
+    {
+      "case": "tool_result_races_ownership_cas",
+      "consumer_owner": "engine-b",
+      "mailbox_deduplicated": true,
+      "passed": true,
+      "stale_source_rejected": true
+    },
+    {
+      "case": "managed_effect_retry",
+      "external_db": "results/effect-1784565931387279736.db",
+      "external_rows": 1,
+      "passed": true,
+      "submit_calls": 1
+    },
+    {
+      "agentshift_accepting_executors": 1,
+      "case": "no_owner_fencing_ablation",
+      "passed": true,
+      "router_only_accepting_executors": 2
+    },
+    {
+      "case": "flush_clears_terminal_prefix_registry",
+      "passed": true,
+      "release_after_flush_token_count": 0
+    }
+  ],
+  "config": {
+    "context_length": 16384,
+    "destination": "http://127.0.0.1:31001",
+    "output_dir": "results",
+    "source": "http://127.0.0.1:31000",
+    "transfer_port": 30400
+  },
+  "passed": true,
+  "state_db": "results/fault-state-1784565928937126031.db"
+}

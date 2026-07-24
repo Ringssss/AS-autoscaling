@@ -1,0 +1,53 @@
+\documentclass[letterpaper,twocolumn,10pt]{article}
+\usepackage{hyperref}
+\usepackage{usenix-2020-09}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xspace}
+
+\newcommand{\agentshift}{AgentShift\xspace}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\title{\Large \bf AgentShift: Execution Mobility for Suspended LLM Agents}
+\author{Anonymous Submission}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LLM agents alternate between model inference and external tools. After an LLM
+turn completes, an agent may wait for a tool while its accumulated prefix
+remains cached on one serving engine. This \emph{suspended-but-warm} state
+creates a placement conflict: sticky routing preserves the prefix but
+concentrates returning agents, whereas rerouting relieves load but reconstructs
+history. Existing routing, retention, offload, and active-request migration do
+not transfer a suspended agent's warm state together with its right to execute.
+
+AgentShift makes suspended executions mobile across identical LLM engines. It
+separates durable continuation from reconstructable KV state, atomically
+installs the completed prefix on a destination, and commits an epoch-fenced
+ownership handoff during the blocked interval. A source shadow provides fast
+recovery until the destination produces its first token.
+
+We implement AgentShift in SGLang and evaluate Qwen3 models with tensor
+parallelism up to four. At a 32K-token prefix and a 500~ms gap, AgentShift
+matches the sticky latency floor while reducing post-tool latency by 24.04$\times$
+over rerouting and 2.41$\times$ over the same transfer started on return. In an
+eight-agent 32K burst, it relocates half the owners with full prefix hits and is
+7.63$\times$ faster than rerouting. Warm-pool scale-out and scale-in are
+3.71$\times$ and 6.43$\times$ faster than semantic rerouting. Within our fault
+model, epoch fencing prevents double advancement and source-shadow recovery is
+10.9$\times$ faster than reconstruction.
+\end{abstract}
+
+\input{body.tex}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

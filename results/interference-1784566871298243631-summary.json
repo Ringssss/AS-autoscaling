@@ -1,0 +1,80 @@
+{
+  "config": {
+    "arrival_probe_delay_ms": 5.0,
+    "destination": "http://127.0.0.1:31001",
+    "first_output_tokens": 4,
+    "foreground_concurrencies": [
+      8
+    ],
+    "foreground_output_tokens": 256,
+    "foreground_prompt_tokens": 128,
+    "modes": [
+      "no-migration",
+      "sync",
+      "async"
+    ],
+    "output_dir": "results",
+    "poll_interval": 0.005,
+    "prefix_lengths": [
+      32768
+    ],
+    "repeats": 5,
+    "seed": 20260720,
+    "source": "http://127.0.0.1:31000",
+    "transfer_port": 29900
+  },
+  "rows": [
+    {
+      "arrival_probe_ttft_mean_ms": 53.86918932199478,
+      "concurrency": 8,
+      "max_token_gap_mean_ms": 41.62024911493063,
+      "migration_queue_mean_ms": 0.0,
+      "migration_wall_mean_ms": 0.0,
+      "migration_worker_mean_ms": 0.0,
+      "mode": "no-migration",
+      "prefix_length": 32768,
+      "throughput_change_fraction": 0.0,
+      "throughput_tokens_per_second": 397.6706141497966,
+      "tpot_mean_ms": 19.939672433059005,
+      "tpot_p95_mean_ms": 20.552354119718075,
+      "tpot_p99_mean_ms": 21.35908454656601,
+      "trials": 5,
+      "ttft_p95_mean_ms": 66.80040024220943
+    },
+    {
+      "arrival_probe_ttft_mean_ms": 78.021533600986,
+      "concurrency": 8,
+      "max_token_gap_mean_ms": 66.16939567029476,
+      "migration_queue_mean_ms": 0.0,
+      "migration_wall_mean_ms": 90.77046867460012,
+      "migration_worker_mean_ms": 35.20950675010681,
+      "mode": "sync",
+      "prefix_length": 32768,
+      "throughput_change_fraction": -0.0017099185857685217,
+      "throughput_tokens_per_second": 396.9906297756479,
+      "tpot_mean_ms": 19.96770296656691,
+      "tpot_p95_mean_ms": 20.42357064783573,
+      "tpot_p99_mean_ms": 21.476100012660027,
+      "trials": 5,
+      "ttft_p95_mean_ms": 69.52430307865143
+    },
+    {
+      "arrival_probe_ttft_mean_ms": 64.54546190798283,
+      "concurrency": 8,
+      "max_token_gap_mean_ms": 53.37909050285816,
+      "migration_queue_mean_ms": 0.3411281853914261,
+      "migration_wall_mean_ms": 98.74081797897816,
+      "migration_worker_mean_ms": 35.930765606462955,
+      "mode": "async",
+      "prefix_length": 32768,
+      "throughput_change_fraction": 0.0006061559404912931,
+      "throughput_tokens_per_second": 397.91166455492237,
+      "tpot_mean_ms": 19.929294137685908,
+      "tpot_p95_mean_ms": 20.57403977960348,
+      "tpot_p99_mean_ms": 21.3735681027174,
+      "trials": 5,
+      "ttft_p95_mean_ms": 66.11960232257843
+    }
+  ],
+  "source": "results/interference-1784566871298243631.json"
+}

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="AgentShift">
+    <mxGraphModel dx="1200" dy="520" grid="1" gridSize="10" page="1" pageWidth="1200" pageHeight="520">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="Agent runtime" style="swimlane;startSize=26;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Arial;fontSize=12;fontStyle=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="1160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="LLM turn complete" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="2">
+          <mxGeometry x="40" y="40" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="Tool future pending&#xa;(suspended but warm)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Arial;fontSize=11;" vertex="1" parent="2">
+          <mxGeometry x="470" y="40" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="Durable control plane" style="swimlane;startSize=26;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Arial;fontSize=12;fontStyle=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="20" y="160" width="1160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="Gap-aware mobility controller&#xa;admit, copy, commit, recover" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Arial;fontSize=11;" vertex="1" parent="5">
+          <mxGeometry x="40" y="45" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="Continuation store&#xa;step, owner@epoch, migration" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Arial;fontSize=11;" vertex="1" parent="5">
+          <mxGeometry x="460" y="40" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="Mailbox and effects&#xa;future result, effect fence" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontFamily=Arial;fontSize=11;" vertex="1" parent="5">
+          <mxGeometry x="850" y="40" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="Serving data plane" style="swimlane;startSize=26;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Arial;fontSize=12;fontStyle=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="20" y="320" width="1160" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="Source SGLang&#xa;pin completed prefix&#xa;retain recovery shadow" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="9">
+          <mxGeometry x="40" y="55" width="250" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="11" value="Rank-pair KV transfer&#xa;independent CUDA stream" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Arial;fontSize=11;" vertex="1" parent="9">
+          <mxGeometry x="455" y="65" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="12" value="Destination SGLang&#xa;reserve and atomically install&#xa;first-token ACK" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Arial;fontSize=11;" vertex="1" parent="9">
+          <mxGeometry x="870" y="55" width="250" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="20" value="tool start" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontFamily=Arial;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="3" target="4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="21" value="handoff request" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontFamily=Arial;fontSize=10;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="4" target="6">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="600" y="145" /><mxPoint x="190" y="145" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="22" value="CAS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontFamily=Arial;fontSize=10;exitX=1;exitY=0.35;entryX=0;entryY=0.35;" edge="1" parent="1" source="6" target="7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="23" value="rebind" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontFamily=Arial;fontSize=10;exitX=1;exitY=0.65;entryX=0;entryY=0.65;" edge="1" parent="1" source="7" target="8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="24" value="pin" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontFamily=Arial;fontSize=10;exitX=0.25;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="6" target="10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="25" value="reserve" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontFamily=Arial;fontSize=10;exitX=0.75;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="6" target="12">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="235" y="305" /><mxPoint x="1015" y="305" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="26" value="K/V" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontFamily=Arial;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="10" target="11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="27" value="install" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontFamily=Arial;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="11" target="12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28" value="DEST_READY" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;dashed=1;fontFamily=Arial;fontSize=10;exitX=0.5;exitY=0;entryX=1;entryY=1;" edge="1" parent="1" source="12" target="6">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1035" y="305" /><mxPoint x="330" y="305" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

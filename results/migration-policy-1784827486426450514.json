@@ -1,0 +1,187 @@
+{
+  "config": {
+    "destination": "http://127.0.0.1:31001",
+    "estimated_bandwidth_gib_s": 70.0,
+    "first_output_tokens": 4,
+    "fixed_copy_ms": 8.0,
+    "gap_ms": [
+      60.0,
+      200.0
+    ],
+    "kv_bytes_per_token": 147456,
+    "next_output_tokens": 4,
+    "output_dir": "results",
+    "policies": [
+      "fifo",
+      "shortest-kv",
+      "oracle"
+    ],
+    "poll_interval": 0.002,
+    "prefix_lengths": [
+      4096,
+      8192
+    ],
+    "repeats": 1,
+    "seed": 20260724,
+    "source": "http://127.0.0.1:31000",
+    "tool_result_tokens": 32,
+    "transfer_port": 31300
+  },
+  "records": [
+    {
+      "completed_in_gap_fraction": 0,
+      "exposed_migration_p95_seconds": 0.06317565403878689,
+      "exposed_migration_sum_seconds": 0.08210504706948996,
+      "full_hit_fraction": 1,
+      "makespan_seconds": 0.3378248466178775,
+      "order_gap_ms": [
+        60.0,
+        200.0
+      ],
+      "order_prefix_tokens": [
+        4100,
+        8196
+      ],
+      "policy": "oracle",
+      "post_tool_mean_seconds": 0.16850723698735237,
+      "post_tool_p95_seconds": 0.199331346899271,
+      "records": [
+        {
+          "actual_copy_seconds": 0.11507273651659489,
+          "agent_id": "policy-oracle-1-0",
+          "cached_tokens": 4100,
+          "completed_in_gap": false,
+          "estimated_copy_seconds": 0.016043561662946428,
+          "exposed_migration_seconds": 0.06317565403878689,
+          "finished_seconds": 0.26089900732040405,
+          "gap_seconds": 0.06,
+          "migration_bytes": 604569600,
+          "migration_completed_seconds": 0.12317565362900496,
+          "post_tool_seconds": 0.199331346899271,
+          "prefix_tokens": 4100,
+          "request_started_seconds": 0.1247015930712223
+        },
+        {
+          "actual_copy_seconds": 0.06858890317380428,
+          "agent_id": "policy-oracle-2-1",
+          "cached_tokens": 8196,
+          "completed_in_gap": false,
+          "estimated_copy_seconds": 0.024079275948660713,
+          "exposed_migration_seconds": 0.018929393030703068,
+          "finished_seconds": 0.3378248466178775,
+          "gap_seconds": 0.2,
+          "migration_bytes": 1208549376,
+          "migration_completed_seconds": 0.21892939321696758,
+          "post_tool_seconds": 0.13768312707543373,
+          "prefix_tokens": 8196,
+          "request_started_seconds": 0.2189947608858347
+        }
+      ],
+      "repeat": 0
+    },
+    {
+      "completed_in_gap_fraction": 1,
+      "exposed_migration_p95_seconds": 0.0,
+      "exposed_migration_sum_seconds": 0.0,
+      "full_hit_fraction": 1,
+      "makespan_seconds": 0.30350761767476797,
+      "order_gap_ms": [
+        60.0,
+        200.0
+      ],
+      "order_prefix_tokens": [
+        4100,
+        8196
+      ],
+      "policy": "fifo",
+      "post_tool_mean_seconds": 0.10950316488742828,
+      "post_tool_p95_seconds": 0.116581822745502,
+      "records": [
+        {
+          "actual_copy_seconds": 0.038825372233986855,
+          "agent_id": "policy-fifo-3-0",
+          "cached_tokens": 4100,
+          "completed_in_gap": true,
+          "estimated_copy_seconds": 0.016043561662946428,
+          "exposed_migration_seconds": 0.0,
+          "finished_seconds": 0.1768614910542965,
+          "gap_seconds": 0.06,
+          "migration_bytes": 604569600,
+          "migration_completed_seconds": 0.046397230587899685,
+          "post_tool_seconds": 0.116581822745502,
+          "prefix_tokens": 4100,
+          "request_started_seconds": 0.060234639793634415
+        },
+        {
+          "actual_copy_seconds": 0.04803762212395668,
+          "agent_id": "policy-fifo-4-1",
+          "cached_tokens": 8196,
+          "completed_in_gap": true,
+          "estimated_copy_seconds": 0.024079275948660713,
+          "exposed_migration_seconds": 0.0,
+          "finished_seconds": 0.30350761767476797,
+          "gap_seconds": 0.2,
+          "migration_bytes": 1208549376,
+          "migration_completed_seconds": 0.12178433686494827,
+          "post_tool_seconds": 0.10242450702935457,
+          "prefix_tokens": 8196,
+          "request_started_seconds": 0.20100903883576393
+        }
+      ],
+      "repeat": 0
+    },
+    {
+      "completed_in_gap_fraction": 1,
+      "exposed_migration_p95_seconds": 0.0,
+      "exposed_migration_sum_seconds": 0.0,
+      "full_hit_fraction": 1,
+      "makespan_seconds": 0.3012810321524739,
+      "order_gap_ms": [
+        60.0,
+        200.0
+      ],
+      "order_prefix_tokens": [
+        4100,
+        8196
+      ],
+      "policy": "shortest-kv",
+      "post_tool_mean_seconds": 0.10850757407024503,
+      "post_tool_p95_seconds": 0.11642870027571917,
+      "records": [
+        {
+          "actual_copy_seconds": 0.03325185924768448,
+          "agent_id": "policy-shortest-kv-5-0",
+          "cached_tokens": 4100,
+          "completed_in_gap": true,
+          "estimated_copy_seconds": 0.016043561662946428,
+          "exposed_migration_seconds": 0.0,
+          "finished_seconds": 0.1766266841441393,
+          "gap_seconds": 0.06,
+          "migration_bytes": 604569600,
+          "migration_completed_seconds": 0.04055942129343748,
+          "post_tool_seconds": 0.11642870027571917,
+          "prefix_tokens": 4100,
+          "request_started_seconds": 0.060154831036925316
+        },
+        {
+          "actual_copy_seconds": 0.054846481420099735,
+          "agent_id": "policy-shortest-kv-6-1",
+          "cached_tokens": 8196,
+          "completed_in_gap": true,
+          "estimated_copy_seconds": 0.024079275948660713,
+          "exposed_migration_seconds": 0.0,
+          "finished_seconds": 0.3012810321524739,
+          "gap_seconds": 0.2,
+          "migration_bytes": 1208549376,
+          "migration_completed_seconds": 0.12184904050081968,
+          "post_tool_seconds": 0.10058644786477089,
+          "prefix_tokens": 8196,
+          "request_started_seconds": 0.20059054996818304
+        }
+      ],
+      "repeat": 0
+    }
+  ],
+  "state_db": "results/migration-policy-state-1784827484019904696.db",
+  "workload": "heterogeneous-prefix blocked-agent scheduling"
+}
