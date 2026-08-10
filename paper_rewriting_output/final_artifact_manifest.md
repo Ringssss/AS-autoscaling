@@ -2,25 +2,27 @@
 
 ## Manuscript
 
-- `full_paper.md`: complete English paper in Markdown, 7,161 words.
+- `full_paper.md`: complete English paper in Markdown, approximately 8,200 words.
 - `final_paper/main.tex`: USENIX entry point and abstract.
-- `final_paper/body.tex`: generated and reviewed two-column body.
+- `final_paper/body.tex`: reviewed two-column body with Figure 1 integrated and
+  16 remaining figure placeholders.
 - `final_paper/references.bib`: cited literature.
-- `final_paper/paper.pdf`: compiled 13-page USENIX paper.
+- `final_paper/paper.pdf`: stale prior draft; current source has not been rebuilt because no TeX engine is available.
 
 ## Figures
 
-- `fig_workload_characterization.pdf`
-- `fig_architecture.pdf` and editable `fig_architecture.drawio`
-- `fig_context_latency.pdf`
-- `fig_gap_overlap.pdf`
-- `fig_hotspot.pdf`
-- `fig_elasticity.pdf`
-- `fig_interference.pdf`
-- `fig_control_plane.pdf`
-- `fig_replay_policy.pdf`
+- `FIGURE_PLAN.md`: frozen 17-figure sequence, type, evidence status, drawing protocol, and claim.
+- `figure_asset_map.md`: maps each slot to evidence and LaTeX labels.
+- `figures/fig_motivation.pdf`: vector Figure 1 generated from the raw
+  FlowPrefill trace and repeated SGLang experiments.
+- `figures/fig_motivation.png`: 600 dpi Figure 1 preview.
+- `figures/fig_motivation_data.json`: exact derived values, metric definitions,
+  and source paths for Figure 1.
+- `final_paper/body.tex`: contains Figure 1 and 16 numbered placeholder floats.
+- Existing PDFs in `figures/` are prior data checks, not the final 17-figure set.
 
-All plot labels use embedded Arial TrueType fonts. PNG copies are included for quick inspection.
+Every final experimental plot must use the Times-compatible style and the
+palette/layout rules in `FIGURE_PLAN.md`.
 
 ## Evidence and Audit
 
@@ -32,8 +34,8 @@ All plot labels use embedded Arial TrueType fonts. PNG copies are included for q
 
 ## Verification
 
-- AgentShift tests: 39 passed.
-- SGLang AgentShift prefix-cache tests: 14 passed.
-- Fault campaign: 8/8 passed.
-- LaTeX compilation: successful.
-- No AgentShift benchmark or SGLang server process remains active.
+- Previously recorded AgentShift tests: 39 passed.
+- Previously recorded SGLang AgentShift prefix-cache tests: 14 passed.
+- Recorded fault campaign: 8/8 passed.
+- LaTeX static guard: 0 errors, 0 warnings.
+- Current PDF compilation: pending a TeX engine.

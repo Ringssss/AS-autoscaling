@@ -1,0 +1,1987 @@
+{
+  "config": {
+    "destination": "http://127.0.0.1:31201",
+    "first_output_tokens": 4,
+    "output_dir": "results/fencing-microbench/qwen32b-tp4-control-overhead",
+    "output_tokens": 16,
+    "prefix_length": 4096,
+    "repeats": 10,
+    "seed": 20260806,
+    "source": "http://127.0.0.1:31200",
+    "tool_result_tokens": 32,
+    "tp_size": 4,
+    "transfer_port": 30540
+  },
+  "records": [
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.9559676710050553
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.14366545202210546,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "repeat": 0,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.9559703409904614,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8491747759981081
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.00035618600668385625
+      ],
+      "managed_commit_seconds": [
+        0.0013855599681846797
+      ],
+      "managed_control_seconds": [
+        0.001741745974868536
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03247212304268032,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 0,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        4.620698746293783e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8493172019952908,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8478219310054556
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.0002872520126402378
+      ],
+      "managed_commit_seconds": [
+        0.0012915130355395377
+      ],
+      "managed_control_seconds": [
+        0.0015787650481797755
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03129366203211248,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {},
+      "repeat": 0,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8478255699737929,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 4100,
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 0.8671217260416597,
+        "engine-b": 0.8543779070023447
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 32,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03531032701721415,
+      "output_digests": {
+        "engine-a": "24b3d747c3ac4d71",
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-a": 16,
+        "engine-b": 16
+      },
+      "repeat": 0,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 0.86718971200753,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 16,
+      "wasted_engine_seconds": 0.8671217260416597,
+      "wasted_gpu_seconds": 3.468486904166639
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8506586360163055
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.000281440035905689
+      ],
+      "managed_commit_seconds": [
+        0.0012483120081014931
+      ],
+      "managed_control_seconds": [
+        0.0015297520440071821
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.04281725495820865,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {},
+      "repeat": 1,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8506623199791647,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.9786643300321884
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.00026851100847125053
+      ],
+      "managed_commit_seconds": [
+        0.0012613990111276507
+      ],
+      "managed_control_seconds": [
+        0.0015299100195989013
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.031242214958183467,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 1,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        4.5428983867168427e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.9787978989770636,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8395044730277732
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.0352730939630419,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "repeat": 1,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8395068569807336,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 4100,
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 0.9161737830145285,
+        "engine-b": 0.9039842459606007
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 32,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03296983300242573,
+      "output_digests": {
+        "engine-a": "24b3d747c3ac4d71",
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-a": 16,
+        "engine-b": 16
+      },
+      "repeat": 1,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 0.9162515139905736,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 16,
+      "wasted_engine_seconds": 0.9161737830145285,
+      "wasted_gpu_seconds": 3.664695132058114
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8571258570300415
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.04055827099364251,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "repeat": 2,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8571292310371064,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 4100,
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 0.8592791950213723,
+        "engine-b": 0.8456708979792893
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 32,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.04380168003262952,
+      "output_digests": {
+        "engine-a": "24b3d747c3ac4d71",
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-a": 16,
+        "engine-b": 16
+      },
+      "repeat": 2,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 0.859356676985044,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 16,
+      "wasted_engine_seconds": 0.8592791950213723,
+      "wasted_gpu_seconds": 3.437116780085489
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8835187530494295
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.00029770302353426814
+      ],
+      "managed_commit_seconds": [
+        0.0013179440284147859
+      ],
+      "managed_control_seconds": [
+        0.001615647051949054
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03582894697319716,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {},
+      "repeat": 2,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8835226609953679,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8566329559544101
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.0002755719469860196
+      ],
+      "managed_commit_seconds": [
+        0.001278224983252585
+      ],
+      "managed_control_seconds": [
+        0.0015537969302386045
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.037100380985066295,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 2,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        4.53800312243402e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8567703070002608,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8541717839543708
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.030739154026377946,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "repeat": 3,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8541738589992747,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.9135734800365753
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.00029529002495110035
+      ],
+      "managed_commit_seconds": [
+        0.0013381140306591988
+      ],
+      "managed_control_seconds": [
+        0.0016334040556102991
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.028621934994589537,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {},
+      "repeat": 3,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.9135773250018246,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 4100,
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 0.8560677070054226,
+        "engine-b": 0.8576189929735847
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 32,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.02945525699760765,
+      "output_digests": {
+        "engine-a": "24b3d747c3ac4d71",
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-a": 16,
+        "engine-b": 16
+      },
+      "repeat": 3,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 0.8577197170234285,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 16,
+      "wasted_engine_seconds": 0.8560677070054226,
+      "wasted_gpu_seconds": 3.4242708280216902
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 1.0268506960128434
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.00027795799542218447
+      ],
+      "managed_commit_seconds": [
+        0.0014523600111715496
+      ],
+      "managed_control_seconds": [
+        0.001730318006593734
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.035141660016961396,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 3,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        4.3316977098584175e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 1.0269881780259311,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 4100,
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 0.8675598080153577,
+        "engine-b": 0.8730341350310482
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 32,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.045630918990354985,
+      "output_digests": {
+        "engine-a": "24b3d747c3ac4d71",
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-a": 16,
+        "engine-b": 16
+      },
+      "repeat": 4,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 0.873146653000731,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 16,
+      "wasted_engine_seconds": 0.8675598080153577,
+      "wasted_gpu_seconds": 3.470239232061431
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8537201239960268
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.000273661979008466
+      ],
+      "managed_commit_seconds": [
+        0.0014069530298002064
+      ],
+      "managed_control_seconds": [
+        0.0016806150088086724
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.030205496004782617,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {},
+      "repeat": 4,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.853724043990951,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8731460979906842
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.00026773003628477454
+      ],
+      "managed_commit_seconds": [
+        0.0013749159988947213
+      ],
+      "managed_control_seconds": [
+        0.0016426460351794958
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.04018026002449915,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 4,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        4.447402898222208e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8732841000310145,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8575584520003758
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.04119536996586248,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "repeat": 4,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8575608220417053,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 4100,
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 0.858612407988403,
+        "engine-b": 0.8506496999762021
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 32,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03868171200156212,
+      "output_digests": {
+        "engine-a": "24b3d747c3ac4d71",
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-a": 16,
+        "engine-b": 16
+      },
+      "repeat": 5,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 0.8586798899923451,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 16,
+      "wasted_engine_seconds": 0.858612407988403,
+      "wasted_gpu_seconds": 3.434449631953612
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8758067360031419
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.04152486100792885,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "repeat": 5,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8758096260135062,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8592118870001286
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.0002764570526778698
+      ],
+      "managed_commit_seconds": [
+        0.0013960669748485088
+      ],
+      "managed_control_seconds": [
+        0.0016725240275263786
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03523702500388026,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 5,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        4.458602052181959e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8593435239745304,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8520665620453656
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.0002985300379805267
+      ],
+      "managed_commit_seconds": [
+        0.0014400200452655554
+      ],
+      "managed_control_seconds": [
+        0.001738550083246082
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.04120089201023802,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {},
+      "repeat": 5,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8520704610273242,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 4100,
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 0.8921486479812302,
+        "engine-b": 0.8723113649757579
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 32,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.047843764012213796,
+      "output_digests": {
+        "engine-a": "24b3d747c3ac4d71",
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-a": 16,
+        "engine-b": 16
+      },
+      "repeat": 6,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 0.8922652750043198,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 16,
+      "wasted_engine_seconds": 0.8921486479812302,
+      "wasted_gpu_seconds": 3.5685945919249207
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8736978659871966
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.0002742419601418078
+      ],
+      "managed_commit_seconds": [
+        0.003513630013912916
+      ],
+      "managed_control_seconds": [
+        0.003787871974054724
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.032591519004199654,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {},
+      "repeat": 6,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8737023719586432,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.861115310981404
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.00017292401753365993
+      ],
+      "managed_commit_seconds": [
+        0.0013875250006094575
+      ],
+      "managed_control_seconds": [
+        0.0015604490181431174
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.0323220330174081,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 6,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        4.505098331719637e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.861250727029983,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8676762739778496
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03034170705359429,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "repeat": 6,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8676791629986838,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 4100,
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 0.8520726120332256,
+        "engine-b": 0.8446481120190583
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 32,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03676205303054303,
+      "output_digests": {
+        "engine-a": "24b3d747c3ac4d71",
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-a": 16,
+        "engine-b": 16
+      },
+      "repeat": 7,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 0.8521331840311177,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 16,
+      "wasted_engine_seconds": 0.8520726120332256,
+      "wasted_gpu_seconds": 3.4082904481329024
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8504637089790776
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.00026825000531971455
+      ],
+      "managed_commit_seconds": [
+        0.0012733059702441096
+      ],
+      "managed_control_seconds": [
+        0.0015415559755638242
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03538591304095462,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 7,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        5.1731010898947716e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8505970180267468,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8448954100022092
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.0001777110155671835
+      ],
+      "managed_commit_seconds": [
+        0.0013688160106539726
+      ],
+      "managed_control_seconds": [
+        0.0015465270262211561
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.036330509989056736,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {},
+      "repeat": 7,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8448986500152387,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8433328120154329
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.0390707990154624,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "repeat": 7,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8433353869477287,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8836054209969006
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.0001878009643405676
+      ],
+      "managed_commit_seconds": [
+        0.0015262819943018258
+      ],
+      "managed_control_seconds": [
+        0.0017140829586423934
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03703110100468621,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 8,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        4.686799366027117e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8837582170381211,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 1.0517964600003324
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03823946602642536,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "repeat": 8,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 1.0517991809756495,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.9182030219817534
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.00018705701222643256
+      ],
+      "managed_commit_seconds": [
+        0.0013712879735976458
+      ],
+      "managed_control_seconds": [
+        0.0015583449858240783
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.038605045003350824,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {},
+      "repeat": 8,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.9182064929627813,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 4100,
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 0.8593606399954297,
+        "engine-b": 0.8426828270312399
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 32,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03590250900015235,
+      "output_digests": {
+        "engine-a": "24b3d747c3ac4d71",
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-a": 16,
+        "engine-b": 16
+      },
+      "repeat": 8,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 0.8594233359908685,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 16,
+      "wasted_engine_seconds": 0.8593606399954297,
+      "wasted_gpu_seconds": 3.4374425599817187
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8490412110113539
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.00017457205103710294
+      ],
+      "managed_commit_seconds": [
+        0.0013298409758135676
+      ],
+      "managed_control_seconds": [
+        0.0015044130268506706
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03861224796855822,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 9,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        4.339899169281125e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8491750300163403,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 4100,
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 0.8564418529858813,
+        "engine-b": 0.8447961719939485
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 32,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.03760781104210764,
+      "output_digests": {
+        "engine-a": "24b3d747c3ac4d71",
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-a": 16,
+        "engine-b": 16
+      },
+      "repeat": 9,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 0.8565377589548007,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 16,
+      "wasted_engine_seconds": 0.8564418529858813,
+      "wasted_gpu_seconds": 3.425767411943525
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8479419880313799
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.02918710804078728,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "repeat": 9,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8479441090021282,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 4100
+      },
+      "committed_tokens": 16,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 0.8431019959971309
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 16,
+      "logical_steps": 1,
+      "managed_claim_seconds": [
+        0.00019699899712577462
+      ],
+      "managed_commit_seconds": [
+        0.0012078110012225807
+      ],
+      "managed_control_seconds": [
+        0.0014048099983483553
+      ],
+      "migration_bytes": 1074790400,
+      "migration_seconds": 0.028802688990253955,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "24b3d747c3ac4d71"
+      },
+      "output_tokens": {
+        "engine-b": 16
+      },
+      "rejections": {},
+      "repeat": 9,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 0.8431057410198264,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    }
+  ],
+  "state_db": "results/fencing-microbench/qwen32b-tp4-control-overhead/fencing-state-1786008799507661977.db",
+  "summary": {
+    "failure_free_e2e_delta_seconds": -0.016961293906206265,
+    "fenced-duplicate": {
+      "accepted_executors_mean": 1.0,
+      "duplicate_effect_submissions": 0,
+      "full_prefix_hit_rate": 1.0,
+      "generate_rpc_count_mean": 1.0,
+      "generated_tokens_mean": 16.0,
+      "managed_claim_seconds": {
+        "mean": 0.0002525961084757,
+        "p50": 0.00026825000531971455,
+        "p95": 0.00035618600668385625,
+        "p99": 0.00035618600668385625
+      },
+      "managed_commit_seconds": {
+        "mean": 0.0013665480888448655,
+        "p50": 0.0013749159988947213,
+        "p95": 0.0015262819943018258,
+        "p99": 0.0015262819943018258
+      },
+      "managed_control_seconds": {
+        "mean": 0.0016191441973205656,
+        "p50": 0.0015604490181431174,
+        "p95": 0.001741745974868536,
+        "p99": 0.001741745974868536
+      },
+      "migration_bytes_mean": 1074790400.0,
+      "samples": 10,
+      "stale_rejection_seconds": {
+        "mean": 4.564420087262988e-05,
+        "p50": 4.505098331719637e-05,
+        "p95": 5.1731010898947716e-05,
+        "p99": 5.1731010898947716e-05
+      },
+      "wall_seconds": {
+        "mean": 0.8889282202115283,
+        "p50": 0.8593435239745304,
+        "p95": 1.0269881780259311,
+        "p99": 1.0269881780259311
+      },
+      "wasted_decode_fraction_mean": 0.0,
+      "wasted_decode_tokens_mean": 0.0,
+      "wasted_engine_seconds_mean": 0.0,
+      "wasted_gpu_seconds_mean": 0.0
+    },
+    "fenced-normal": {
+      "accepted_executors_mean": 1.0,
+      "duplicate_effect_submissions": 0,
+      "full_prefix_hit_rate": 1.0,
+      "generate_rpc_count_mean": 1.0,
+      "generated_tokens_mean": 16.0,
+      "managed_claim_seconds": {
+        "mean": 0.00025698860990814866,
+        "p50": 0.0002742419601418078,
+        "p95": 0.0002985300379805267,
+        "p99": 0.0002985300379805267
+      },
+      "managed_commit_seconds": {
+        "mean": 0.0015504401177167892,
+        "p50": 0.0013381140306591988,
+        "p95": 0.003513630013912916,
+        "p99": 0.003513630013912916
+      },
+      "managed_control_seconds": {
+        "mean": 0.001807428727624938,
+        "p50": 0.0015787650481797755,
+        "p95": 0.003787871974054724,
+        "p99": 0.003787871974054724
+      },
+      "migration_bytes_mean": 1074790400.0,
+      "samples": 10,
+      "stale_rejection_seconds": null,
+      "wall_seconds": {
+        "mean": 0.8681295636924915,
+        "p50": 0.8520704610273242,
+        "p95": 0.9182064929627813,
+        "p99": 0.9182064929627813
+      },
+      "wasted_decode_fraction_mean": 0.0,
+      "wasted_decode_tokens_mean": 0.0,
+      "wasted_engine_seconds_mean": 0.0,
+      "wasted_gpu_seconds_mean": 0.0
+    },
+    "router-duplicate": {
+      "accepted_executors_mean": 2.0,
+      "duplicate_effect_submissions": 10,
+      "full_prefix_hit_rate": 1.0,
+      "generate_rpc_count_mean": 2.0,
+      "generated_tokens_mean": 32.0,
+      "managed_claim_seconds": null,
+      "managed_commit_seconds": null,
+      "managed_control_seconds": null,
+      "migration_bytes_mean": 1074790400.0,
+      "samples": 10,
+      "stale_rejection_seconds": null,
+      "wall_seconds": {
+        "mean": 0.8692703716980759,
+        "p50": 0.859356676985044,
+        "p95": 0.9162515139905736,
+        "p99": 0.9162515139905736
+      },
+      "wasted_decode_fraction_mean": 0.5,
+      "wasted_decode_tokens_mean": 16.0,
+      "wasted_engine_seconds_mean": 0.868483838008251,
+      "wasted_gpu_seconds_mean": 3.473935352033004
+    },
+    "router-normal": {
+      "accepted_executors_mean": 1.0,
+      "duplicate_effect_submissions": 0,
+      "full_prefix_hit_rate": 1.0,
+      "generate_rpc_count_mean": 1.0,
+      "generated_tokens_mean": 16.0,
+      "managed_claim_seconds": null,
+      "managed_commit_seconds": null,
+      "managed_control_seconds": null,
+      "migration_bytes_mean": 1074790400.0,
+      "samples": 10,
+      "stale_rejection_seconds": null,
+      "wall_seconds": {
+        "mean": 0.8850908575986978,
+        "p50": 0.8571292310371064,
+        "p95": 1.0517991809756495,
+        "p99": 1.0517991809756495
+      },
+      "wasted_decode_fraction_mean": 0.0,
+      "wasted_decode_tokens_mean": 0.0,
+      "wasted_engine_seconds_mean": 0.0,
+      "wasted_gpu_seconds_mean": 0.0
+    }
+  },
+  "validation": {
+    "checks": {
+      "all_executed_turns_have_full_prefix_hits": true,
+      "fencing_rejects_source_before_generate": true,
+      "normal_paths_execute_once": true,
+      "router_only_duplicate_reaches_both_engines": true
+    },
+    "passed": true
+  }
+}

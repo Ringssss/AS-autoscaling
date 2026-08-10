@@ -1,0 +1,153 @@
+{
+  "config": {
+    "background_concurrency": 16,
+    "background_output_tokens": 128,
+    "background_prompt_tokens": 128,
+    "destination": "http://127.0.0.1:31001",
+    "first_output_tokens": 4,
+    "next_output_tokens": 1,
+    "output_dir": "results/motivation-qwen32b/smoke-ignore-eos",
+    "prefix_tokens": 4096,
+    "repeats": 1,
+    "returning_agents": [
+      2
+    ],
+    "source": "http://127.0.0.1:31000",
+    "source_loads": [
+      "idle",
+      "busy"
+    ],
+    "timeout": 300.0,
+    "tool_result_tokens": 32
+  },
+  "measurement": "TTFT is measured at the streaming client from request submission until receipt of the first output event",
+  "records": [
+    {
+      "background_completion_tokens": [],
+      "background_concurrency": 0,
+      "background_e2e_seconds": [],
+      "background_ttft_seconds": [],
+      "burst_makespan_seconds": 0.16286301400396042,
+      "cached_tokens": [
+        4100,
+        4100
+      ],
+      "completed_prefix_tokens": [
+        4100,
+        4100
+      ],
+      "prefix_tokens": 4096,
+      "repeat": 0,
+      "request_e2e_seconds": [
+        0.11160230901441537,
+        0.161765559023479
+      ],
+      "request_ttft_seconds": [
+        0.11151678400347009,
+        0.1616718890145421
+      ],
+      "returning_agents": 2,
+      "source_load": "idle"
+    },
+    {
+      "background_completion_tokens": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "background_concurrency": 16,
+      "background_e2e_seconds": [
+        7.020713349018479,
+        7.020450906013139,
+        7.01907525700517,
+        7.018276943999808,
+        7.0185246559849475,
+        7.017367516004015,
+        7.01733477099333,
+        7.016666355979396,
+        7.0162126300274394,
+        7.0150493970140815,
+        7.013152519997675,
+        7.011573081021197,
+        7.012514567992184,
+        7.013276612997288,
+        7.011808190989541,
+        7.010645979986293
+      ],
+      "background_ttft_seconds": [
+        0.11266600899398327,
+        0.17104766401462257,
+        0.17030403402168304,
+        0.17030554299708456,
+        0.1690250519895926,
+        0.16879279000568204,
+        0.16880275501171127,
+        0.16806304999045096,
+        0.16677908902056515,
+        0.16633962900959887,
+        0.16647725101211108,
+        0.1651408700272441,
+        0.16378497699042782,
+        0.1635952799988445,
+        0.16358717597904615,
+        0.1623136349953711
+      ],
+      "burst_makespan_seconds": 6.956809499999508,
+      "cached_tokens": [
+        4100,
+        4100
+      ],
+      "completed_prefix_tokens": [
+        4100,
+        4100
+      ],
+      "prefix_tokens": 4096,
+      "repeat": 0,
+      "request_e2e_seconds": [
+        6.955726007989142,
+        6.955010965990368
+      ],
+      "request_ttft_seconds": [
+        6.9556276770017575,
+        6.954852146998746
+      ],
+      "returning_agents": 2,
+      "source_load": "busy"
+    }
+  ],
+  "summary": {
+    "busy:2": {
+      "burst_makespan_mean_ms": 6956.809499999508,
+      "cached_tokens_mean": 4100.0,
+      "cached_tokens_min": 4100,
+      "samples": 2,
+      "ttft_mean_ms": 6955.239912000252,
+      "ttft_p50_ms": 6955.239912000252,
+      "ttft_p95_ms": 6955.588900501607,
+      "ttft_p99_ms": 6955.6199217017265
+    },
+    "idle:2": {
+      "burst_makespan_mean_ms": 162.86301400396042,
+      "cached_tokens_mean": 4100.0,
+      "cached_tokens_min": 4100,
+      "samples": 2,
+      "ttft_mean_ms": 136.5943365090061,
+      "ttft_p50_ms": 136.5943365090061,
+      "ttft_p95_ms": 159.1641337639885,
+      "ttft_p99_ms": 161.17033796443138
+    }
+  }
+}

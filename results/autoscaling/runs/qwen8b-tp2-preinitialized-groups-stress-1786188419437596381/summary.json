@@ -1,0 +1,65 @@
+{
+  "duration_seconds": 131.0773095660261,
+  "engine_urls": [
+    "http://127.0.0.1:32000",
+    "http://127.0.0.1:32001",
+    "http://127.0.0.1:32002",
+    "http://127.0.0.1:32003"
+  ],
+  "events": 640,
+  "failed_agents": 0,
+  "first_turn_ttft_seconds": {
+    "count": 640,
+    "mean": 0.11518003991695877,
+    "p50": 0.09343254298437387,
+    "p95": 0.25929353304672986,
+    "p99": 0.33159582497319207
+  },
+  "historical_reprefilled_tokens": 0,
+  "manifest": "/home/zhujianian/agentshift/results/autoscaling/manifests/autoscaling-manifest-qwen8b-control-concurrency-stress-v1.json",
+  "migrated_full_prefix_hit_fraction": 1.0,
+  "migration_bytes": 146583355392,
+  "migration_hidden_fraction": 0.8892988929889298,
+  "migration_transfer_seconds": {
+    "count": 271,
+    "mean": 0.18611450057701856,
+    "p50": 0.09603201801655814,
+    "p95": 0.4822621479979716,
+    "p99": 2.2851069180178456
+  },
+  "migrations": 271,
+  "policy": "agentshift",
+  "post_tool_ttft_seconds": {
+    "count": 640,
+    "mean": 0.08828758637273496,
+    "p50": 0.08761216700077057,
+    "p95": 0.10597283602692187,
+    "p99": 0.1383394370204769
+  },
+  "preinitialized_transfer_pairs": 12,
+  "run_dir": "results/autoscaling/runs/qwen8b-tp2-preinitialized-groups-stress-1786188419437596381",
+  "run_name": "qwen8b-tp2-preinitialized-groups-stress",
+  "scaling_events": [
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 0.5457521459902637,
+      "engine_id": "engine-1",
+      "reason": "waiting=0, requests_per_engine=2.00"
+    },
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 5.879431259003468,
+      "engine_id": "engine-2",
+      "reason": "waiting=0, requests_per_engine=14.00"
+    },
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 11.219029116036836,
+      "engine_id": "engine-3",
+      "reason": "waiting=0, requests_per_engine=9.33"
+    }
+  ],
+  "successful_agents": 640,
+  "tp_size": 2,
+  "transfer_group_init_seconds": 3.5361944870091975
+}

@@ -1,0 +1,940 @@
+{
+  "config": {
+    "destination": "http://127.0.0.1:31201",
+    "first_output_tokens": 4,
+    "output_dir": "results/fencing-microbench/qwen32b-tp4-16k-128t",
+    "output_tokens": 128,
+    "prefix_length": 16384,
+    "repeats": 5,
+    "seed": 20260806,
+    "source": "http://127.0.0.1:31200",
+    "tool_result_tokens": 32,
+    "tp_size": 4,
+    "transfer_port": 30520
+  },
+  "records": [
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.4981086470070295
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.1303908940171823,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "repeat": 0,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.498112579982262,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.66262854100205
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.05005247099325061,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 0,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        6.439001299440861e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.662812415976077,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.407433996035252
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.038944979023654014,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "rejections": {},
+      "repeat": 0,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.407437179994304,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 16388,
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 6.566734127001837,
+        "engine-b": 6.380437214043923
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 256,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.04147583799203858,
+      "output_digests": {
+        "engine-a": "f99badc71eb02452",
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-a": 128,
+        "engine-b": 128
+      },
+      "repeat": 0,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 6.566822346008848,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 128,
+      "wasted_engine_seconds": 6.566734127001837,
+      "wasted_gpu_seconds": 26.266936508007348
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.330780650023371
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.04383994598174468,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "rejections": {},
+      "repeat": 1,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.3307841859641485,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.334959092026111
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.04570934199728072,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 1,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        6.123899947851896e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.33513652603142,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.3149148389929906
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.03938507504062727,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "repeat": 1,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.31491754099261,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 16388,
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 6.487243278999813,
+        "engine-b": 6.342133711965289
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 256,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.05264037998858839,
+      "output_digests": {
+        "engine-a": "f99badc71eb02452",
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-a": 128,
+        "engine-b": 128
+      },
+      "repeat": 1,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 6.487331501033623,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 128,
+      "wasted_engine_seconds": 6.487243278999813,
+      "wasted_gpu_seconds": 25.94897311599925
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.449851404991932
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.05035100504755974,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "repeat": 2,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.449854160018731,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 16388,
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 6.4376239819685,
+        "engine-b": 6.330731778987683
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 256,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.05018180498154834,
+      "output_digests": {
+        "engine-a": "f99badc71eb02452",
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-a": 128,
+        "engine-b": 128
+      },
+      "repeat": 2,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 6.43771818804089,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 128,
+      "wasted_engine_seconds": 6.4376239819685,
+      "wasted_gpu_seconds": 25.750495927874
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.390540890977718
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.04642657097429037,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "rejections": {},
+      "repeat": 2,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.390544098045211,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.3859399239881895
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.037606025056447834,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 2,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        6.21519866399467e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.3861121970112436,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.253399482986424
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.045991602004505694,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "repeat": 3,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.2534022880136035,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.326926280977204
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.03879116498865187,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "rejections": {},
+      "repeat": 3,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.32692932599457,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 16388,
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 6.538127898995299,
+        "engine-b": 6.295338544994593
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 256,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.03897965501528233,
+      "output_digests": {
+        "engine-a": "f99badc71eb02452",
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-a": 128,
+        "engine-b": 128
+      },
+      "repeat": 3,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 6.538229603029322,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 128,
+      "wasted_engine_seconds": 6.538127898995299,
+      "wasted_gpu_seconds": 26.152511595981196
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.5119562249747105
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.04070244199829176,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 3,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        5.936599336564541e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.512136729026679,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 2,
+      "cached_tokens": {
+        "engine-a": 16388,
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 1,
+      "execution_seconds": {
+        "engine-a": 6.403816826001275,
+        "engine-b": 6.296418640005868
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-a": true,
+        "engine-b": true
+      },
+      "generate_rpc_count": 2,
+      "generated_tokens": 256,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.041050835978239775,
+      "output_digests": {
+        "engine-a": "f99badc71eb02452",
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-a": 128,
+        "engine-b": 128
+      },
+      "repeat": 4,
+      "scenario": "router-duplicate",
+      "source_generate_rpc_count": 1,
+      "synthetic_effect_submissions": 2,
+      "wall_seconds": 6.403913983027451,
+      "wasted_decode_fraction": 0.5,
+      "wasted_decode_tokens": 128,
+      "wasted_engine_seconds": 6.403816826001275,
+      "wasted_gpu_seconds": 25.6152673040051
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.89796195900999
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.047835972043685615,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "rejections": {},
+      "repeat": 4,
+      "scenario": "fenced-normal",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [],
+      "stale_rejections": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.8979653809801675,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": true,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.827476310019847
+      },
+      "fencing": true,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.03855986596317962,
+      "other_rejections": 0,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "rejections": {
+        "engine-a": "StaleLease"
+      },
+      "repeat": 4,
+      "scenario": "fenced-duplicate",
+      "source_generate_rpc_count": 0,
+      "stale_rejection_seconds": [
+        6.696197669953108e-05
+      ],
+      "stale_rejections": 1,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.827656676003244,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    },
+    {
+      "accepted_executors": 1,
+      "cached_tokens": {
+        "engine-b": 16388
+      },
+      "committed_tokens": 128,
+      "destination_generate_rpc_count": 1,
+      "duplicate_delivery": false,
+      "duplicate_effect_submissions": 0,
+      "execution_seconds": {
+        "engine-b": 6.315851065970492
+      },
+      "fencing": false,
+      "full_prefix_hit": {
+        "engine-b": true
+      },
+      "generate_rpc_count": 1,
+      "generated_tokens": 128,
+      "logical_steps": 1,
+      "migration_bytes": 4296015872,
+      "migration_seconds": 0.04971864499384537,
+      "output_digests": {
+        "engine-b": "f99badc71eb02452"
+      },
+      "output_tokens": {
+        "engine-b": 128
+      },
+      "repeat": 4,
+      "scenario": "router-normal",
+      "source_generate_rpc_count": 0,
+      "synthetic_effect_submissions": 1,
+      "wall_seconds": 6.315853911975864,
+      "wasted_decode_fraction": 0.0,
+      "wasted_decode_tokens": 0,
+      "wasted_engine_seconds": 0.0,
+      "wasted_gpu_seconds": 0.0
+    }
+  ],
+  "state_db": "results/fencing-microbench/qwen32b-tp4-16k-128t/fencing-state-1786008557583817496.db",
+  "summary": {
+    "failure_free_managed_turn_overhead_seconds": 0.10430393799906579,
+    "fenced-duplicate": {
+      "accepted_executors_mean": 1.0,
+      "duplicate_effect_submissions": 0,
+      "full_prefix_hit_rate": 1.0,
+      "generate_rpc_count_mean": 1.0,
+      "generated_tokens_mean": 128.0,
+      "migration_bytes_mean": 4296015872.0,
+      "samples": 5,
+      "stale_rejection_seconds": {
+        "mean": 6.282179383561015e-05,
+        "p50": 6.21519866399467e-05,
+        "p95": 6.696197669953108e-05,
+        "p99": 6.696197669953108e-05
+      },
+      "wall_seconds": {
+        "mean": 6.544770908809733,
+        "p50": 6.512136729026679,
+        "p95": 6.827656676003244,
+        "p99": 6.827656676003244
+      },
+      "wasted_decode_fraction_mean": 0.0,
+      "wasted_decode_tokens_mean": 0.0,
+      "wasted_engine_seconds_mean": 0.0,
+      "wasted_gpu_seconds_mean": 0.0
+    },
+    "fenced-normal": {
+      "accepted_executors_mean": 1.0,
+      "duplicate_effect_submissions": 0,
+      "full_prefix_hit_rate": 1.0,
+      "generate_rpc_count_mean": 1.0,
+      "generated_tokens_mean": 128.0,
+      "migration_bytes_mean": 4296015872.0,
+      "samples": 5,
+      "stale_rejection_seconds": null,
+      "wall_seconds": {
+        "mean": 6.47073203419568,
+        "p50": 6.390544098045211,
+        "p95": 6.8979653809801675,
+        "p99": 6.8979653809801675
+      },
+      "wasted_decode_fraction_mean": 0.0,
+      "wasted_decode_tokens_mean": 0.0,
+      "wasted_engine_seconds_mean": 0.0,
+      "wasted_gpu_seconds_mean": 0.0
+    },
+    "router-duplicate": {
+      "accepted_executors_mean": 2.0,
+      "duplicate_effect_submissions": 5,
+      "full_prefix_hit_rate": 1.0,
+      "generate_rpc_count_mean": 2.0,
+      "generated_tokens_mean": 256.0,
+      "migration_bytes_mean": 4296015872.0,
+      "samples": 5,
+      "stale_rejection_seconds": null,
+      "wall_seconds": {
+        "mean": 6.486803124228027,
+        "p50": 6.487331501033623,
+        "p95": 6.566822346008848,
+        "p99": 6.566822346008848
+      },
+      "wasted_decode_fraction_mean": 0.5,
+      "wasted_decode_tokens_mean": 128.0,
+      "wasted_engine_seconds_mean": 6.486709222593345,
+      "wasted_gpu_seconds_mean": 25.94683689037338
+    },
+    "router-normal": {
+      "accepted_executors_mean": 1.0,
+      "duplicate_effect_submissions": 0,
+      "full_prefix_hit_rate": 1.0,
+      "generate_rpc_count_mean": 1.0,
+      "generated_tokens_mean": 128.0,
+      "migration_bytes_mean": 4296015872.0,
+      "samples": 5,
+      "stale_rejection_seconds": null,
+      "wall_seconds": {
+        "mean": 6.366428096196614,
+        "p50": 6.315853911975864,
+        "p95": 6.498112579982262,
+        "p99": 6.498112579982262
+      },
+      "wasted_decode_fraction_mean": 0.0,
+      "wasted_decode_tokens_mean": 0.0,
+      "wasted_engine_seconds_mean": 0.0,
+      "wasted_gpu_seconds_mean": 0.0
+    }
+  },
+  "validation": {
+    "checks": {
+      "all_executed_turns_have_full_prefix_hits": true,
+      "fencing_rejects_source_before_generate": true,
+      "normal_paths_execute_once": true,
+      "router_only_duplicate_reaches_both_engines": true
+    },
+    "passed": true
+  }
+}

@@ -154,6 +154,42 @@ PYTHONPATH=. python scripts/benchmark_coding_agent_replay.py \
   --python "$(command -v python)"
 ```
 
+Controlled network, document, and local-compute tool gaps use two Qwen3-8B
+TP=2 engines on GPUs 0--3. The replay keeps errors and timeouts in its output:
+
+```bash
+bash scripts/tool_gap_engines.sh start
+
+PYTHONPATH=. python scripts/benchmark_blocked_window.py \
+  --source http://127.0.0.1:32200 \
+  --destination http://127.0.0.1:32201 \
+  --prefix-lengths 4096 16384 32768 \
+  --gap-ms 0 \
+  --scenarios agentshift \
+  --repeats 5 \
+  --tp-size 2 \
+  --transfer-port 34000 \
+  --output-dir results/tool-gap-workloads/preparation
+
+PYTHONPATH=. python scripts/benchmark_agent_tool_gaps.py \
+  --engine http://127.0.0.1:32200 \
+  --model-label Qwen3-8B \
+  --tp-size 2 \
+  --prefix-lengths 4096 16384 32768 \
+  --repeats 2 \
+  --output-dir results/tool-gap-workloads/formal
+
+python scripts/generate_tool_gap_table.py
+cp paper_rewriting_output/tables/table_tool_gaps.tex \
+  paper_rewriting_output/final_paper/tables/table_tool_gaps.tex
+
+bash scripts/tool_gap_engines.sh stop
+```
+
+The checked table uses the timestamped workload and preparation paths encoded
+as defaults in `generate_tool_gap_table.py`. Update both arguments together
+when regenerating from a new run so coverage always uses the matching TP setup.
+
 Heterogeneous migration scheduling:
 
 ```bash
@@ -182,6 +218,24 @@ Fault campaign:
 ```bash
 PYTHONPATH=. python scripts/validate_fault_matrix.py
 ```
+
+Real duplicate-delivery and fencing microbenchmark with Qwen3-32B TP=4 engines
+on ports 31200 and 31201:
+
+```bash
+PYTHONPATH=. python scripts/benchmark_fencing.py \
+  --source http://127.0.0.1:31200 \
+  --destination http://127.0.0.1:31201 \
+  --prefix-length 16384 \
+  --output-tokens 128 \
+  --repeats 5 \
+  --tp-size 4 \
+  --transfer-port 30520
+```
+
+The runner verifies that both router-only requests reach real engines, that a
+stale source is rejected before `/generate` on the fenced path, and that every
+executed request obtains a full prefix hit.
 
 CPU-only controller scaling does not require SGLang engines:
 

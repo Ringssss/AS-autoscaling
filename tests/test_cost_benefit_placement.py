@@ -58,6 +58,31 @@ def test_cost_benefit_policy_bounds_concurrency_and_capacity():
     assert len(selected) == 1
 
 
+def test_cost_benefit_policy_selects_only_disjoint_engine_pairs():
+    policy = CostBenefitPlacementPolicy(
+        bandwidth_bytes_per_second=10 * 1024**3,
+        max_concurrent_migrations=3,
+    )
+    candidates = [
+        candidate("from-a", source_engine="a"),
+        candidate("from-c", source_engine="c"),
+    ]
+    engine_loads = [
+        EngineLoad("a", queue_depth=9, free_kv_tokens=10_000, kv_pressure=0.9),
+        EngineLoad("b", queue_depth=0, free_kv_tokens=10_000, kv_pressure=0.1),
+        EngineLoad("c", queue_depth=8, free_kv_tokens=10_000, kv_pressure=0.8),
+        EngineLoad("d", queue_depth=1, free_kv_tokens=10_000, kv_pressure=0.2),
+    ]
+    selected = policy.select(candidates, engine_loads)
+    used_engines = [
+        engine
+        for result in selected
+        for engine in (result.source_engine, result.destination_engine)
+    ]
+    assert len(selected) == 2
+    assert len(used_engines) == len(set(used_engines))
+
+
 def test_cost_benefit_policy_validates_configuration():
     with pytest.raises(ValueError):
         CostBenefitPlacementPolicy(bandwidth_bytes_per_second=0)

@@ -5,7 +5,7 @@
 - Define the locality--placement conflict for suspended agents.
 - State the completed-turn insight.
 - Name the three mechanisms and their benefit.
-- Report 32K latency, burst, elasticity, and fault evidence with scope qualifiers.
+- Report 130K latency, burst, elasticity, and fault evidence with scope qualifiers.
 
 ## 1 Introduction
 
@@ -18,7 +18,7 @@
 ## 2 Background and Motivation
 
 - Explain cross-turn KV locality and its placement consequence.
-- Use Kimi/FlowPrefill characterization with explicit schema limitations.
+- Use Kimi/FlowPrefill characterization with explicit schema limitations and reserve the true lifecycle panel as TODO until a labeled runtime trace exists.
 - Formalize the constrained objective: destination execution, full hit, hidden preparation, one owner.
 - State design principles: durable progress is authoritative; KV is reconstructable acceleration state.
 
@@ -55,6 +55,7 @@
 ## 8 Evaluation
 
 - Setup and baseline capability table.
+- Do not include Autellix/Agentix as an experimental baseline; keep it in Related Work as orthogonal program scheduling.
 - RQ1 locality after relocation.
 - RQ2 gap overlap, multi-turn coding replay, and heterogeneous migration ordering.
 - RQ3 correlated-return hotspots and TTL/offload boundaries.

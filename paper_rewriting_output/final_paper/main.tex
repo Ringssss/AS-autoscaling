@@ -6,9 +6,13 @@
 \usepackage{amssymb}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{xcolor}
 \usepackage{xspace}
 
 \newcommand{\agentshift}{AgentShift\xspace}
+\newcommand{\figplaceholder}[3]{%
+  \fcolorbox{black!55}{black!3}{%
+    \parbox[c][#1][c]{#2}{\centering\scriptsize #3}}}
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
@@ -34,14 +38,14 @@ installs the completed prefix on a destination, and commits an epoch-fenced
 ownership handoff during the blocked interval. A source shadow provides fast
 recovery until the destination produces its first token.
 
-We implement AgentShift in SGLang and evaluate Qwen3 models with tensor
-parallelism up to four. At a 32K-token prefix and a 500~ms gap, AgentShift
-matches the sticky latency floor while reducing post-tool latency by 24.04$\times$
-over rerouting and 2.41$\times$ over the same transfer started on return. In an
-eight-agent 32K burst, it relocates half the owners with full prefix hits and is
-7.63$\times$ faster than rerouting. Warm-pool scale-out and scale-in are
-3.71$\times$ and 6.43$\times$ faster than semantic rerouting. Within our fault
-model, epoch fencing prevents double advancement and source-shadow recovery is
+We implement AgentShift in SGLang and evaluate Qwen3-8B and Qwen3-32B with
+tensor parallelism up to four and prefixes up to 130K tokens. With a 250~ms
+gap, AgentShift relocates a 130K prefix with a full hit and reduces post-tool
+latency by 132.30$\times$ and 75.54$\times$ over rerouting for the two models,
+respectively; it remains within 5.3~ms of Sticky. In an eight-agent 32K burst,
+it relocates half the owners and is 7.63$\times$ faster than rerouting. Warm-pool
+scale-in is 6.43$\times$ faster than semantic rerouting. Within our fault model,
+epoch fencing prevents double advancement and source-shadow recovery is
 10.9$\times$ faster than reconstruction.
 \end{abstract}
 

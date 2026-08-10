@@ -193,23 +193,36 @@ class CostBenefitPlacementPolicy:
         self,
         candidates: list[MobilityCandidate],
         loads: list[EngineLoad],
+        *,
+        destination_engine_ids: set[str] | None = None,
     ) -> list[MobilityScore]:
         load_map = {load.engine_id: load for load in loads}
         ranked = []
         for candidate in candidates:
             for destination in loads:
+                if (
+                    destination_engine_ids is not None
+                    and destination.engine_id not in destination_engine_ids
+                ):
+                    continue
                 result = self.score(candidate, destination, load_map)
                 if result is not None and result.score > 0:
                     ranked.append(result)
         ranked.sort(key=lambda item: item.score, reverse=True)
         selected = []
         selected_agents = set()
+        selected_engines = set()
         reserved_tokens = {load.engine_id: 0 for load in loads}
         candidates_by_id = {candidate.agent_id: candidate for candidate in candidates}
         for result in ranked:
             if len(selected) >= self.max_concurrent_migrations:
                 break
             if result.agent_id in selected_agents:
+                continue
+            if (
+                result.source_engine in selected_engines
+                or result.destination_engine in selected_engines
+            ):
                 continue
             candidate = candidates_by_id[result.agent_id]
             destination = load_map[result.destination_engine]
@@ -220,5 +233,7 @@ class CostBenefitPlacementPolicy:
                 continue
             selected.append(result)
             selected_agents.add(result.agent_id)
+            selected_engines.add(result.source_engine)
+            selected_engines.add(result.destination_engine)
             reserved_tokens[result.destination_engine] += candidate.prefix_tokens
         return selected

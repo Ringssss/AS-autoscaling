@@ -10,11 +10,11 @@
 
 ## Experimental Strength
 
-**Pass within the tested single-node setting.** The strongest controlled comparison is On-return because it shares transfer, installation, and ownership code; AgentShift is 2.41x faster at 32K/500 ms. Reroute, hotspot, elasticity, interference, TP/model, TTL, multi-turn coding replay, migration ordering, and fault results test distinct claims. The short 8.9 ms tool and the deferred policy tail are reported as failure modes rather than hidden.
+**Pass within the tested single-node setting.** The strongest controlled comparison is On-return because it shares transfer, installation, and ownership code. At 130K/250 ms, AgentShift is 4.01x and 2.38x faster than On-return and 132.30x and 75.54x faster than reroute on the two evaluated configurations. Hotspot, elasticity, interference, TP/model, TTL, multi-turn coding replay, migration ordering, and fault results test distinct claims. The short 8.9 ms tool and the deferred policy tail are reported as failure modes rather than hidden.
 
 ## Evaluation Completeness
 
-**Needs new infrastructure-dependent experiments before an NSDI submission.** The paper now includes an eight-agent three-turn replay and a serialized migration-policy sweep, but it still lacks a complete SWE-agent/BFCL replay, concurrent transfer groups, independent-process crash-stop injection, and cross-node network results. Mechanism-equivalent Agentix/Continuum/TokenCake/Symphony comparisons are labeled and must not be described as official reproductions. These gaps are explicit in Section 9 and do not invalidate the prototype claims.
+**Needs new infrastructure-dependent experiments before an NSDI submission.** The paper now includes an eight-agent three-turn replay and a serialized migration-policy sweep, but it still lacks a complete SWE-agent/BFCL replay, a labeled lifecycle/tool-gap trace, concurrent transfer groups, independent-process crash-stop injection, and cross-node network results. Mechanism-equivalent Continuum/TokenCake/Symphony comparisons are labeled and must not be described as official reproductions. Autellix/Agentix is correctly treated as orthogonal related work rather than a forced performance baseline. These gaps are explicit in Section 9 and in grey/TODO figure panels; they do not support headline claims.
 
 ## Method Soundness
 
@@ -24,7 +24,7 @@
 
 | Claim | Evidence | Status |
 |---|---|---|
-| Relocation preserves locality | E4, E5, E11 | Supported |
+| Relocation preserves locality through 130K | E4, E5, E11, E19 | Supported for identical single-node engines |
 | Gap overlap is distinct from mobility | E4, E5, E8 | Supported |
 | Correlated-return load can be relieved | E6, E7 | Supported for tested bursts |
 | Warm scale-out and semantic drain work | E12, E13 | Supported for model-ready targets |
@@ -35,3 +35,4 @@
 | Admissible-first ordering improves in-gap coverage | E17 | Supported for one serialized trace |
 | Official SOTA systems are outperformed | None | Not claimed |
 | Cross-node performance is established | None | Not claimed |
+| Labeled lifecycle and universal tool-gap coverage are established | None | Not claimed; Figures 2 and 10 remain TODO |

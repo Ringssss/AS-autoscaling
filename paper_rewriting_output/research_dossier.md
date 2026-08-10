@@ -11,7 +11,7 @@ cross-node RDMA performance or independent node-failure domains.
 
 ## Deep-Read Papers
 
-### FastServe (NSDI 2026)
+### FastServe (arXiv:2305.05920)
 
 FastServe starts with one measured bottleneck: head-of-line blocking dominates
 latency under skewed LLM requests. It then derives token-granularity preemption,
@@ -21,14 +21,14 @@ component the consequence of the previous component. AgentShift should follow
 the same causal discipline: placement stickiness motivates state mobility;
 state mobility requires ownership; exposed mobility motivates gap overlap.
 
-### Agentix (NSDI 2026)
+### Autellix / Agentix (arXiv 2025 / NSDI 2026)
 
-Agentix first defines agentic programs as dynamic DAGs of LLM calls and
+Autellix, later published as Agentix, first defines agentic programs as dynamic DAGs of LLM calls and
 interrupts. It then measures program-level waiting and shows that call-level
 schedulers lack program context. PLAS/ATLAS and program-aware routing follow
-from that observation. The relevant boundary is precise: Agentix decides where
-future calls run while trading locality against recomputation; it does not move
-an already resident completed prefix together with execution authority.
+from that observation. It is an orthogonal scheduling system, not an
+apple-to-apple AgentShift baseline. AgentShift uses its workload and rhetorical
+organization as an exemplar, and cites the system in Related Work only.
 
 ### Symphony (NSDI 2026)
 

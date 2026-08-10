@@ -8,7 +8,12 @@ from agentshift.state.store import SQLiteStateStore
 
 
 class FakeEngine:
-    def __init__(self, engine_id: str, fail_destination: bool = False):
+    def __init__(
+        self,
+        engine_id: str,
+        fail_destination: bool = False,
+        transfer_tracker: dict | None = None,
+    ):
         self.engine_id = engine_id
         self.fail_destination = fail_destination
         self.releases = []
@@ -17,6 +22,9 @@ class FakeEngine:
         self.active_releases = 0
         self.max_active_releases = 0
         self.release_options = []
+        self.transfer_tracker = transfer_tracker
+        self.transfer_calls = []
+        self.generate_calls = []
 
     async def pin_prefix(self, agent_id, owner_epoch, token_ids):
         return {"success": True, "token_count": len(token_ids)}
@@ -25,13 +33,25 @@ class FakeEngine:
         return {"success": True}
 
     async def transfer_prefix(self, **kwargs):
+        self.transfer_calls.append(kwargs)
         if kwargs["role"] == "destination" and self.fail_destination:
             raise RuntimeError("injected destination failure")
+        if self.transfer_tracker is not None and kwargs["role"] == "source":
+            self.transfer_tracker["active"] += 1
+            self.transfer_tracker["maximum"] = max(
+                self.transfer_tracker["maximum"], self.transfer_tracker["active"]
+            )
+            await asyncio.sleep(0.01)
+            self.transfer_tracker["active"] -= 1
         return {
             "success": True,
             "bytes_transferred": 4096,
             "state": "QUEUED" if kwargs.get("async_transfer") else "COMPLETE",
         }
+
+    async def post(self, path, payload, require_success=True):
+        self.generate_calls.append((path, payload))
+        return {"success": True, "output_ids": [42]}
 
     async def transfer_status(self, migration_id):
         return {
@@ -174,12 +194,138 @@ def test_concurrent_acks_serialize_source_releases(tmp_path):
     assert sorted(source.releases) == [("a1", 3), ("a2", 3)]
 
 
+def test_disjoint_engine_pairs_migrate_concurrently(tmp_path):
+    tracker = {"active": 0, "maximum": 0}
+    store = SQLiteStateStore(tmp_path / "parallel.db")
+    store.register_agent(AgentContinuation("a1", 1, "a", 1, (1, 2, 3)))
+    store.register_agent(AgentContinuation("c1", 1, "c", 1, (4, 5, 6)))
+    engines = {
+        engine_id: FakeEngine(engine_id, transfer_tracker=tracker)
+        for engine_id in ("a", "b", "c", "d")
+    }
+    coordinator = MigrationCoordinator(store, engines, base_port=29900)
+
+    async def migrate_both():
+        return await asyncio.gather(
+            coordinator.migrate("a1", "b"),
+            coordinator.migrate("c1", "d"),
+        )
+
+    asyncio.run(migrate_both())
+    assert tracker["maximum"] == 2
+
+
+def test_shared_engine_serializes_concurrent_migrations(tmp_path):
+    tracker = {"active": 0, "maximum": 0}
+    store = SQLiteStateStore(tmp_path / "serialized.db")
+    store.register_agent(AgentContinuation("a1", 1, "a", 1, (1, 2, 3)))
+    store.register_agent(AgentContinuation("a2", 1, "a", 1, (4, 5, 6)))
+    engines = {
+        engine_id: FakeEngine(engine_id, transfer_tracker=tracker)
+        for engine_id in ("a", "b", "c")
+    }
+    coordinator = MigrationCoordinator(store, engines, base_port=29900)
+
+    async def migrate_both():
+        return await asyncio.gather(
+            coordinator.migrate("a1", "b"),
+            coordinator.migrate("a2", "c"),
+        )
+
+    asyncio.run(migrate_both())
+    assert tracker["maximum"] == 1
+
+
+def test_transfer_ports_are_stable_across_pair_initialization_order(tmp_path):
+    engines = {engine_id: FakeEngine(engine_id) for engine_id in ("a", "b", "c", "d")}
+    first = MigrationCoordinator(
+        SQLiteStateStore(tmp_path / "ports-first.db"), engines, base_port=29900, tp_size=2
+    )
+    second = MigrationCoordinator(
+        SQLiteStateStore(tmp_path / "ports-second.db"), engines, base_port=29900, tp_size=2
+    )
+
+    async def first_order():
+        ab = await first.initialize_transfer_pair("a", "b")
+        cd = await first.initialize_transfer_pair("c", "d")
+        return ab, cd
+
+    async def second_order():
+        cd = await second.initialize_transfer_pair("c", "d")
+        ab = await second.initialize_transfer_pair("a", "b")
+        return ab, cd
+
+    assert asyncio.run(first_order()) == asyncio.run(second_order())
+
+
 def test_sync_transfer_path_remains_available(tmp_path):
     store, _, _, coordinator = make_coordinator(tmp_path)
     coordinator.async_transfer = False
     result = asyncio.run(coordinator.migrate("a1", "b"))
     assert result.bytes_transferred == 4096
     assert store.get_agent("a1").owner_engine == "b"
+
+
+def test_progressive_migration_is_opt_in_and_returns_after_commit(tmp_path):
+    store, source, destination, coordinator = make_coordinator(tmp_path)
+    result = asyncio.run(
+        coordinator.migrate_and_generate_progressive(
+            "a1",
+            "b",
+            token_ids=(1, 2, 3, 4, 9),
+            max_new_tokens=1,
+            rid="progressive-request",
+            layer_group_size=2,
+        )
+    )
+    assert result.generation["output_ids"] == [42]
+    assert store.get_migration(result.migration.migration_id).state == (
+        MigrationState.COMMITTED
+    )
+    assert store.get_agent("a1").owner_engine == "b"
+    assert destination.transfer_calls[0]["progressive"] is True
+    assert destination.transfer_calls[0]["layer_group_size"] == 2
+    assert source.transfer_calls[0].get("progressive", False) is False
+    assert destination.generate_calls[0][1][
+        "agentshift_progressive_migration_id"
+    ] == result.migration.migration_id
+
+
+def test_progressive_migration_rejects_nonextending_continuation(tmp_path):
+    store, _, _, coordinator = make_coordinator(tmp_path)
+    with pytest.raises(RuntimeError, match="does not extend"):
+        asyncio.run(
+            coordinator.migrate_and_generate_progressive(
+                "a1",
+                "b",
+                token_ids=(1, 2, 99, 4, 9),
+                max_new_tokens=1,
+                rid="bad-progressive-request",
+            )
+        )
+    assert store.get_agent("a1").owner_engine == "a"
+
+
+def test_progressive_awaitable_failure_cleans_transfer_reservations(tmp_path):
+    store, source, destination, coordinator = make_coordinator(tmp_path)
+
+    async def invalid_tokens():
+        await asyncio.sleep(0)
+        return (1, 2, 99, 4, 9)
+
+    with pytest.raises(RuntimeError, match="does not extend"):
+        asyncio.run(
+            coordinator.migrate_and_generate_progressive(
+                "a1",
+                "b",
+                token_ids=invalid_tokens(),
+                max_new_tokens=1,
+                rid="bad-progressive-request",
+            )
+        )
+    assert len(source.cleanups) == 1
+    assert destination.cleanups == source.cleanups
+    assert store.get_agent("a1").owner_engine == "a"
 
 
 def test_post_commit_failure_recovers_to_source_shadow(tmp_path):

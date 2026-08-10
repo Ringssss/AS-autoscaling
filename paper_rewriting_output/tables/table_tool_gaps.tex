@@ -1,0 +1,27 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Blocking intervals observed after a completed Qwen3-8B turn. Coding rows come from an eight-agent, three-turn replay repeated three times. Representative rows aggregate four operations over 4K, 16K, and 32K prefixes, each repeated twice. `Covered' compares each interval with p95 prefix-preparation time under the matching TP configuration. All 120 representative calls completed successfully; the replay retains any failures and timeouts.}
+\label{tab:tool-gaps}
+\begin{tabular}{llrrrr}
+\toprule
+Tool class & Representative operation & Blocked & Wait p50/p90 & Prefix p50/p90 & Covered \\
+ & & turns & (ms) & (K tokens) & by wait \\
+\midrule
+\multicolumn{6}{l}{\textit{Controlled coding replay (TP=1)}} \\
+Shell & \texttt{git status --short} & 18 & 5.0 / 11.9 & 24.0 / 32.0 & 0\% \\
+Targeted test & \texttt{pytest} state store & 18 & 426.8 / 434.7 & 24.0 / 32.0 & 100\% \\
+Targeted test & \texttt{pytest} migration protocol & 18 & 504.1 / 510.3 & 24.0 / 32.0 & 100\% \\
+Build/test & \texttt{pytest} full suite & 18 & 623.4 / 628.4 & 24.0 / 32.0 & 100\% \\
+\textbf{Overall} & All operations & 72 & 437.2 / 624.1 & 24.0 / 32.0 & 75\% \\
+\addlinespace[2pt]
+\multicolumn{6}{l}{\textit{Representative blocking operations (TP=2)}} \\
+Web search & OpenAlex query & 24 & 1649.8 / 2614.5 & 16.0 / 32.0 & 100\% \\
+Page fetch & HTTP fetch + HTML parse & 24 & 709.2 / 2328.4 & 16.0 / 32.0 & 100\% \\
+External API & Open-Meteo request & 24 & 1078.4 / 1184.4 & 16.0 / 32.0 & 100\% \\
+PDF parsing & Parse up to 12 pages & 24 & 1074.9 / 1518.6 & 16.0 / 32.0 & 100\% \\
+Python execution & AST/JSON/hash/sort & 24 & 270.3 / 364.0 & 16.0 / 32.0 & 100\% \\
+\textbf{Overall} & All operations & 120 & 1025.1 / 2045.8 & 16.0 / 32.0 & 100\% \\
+\bottomrule
+\end{tabular}
+\end{table*}

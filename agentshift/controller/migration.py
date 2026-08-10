@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import asyncio
+import inspect
 import time
 import uuid
 from dataclasses import dataclass
-from typing import Callable
+from typing import Any, Awaitable, Callable
 
-from agentshift.engine.sglang import SGLangAgentShiftClient
+from agentshift.engine.sglang import SGLangAgentShiftClient, generate
 from agentshift.state.schema import AgentContinuation, MigrationRecord, MigrationState
 from agentshift.state.store import SQLiteStateStore
 
@@ -24,6 +25,20 @@ class MigrationResult:
     transfer_seconds: float
     worker_transfer_seconds: float = 0.0
     queue_seconds: float = 0.0
+
+
+@dataclass(frozen=True, slots=True)
+class ProgressiveMigrationResult:
+    migration: MigrationResult
+    generation: dict[str, Any]
+
+
+@dataclass(frozen=True, slots=True)
+class _ProgressiveContinuation:
+    token_ids: tuple[int, ...] | Awaitable[tuple[int, ...]]
+    max_new_tokens: int
+    rid: str
+    layer_group_size: int
 
 
 @dataclass(frozen=True, slots=True)
@@ -55,10 +70,14 @@ class MigrationCoordinator:
         self.transfer_poll_interval = transfer_poll_interval
         self.transfer_timeout = transfer_timeout
         self.fault_injector = fault_injector
+        self._engine_order = tuple(sorted(engines))
         self._pair_groups: dict[tuple[str, str], tuple[str, tuple[int, ...]]] = {}
         self._group_lock = asyncio.Lock()
-        # NCCL P2P messages are untagged. Keep source and destination queue order equal.
-        self._migration_lock = asyncio.Lock()
+        # NCCL P2P messages are untagged. Serialize transfers that share either
+        # endpoint, while allowing disjoint engine pairs to proceed in parallel.
+        self._engine_locks = {
+            engine_id: asyncio.Lock() for engine_id in engines
+        }
         # SGLang's tokenizer control communicator accepts one in-flight RPC per
         # operation. First-token ACKs can arrive together, so serialize releases
         # for each source engine while allowing different engines to proceed.
@@ -75,12 +94,19 @@ class MigrationCoordinator:
         async with self._group_lock:
             if pair in self._pair_groups:
                 return self._pair_groups[pair]
-            pair_index = len(self._pair_groups)
+            source_index = self._engine_order.index(source)
+            destination_index = self._engine_order.index(destination)
+            destination_slot = (
+                destination_index
+                if destination_index < source_index
+                else destination_index - 1
+            )
+            pair_index = source_index * (len(self._engine_order) - 1) + destination_slot
             ports = tuple(
                 self.base_port + pair_index * self.tp_size + rank
                 for rank in range(self.tp_size)
             )
-            group_name = f"agentshift_{source}_{destination}_{pair_index}"
+            group_name = f"agentshift_{source}_{destination}"
             await asyncio.gather(
                 self.engines[source].init_transfer_group(
                     master_address=self.master_address,
@@ -121,13 +147,102 @@ class MigrationCoordinator:
                 raise TimeoutError(f"transfer timed out: {migration_id}")
             await asyncio.sleep(self.transfer_poll_interval)
 
+    async def _wait_for_transfer_states(
+        self,
+        engine: SGLangAgentShiftClient,
+        migration_id: str,
+        states: tuple[str, ...],
+    ) -> dict:
+        deadline = time.monotonic() + self.transfer_timeout
+        while True:
+            result = await engine.transfer_status(migration_id)
+            if result["state"] in states or result["state"] == "FAILED":
+                return result
+            if time.monotonic() >= deadline:
+                raise TimeoutError(f"transfer timed out: {migration_id}")
+            await asyncio.sleep(self.transfer_poll_interval)
+
     async def migrate(self, agent_id: str, destination_engine: str) -> MigrationResult:
-        async with self._migration_lock:
-            return await self._migrate_serial(agent_id, destination_engine)
+        if destination_engine not in self.engines:
+            raise KeyError(destination_engine)
+        while True:
+            source_engine = self.store.get_agent(agent_id).owner_engine
+            if source_engine == destination_engine:
+                raise ValueError("source and destination must differ")
+            engine_ids = sorted((source_engine, destination_engine))
+            locks = [self._engine_locks[engine_id] for engine_id in engine_ids]
+            acquired: list[asyncio.Lock] = []
+            try:
+                for lock in locks:
+                    await lock.acquire()
+                    acquired.append(lock)
+                # An earlier migration of the same agent may have committed
+                # while this call waited. Retry with locks for the new owner.
+                if self.store.get_agent(agent_id).owner_engine != source_engine:
+                    continue
+                return await self._migrate_serial(agent_id, destination_engine)
+            finally:
+                for lock in reversed(acquired):
+                    lock.release()
+
+    async def migrate_and_generate_progressive(
+        self,
+        agent_id: str,
+        destination_engine: str,
+        *,
+        token_ids: tuple[int, ...] | Awaitable[tuple[int, ...]],
+        max_new_tokens: int,
+        rid: str,
+        layer_group_size: int = 4,
+    ) -> ProgressiveMigrationResult:
+        """Overlap destination continuation with an in-flight prefix transfer.
+
+        The generated response stays private to this controller call until the
+        migration has committed, so callers cannot observe destination output
+        under the old ownership epoch.
+        """
+        if not self.async_transfer:
+            raise RuntimeError("progressive continuation requires async transfers")
+        if layer_group_size <= 0:
+            raise ValueError("layer_group_size must be positive")
+        continuation = _ProgressiveContinuation(
+            token_ids=token_ids,
+            max_new_tokens=max_new_tokens,
+            rid=rid,
+            layer_group_size=layer_group_size,
+        )
+        while True:
+            source_engine = self.store.get_agent(agent_id).owner_engine
+            if source_engine == destination_engine:
+                raise ValueError("source and destination must differ")
+            if destination_engine not in self.engines:
+                raise KeyError(destination_engine)
+            engine_ids = sorted((source_engine, destination_engine))
+            locks = [self._engine_locks[engine_id] for engine_id in engine_ids]
+            acquired: list[asyncio.Lock] = []
+            try:
+                for lock in locks:
+                    await lock.acquire()
+                    acquired.append(lock)
+                if self.store.get_agent(agent_id).owner_engine != source_engine:
+                    continue
+                result = await self._migrate_serial(
+                    agent_id,
+                    destination_engine,
+                    progressive_continuation=continuation,
+                )
+                assert isinstance(result, ProgressiveMigrationResult)
+                return result
+            finally:
+                for lock in reversed(acquired):
+                    lock.release()
 
     async def _migrate_serial(
-        self, agent_id: str, destination_engine: str
-    ) -> MigrationResult:
+        self,
+        agent_id: str,
+        destination_engine: str,
+        progressive_continuation: _ProgressiveContinuation | None = None,
+    ) -> MigrationResult | ProgressiveMigrationResult:
         continuation = self.store.get_agent(agent_id)
         if destination_engine == continuation.owner_engine:
             raise ValueError("source and destination must differ")
@@ -156,6 +271,18 @@ class MigrationCoordinator:
             if token_count <= 0:
                 raise RuntimeError("source has no completed prefix to migrate")
             token_ids = continuation.token_ids[:token_count]
+            if (
+                progressive_continuation is not None
+                and isinstance(progressive_continuation.token_ids, tuple)
+            ):
+                if len(progressive_continuation.token_ids) <= token_count:
+                    raise RuntimeError(
+                        "progressive continuation must append at least one token"
+                    )
+                if progressive_continuation.token_ids[:token_count] != token_ids:
+                    raise RuntimeError(
+                        "progressive continuation does not extend the migrated prefix"
+                    )
             group_name, ports = await self._ensure_group(
                 continuation.owner_engine, destination_engine
             )
@@ -178,6 +305,12 @@ class MigrationCoordinator:
                     role="destination",
                     owner_epoch=continuation.owner_epoch + 1,
                     async_transfer=True,
+                    progressive=progressive_continuation is not None,
+                    layer_group_size=(
+                        progressive_continuation.layer_group_size
+                        if progressive_continuation is not None
+                        else 4
+                    ),
                     **transfer_args,
                 )
                 await source.transfer_prefix(
@@ -186,10 +319,55 @@ class MigrationCoordinator:
                     async_transfer=True,
                     **transfer_args,
                 )
-                transfer_results = await asyncio.gather(
+                progressive_token_ids = None
+                if progressive_continuation is not None:
+                    token_source = progressive_continuation.token_ids
+                    try:
+                        progressive_token_ids = (
+                            await token_source
+                            if inspect.isawaitable(token_source)
+                            else token_source
+                        )
+                        if len(progressive_token_ids) <= token_count:
+                            raise RuntimeError(
+                                "progressive continuation must append at least one token"
+                            )
+                        if progressive_token_ids[:token_count] != token_ids:
+                            raise RuntimeError(
+                                "progressive continuation does not extend the migrated prefix"
+                            )
+                    except BaseException:
+                        await asyncio.gather(
+                            self._wait_for_transfer_states(
+                                source, migration_id, ("COMPLETE",)
+                            ),
+                            self._wait_for_transfer_states(
+                                destination, migration_id, ("COPY_DONE", "COMPLETE")
+                            ),
+                            return_exceptions=True,
+                        )
+                        await asyncio.gather(
+                            source.cleanup_transfer(migration_id),
+                            destination.cleanup_transfer(migration_id),
+                            return_exceptions=True,
+                        )
+                        raise
+                waiters = [
                     self._wait_for_transfer(source, migration_id),
                     self._wait_for_transfer(destination, migration_id),
-                    return_exceptions=True,
+                ]
+                if progressive_continuation is not None:
+                    waiters.append(
+                        generate(
+                            destination,
+                            list(progressive_token_ids),
+                            max_new_tokens=progressive_continuation.max_new_tokens,
+                            rid=progressive_continuation.rid,
+                            agentshift_progressive_migration_id=migration_id,
+                        )
+                    )
+                transfer_results = await asyncio.gather(
+                    *waiters, return_exceptions=True
                 )
             else:
                 transfer_results = await asyncio.gather(
@@ -223,7 +401,10 @@ class MigrationCoordinator:
                     return_exceptions=True,
                 )
                 raise errors[0]
-            source_result, destination_result = transfer_results
+            source_result, destination_result = transfer_results[:2]
+            generation_result = (
+                transfer_results[2] if progressive_continuation is not None else None
+            )
             transfer_seconds = time.perf_counter() - started
             worker_transfer_seconds = max(
                 float(source_result.get("transfer_seconds", 0.0)),
@@ -254,7 +435,7 @@ class MigrationCoordinator:
             self._inject_fault("DEST_READY", migration_id)
             new_continuation = self.store.commit_migration(migration_id)
             self._inject_fault("COMMITTED", migration_id)
-            return MigrationResult(
+            migration_result = MigrationResult(
                 migration_id=migration_id,
                 agent_id=agent_id,
                 source_engine=continuation.owner_engine,
@@ -267,6 +448,13 @@ class MigrationCoordinator:
                 worker_transfer_seconds=worker_transfer_seconds,
                 queue_seconds=queue_seconds,
             )
+            if progressive_continuation is not None:
+                assert isinstance(generation_result, dict)
+                return ProgressiveMigrationResult(
+                    migration=migration_result,
+                    generation=generation_result,
+                )
+            return migration_result
         except Exception as exc:
             current = self.store.get_migration(migration_id)
             if current.state in (MigrationState.PREPARING, MigrationState.COPYING):

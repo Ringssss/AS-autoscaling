@@ -1,0 +1,341 @@
+{
+  "baseline_implementation": "mechanism-equivalent",
+  "calibrations": {
+    "4096": {
+      "completed_tokens": 4100,
+      "kv_bytes": 604569600,
+      "prefix_length": 4096,
+      "recompute_seconds": 0.07156967802438885,
+      "reroute_seconds": 0.14956900698598474,
+      "sticky_seconds": 0.07799932896159589,
+      "ttl_expected_cost_seconds": 0.04828549844371407,
+      "ttl_seconds": 0.004066285095177591
+    }
+  },
+  "config": {
+    "agentix_destination_queue_ms": 0.0,
+    "agentix_source_queue_ms": 0.0,
+    "calibration_repeats": 1,
+    "destination": "http://127.0.0.1:31001",
+    "first_output_tokens": 4,
+    "kv_bytes_per_token": 147456,
+    "max_tool_result_tokens": 1024,
+    "output_dir": "results/progressive-e2e-preflight",
+    "poll_interval": 0.005,
+    "prefix_lengths": [
+      4096
+    ],
+    "progressive_layer_group_size": 4,
+    "python": "/home/zhujianian/miniconda3/envs/sglang-bench/bin/python",
+    "repeats": 1,
+    "scenarios": [
+      "agentshift",
+      "progressive"
+    ],
+    "seed": 20260720,
+    "source": "http://127.0.0.1:31000",
+    "tool_calibration_repeats": 1,
+    "tool_cwd": "/home/zhujianian/agentshift",
+    "tp_size": 2,
+    "transfer_port": 30100,
+    "ttl_hbm_cost_per_gib_second": 0.25
+  },
+  "records": [
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exposed_migration_seconds": 0.0,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.0916732910554856,
+      "migration_seconds": 0.08140778006054461,
+      "next_turn_seconds": 0.08799269201699644,
+      "post_tool_seconds": 0.08799269201699644,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "progressive",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "git-status",
+      "tool_output_bytes": 2810,
+      "tool_prediction_seconds": 0.004066285095177591,
+      "tool_result_tokens": 703,
+      "tool_seconds": 0.003659848007373512
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exposed_migration_seconds": 0.03429712203796953,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.038014458026736975,
+      "migration_seconds": 0.027589753037318587,
+      "next_turn_seconds": 0.0673700519837439,
+      "post_tool_seconds": 0.10166717402171344,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "agentshift",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "git-status",
+      "tool_output_bytes": 2810,
+      "tool_prediction_seconds": 0.004066285095177591,
+      "tool_result_tokens": 703,
+      "tool_seconds": 0.0036818350199609995
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "/home/zhujianian/miniconda3/envs/sglang-bench/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_state_store.py"
+      ],
+      "exposed_migration_seconds": 1.6472069546580315e-05,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.40100420406088233,
+      "migration_seconds": 0.026212107040919363,
+      "next_turn_seconds": 0.07786760607268661,
+      "post_tool_seconds": 0.07788407814223319,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "agentshift",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "state-store-tests",
+      "tool_output_bytes": 98,
+      "tool_prediction_seconds": 0.3973793750628829,
+      "tool_result_tokens": 25,
+      "tool_seconds": 0.4009721599286422
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "/home/zhujianian/miniconda3/envs/sglang-bench/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_state_store.py"
+      ],
+      "exposed_migration_seconds": 0.0,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.47127028298564255,
+      "migration_seconds": 0.46126896992791444,
+      "next_turn_seconds": 0.07345617807004601,
+      "post_tool_seconds": 0.07345617807004601,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "progressive",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "state-store-tests",
+      "tool_output_bytes": 98,
+      "tool_prediction_seconds": 0.3973793750628829,
+      "tool_result_tokens": 25,
+      "tool_seconds": 0.3977981129428372
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "/home/zhujianian/miniconda3/envs/sglang-bench/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exposed_migration_seconds": 0.0,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.7878919800277799,
+      "migration_seconds": 0.7770723160356283,
+      "next_turn_seconds": 0.07614929496776313,
+      "post_tool_seconds": 0.07614929496776313,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "progressive",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "control-plane-tests",
+      "tool_output_bytes": 99,
+      "tool_prediction_seconds": 0.7207406249362975,
+      "tool_result_tokens": 25,
+      "tool_seconds": 0.7117291090544313
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "/home/zhujianian/miniconda3/envs/sglang-bench/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exposed_migration_seconds": 2.1302024833858013e-05,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.7317889060359448,
+      "migration_seconds": 0.02554714505095035,
+      "next_turn_seconds": 0.07278654305264354,
+      "post_tool_seconds": 0.0728078450774774,
+      "prefix_length": 4096,
+      "repeat": 0,
+      "scenario": "agentshift",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "control-plane-tests",
+      "tool_output_bytes": 99,
+      "tool_prediction_seconds": 0.7207406249362975,
+      "tool_result_tokens": 25,
+      "tool_seconds": 0.7317532369634137
+    }
+  ],
+  "state_db": "results/progressive-e2e-preflight/real-tools-all-state-1786343662000445541.db",
+  "tool_measurements": [
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "output_bytes": 2772,
+      "prediction_seconds": 0.004066285095177591,
+      "samples_seconds": [
+        0.004066285095177591
+      ],
+      "tool": "git-status"
+    },
+    {
+      "command": [
+        "/home/zhujianian/miniconda3/envs/sglang-bench/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_state_store.py"
+      ],
+      "output_bytes": 98,
+      "prediction_seconds": 0.3973793750628829,
+      "samples_seconds": [
+        0.3973793750628829
+      ],
+      "tool": "state-store-tests"
+    },
+    {
+      "command": [
+        "/home/zhujianian/miniconda3/envs/sglang-bench/bin/python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "output_bytes": 99,
+      "prediction_seconds": 0.7207406249362975,
+      "samples_seconds": [
+        0.7207406249362975
+      ],
+      "tool": "control-plane-tests"
+    }
+  ],
+  "warmups": [
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exposed_migration_seconds": 0.17054298403672874,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.17449034901801497,
+      "migration_seconds": 0.052393552963621914,
+      "next_turn_seconds": 0.19777487905230373,
+      "post_tool_seconds": 0.36831786308903247,
+      "prefix_length": 4096,
+      "repeat": -1,
+      "scenario": "agentshift",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "git-status",
+      "tool_output_bytes": 2810,
+      "tool_prediction_seconds": 0.004066285095177591,
+      "tool_result_tokens": 703,
+      "tool_seconds": 0.003923419979400933
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exposed_migration_seconds": 0.33965252502821386,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.3443467599572614,
+      "migration_seconds": 0.0,
+      "next_turn_seconds": 0.1855478179641068,
+      "post_tool_seconds": 0.5252003429923207,
+      "prefix_length": 4096,
+      "repeat": -1,
+      "scenario": "tokencake-source",
+      "selected_engine": "engine-a",
+      "source_hbm_release_seconds": 0.33167187008075416,
+      "tier_in_seconds": 0.012648525065742433,
+      "tier_out_seconds": 0.32759991695638746,
+      "tier_total_bytes": 1209139200,
+      "tool": "git-status",
+      "tool_output_bytes": 2810,
+      "tool_prediction_seconds": 0.004066285095177591,
+      "tool_result_tokens": 703,
+      "tool_seconds": 0.004661567974835634
+    },
+    {
+      "cached_tokens": 4100,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exposed_migration_seconds": 0.38727318891324103,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.39162036997731775,
+      "migration_seconds": 0.0,
+      "next_turn_seconds": 0.0755471009761095,
+      "post_tool_seconds": 0.46282028988935053,
+      "prefix_length": 4096,
+      "repeat": -1,
+      "scenario": "symphony",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.2941210059216246,
+      "tier_in_seconds": 0.09748087101615965,
+      "tier_out_seconds": 0.29035071399994195,
+      "tier_total_bytes": 1209139200,
+      "tool": "git-status",
+      "tool_output_bytes": 2810,
+      "tool_prediction_seconds": 0.004066285095177591,
+      "tool_result_tokens": 703,
+      "tool_seconds": 0.004319197032600641
+    }
+  ]
+}

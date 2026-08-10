@@ -1,0 +1,66 @@
+{
+  "measured_figure": {
+    "duration_seconds": 63.33123330399394,
+    "engine_layout": "4 TP=2 engines on 8 GPUs",
+    "evidence_type": "measured",
+    "failed_agents": 0,
+    "handoff_histogram_seconds": 2.0,
+    "historical_reprefilled_tokens": 0,
+    "migrated_full_prefix_hit_fraction": 1.0,
+    "migration_hidden_fraction": 0.7821782178217822,
+    "migrations": 101,
+    "model": "Qwen3-8B",
+    "successful_agents": 300,
+    "summary_path": "/home/zhujianian/agentshift/results/autoscaling/runs/qwen8b-tp2-smoke-immediate-pin-1786185554439251023/summary.json",
+    "summary_sha256": "4764351a396d884f2d393bd953dbf078a5b9874a7d5f9fcd9f43b503132677ee",
+    "telemetry_path": "/home/zhujianian/agentshift/results/autoscaling/runs/qwen8b-tp2-smoke-immediate-pin-1786185554439251023/telemetry.jsonl",
+    "telemetry_sha256": "a0dc8ff38424db0dc08556e2fa512acc237a88281d76fbe1cc87620fd0cc2018"
+  },
+  "trace_replay_figure": {
+    "bin_seconds": 30.0,
+    "evidence_type": "trace-driven policy projection; not a GPU measurement",
+    "manifests": {
+      "32B": {
+        "events": 2013,
+        "path": "/home/zhujianian/agentshift/results/autoscaling/manifests/autoscaling-manifest-qwen32b-30m-v1.json",
+        "phase_event_counts": [
+          1200,
+          213,
+          600
+        ],
+        "sha256": "e02a77d0c373803698ffaf610a6c6a4e56fe04b9df642f83e26f13b96347c56e"
+      },
+      "8B": {
+        "events": 8260,
+        "path": "/home/zhujianian/agentshift/results/autoscaling/manifests/autoscaling-manifest-qwen8b-30m-v1.json",
+        "phase_event_counts": [
+          6000,
+          213,
+          2047
+        ],
+        "sha256": "241c94b2b00c7b360890859fb92b4e1d868412eddf007d658c016092df61f6bd"
+      }
+    },
+    "max_warm_engines": {
+      "32B": 2,
+      "8B": 4
+    },
+    "policy": "desired=ceil(arrival_rate/target); one engine change per 30-s bin; scale out immediately; scale in after two consecutive lower-demand bins",
+    "projected_engine_counts": {
+      "32B": {
+        "1": 13,
+        "2": 47
+      },
+      "8B": {
+        "1": 15,
+        "2": 23,
+        "3": 3,
+        "4": 19
+      }
+    },
+    "targets_arrivals_per_second_per_engine": {
+      "32B": 0.75,
+      "8B": 2.5
+    }
+  }
+}

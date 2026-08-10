@@ -5,7 +5,7 @@ import json
 import time
 import urllib.error
 import urllib.request
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 
@@ -18,6 +18,9 @@ class SGLangAgentShiftClient:
     engine_id: str
     base_url: str
     timeout: float = 120.0
+    control_lock: asyncio.Lock = field(
+        default_factory=asyncio.Lock, compare=False, repr=False
+    )
 
     def _post_sync(
         self, path: str, payload: dict[str, Any], require_success: bool
@@ -53,10 +56,25 @@ class SGLangAgentShiftClient:
             self._post_sync, path, payload, require_success
         )
 
+    async def control_post(
+        self,
+        path: str,
+        payload: dict[str, Any],
+        *,
+        require_success: bool = True,
+    ) -> dict[str, Any]:
+        # SGLang's tokenizer control communicator accepts one in-flight
+        # request per engine. Serialize only AgentShift control traffic;
+        # generation and control traffic to other engines remain concurrent.
+        async with self.control_lock:
+            return await self.post(
+                path, payload, require_success=require_success
+            )
+
     async def pin_prefix(
         self, agent_id: str, owner_epoch: int, token_ids: tuple[int, ...]
     ) -> dict[str, Any]:
-        return await self.post(
+        return await self.control_post(
             "/agentshift/prefix/pin",
             {
                 "agent_id": agent_id,
@@ -73,7 +91,7 @@ class SGLangAgentShiftClient:
         group_rank: int,
         group_name: str,
     ) -> dict[str, Any]:
-        return await self.post(
+        return await self.control_post(
             "/agentshift/transfer_group/init",
             {
                 "master_address": master_address,
@@ -96,8 +114,10 @@ class SGLangAgentShiftClient:
         group_name: str,
         ports: tuple[int, ...],
         async_transfer: bool = False,
+        progressive: bool = False,
+        layer_group_size: int = 4,
     ) -> dict[str, Any]:
-        return await self.post(
+        return await self.control_post(
             "/agentshift/prefix/transfer",
             {
                 "role": role,
@@ -108,17 +128,19 @@ class SGLangAgentShiftClient:
                 "group_name": group_name,
                 "ports": ",".join(map(str, ports)),
                 "async_transfer": async_transfer,
+                "progressive": progressive,
+                "layer_group_size": layer_group_size,
             },
         )
 
     async def transfer_status(self, migration_id: str) -> dict[str, Any]:
-        return await self.post(
+        return await self.control_post(
             "/agentshift/prefix/transfer/status",
             {"migration_id": migration_id},
         )
 
     async def cleanup_transfer(self, migration_id: str) -> dict[str, Any]:
-        return await self.post(
+        return await self.control_post(
             "/agentshift/prefix/transfer/cleanup",
             {"migration_id": migration_id},
         )
@@ -134,7 +156,7 @@ class SGLangAgentShiftClient:
         token_ids: tuple[int, ...],
         release_gpu: bool = True,
     ) -> dict[str, Any]:
-        return await self.post(
+        return await self.control_post(
             "/agentshift/prefix/tier/start",
             {
                 "operation": operation,
@@ -148,7 +170,7 @@ class SGLangAgentShiftClient:
         )
 
     async def tier_status(self, operation_id: str) -> dict[str, Any]:
-        return await self.post(
+        return await self.control_post(
             "/agentshift/prefix/tier/status",
             {"operation_id": operation_id},
         )
@@ -156,7 +178,7 @@ class SGLangAgentShiftClient:
     async def cleanup_tier_operation(
         self, operation_id: str, *, drop_checkpoint: bool = False
     ) -> dict[str, Any]:
-        return await self.post(
+        return await self.control_post(
             "/agentshift/prefix/tier/cleanup",
             {
                 "operation_id": operation_id,
@@ -172,7 +194,7 @@ class SGLangAgentShiftClient:
         evict_after_release: bool = True,
         allow_missing: bool = False,
     ) -> dict[str, Any]:
-        return await self.post(
+        return await self.control_post(
             "/agentshift/prefix/release",
             {
                 "agent_id": agent_id,
@@ -185,7 +207,7 @@ class SGLangAgentShiftClient:
     async def rebind_prefix(
         self, agent_id: str, expected_owner_epoch: int, new_owner_epoch: int
     ) -> dict[str, Any]:
-        return await self.post(
+        return await self.control_post(
             "/agentshift/prefix/rebind",
             {
                 "agent_id": agent_id,
@@ -201,12 +223,20 @@ async def generate(
     *,
     max_new_tokens: int,
     rid: str,
+    agentshift_pin_agent_id: str | None = None,
+    agentshift_pin_owner_epoch: int | None = None,
+    agentshift_progressive_migration_id: str | None = None,
 ) -> dict[str, Any]:
     return await client.post(
         "/generate",
         {
             "input_ids": token_ids,
             "rid": rid,
+            "agentshift_pin_agent_id": agentshift_pin_agent_id,
+            "agentshift_pin_owner_epoch": agentshift_pin_owner_epoch,
+            "agentshift_progressive_migration_id": (
+                agentshift_progressive_migration_id
+            ),
             "sampling_params": {
                 "max_new_tokens": max_new_tokens,
                 "temperature": 0,
@@ -223,14 +253,24 @@ def _stream_generate_sync(
     max_new_tokens: int,
     rid: str,
     notify_first_token,
+    ignore_eos: bool,
+    agentshift_pin_agent_id: str | None,
+    agentshift_pin_owner_epoch: int | None,
+    agentshift_progressive_migration_id: str | None,
 ) -> dict[str, Any]:
     payload = {
         "input_ids": token_ids,
         "rid": rid,
+        "agentshift_pin_agent_id": agentshift_pin_agent_id,
+        "agentshift_pin_owner_epoch": agentshift_pin_owner_epoch,
+        "agentshift_progressive_migration_id": (
+            agentshift_progressive_migration_id
+        ),
         "stream": True,
         "sampling_params": {
             "max_new_tokens": max_new_tokens,
             "temperature": 0,
+            "ignore_eos": ignore_eos,
         },
     }
     request = urllib.request.Request(
@@ -284,6 +324,10 @@ async def stream_generate(
     max_new_tokens: int,
     rid: str,
     first_token_event: asyncio.Event | None = None,
+    ignore_eos: bool = False,
+    agentshift_pin_agent_id: str | None = None,
+    agentshift_pin_owner_epoch: int | None = None,
+    agentshift_progressive_migration_id: str | None = None,
 ) -> dict[str, Any]:
     loop = asyncio.get_running_loop()
 
@@ -298,4 +342,10 @@ async def stream_generate(
         max_new_tokens=max_new_tokens,
         rid=rid,
         notify_first_token=notify_first_token,
+        ignore_eos=ignore_eos,
+        agentshift_pin_agent_id=agentshift_pin_agent_id,
+        agentshift_pin_owner_epoch=agentshift_pin_owner_epoch,
+        agentshift_progressive_migration_id=(
+            agentshift_progressive_migration_id
+        ),
     )

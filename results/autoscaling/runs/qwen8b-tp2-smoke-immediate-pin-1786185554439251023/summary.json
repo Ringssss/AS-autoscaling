@@ -1,0 +1,117 @@
+{
+  "duration_seconds": 63.33123330399394,
+  "engine_urls": [
+    "http://127.0.0.1:32000",
+    "http://127.0.0.1:32001",
+    "http://127.0.0.1:32002",
+    "http://127.0.0.1:32003"
+  ],
+  "events": 300,
+  "failed_agents": 0,
+  "first_turn_ttft_seconds": {
+    "count": 300,
+    "mean": 0.16025304500789692,
+    "p50": 0.09699690894922242,
+    "p95": 0.6689651610213332,
+    "p99": 0.9038394649978727
+  },
+  "historical_reprefilled_tokens": 0,
+  "manifest": "/home/zhujianian/agentshift/results/autoscaling/manifests/autoscaling-manifest-qwen8b-smoke-v2.json",
+  "migrated_full_prefix_hit_fraction": 1.0,
+  "migration_bytes": 31756861440,
+  "migration_hidden_fraction": 0.7821782178217822,
+  "migration_transfer_seconds": {
+    "count": 101,
+    "mean": 0.11022901983463694,
+    "p50": 0.07027740398189053,
+    "p95": 0.22289702499983832,
+    "p99": 0.4410181199782528
+  },
+  "migrations": 101,
+  "policy": "agentshift",
+  "post_tool_ttft_seconds": {
+    "count": 300,
+    "mean": 0.14272554983074467,
+    "p50": 0.08961242996156216,
+    "p95": 0.6751876329653896,
+    "p99": 0.9100067479885183
+  },
+  "run_dir": "results/autoscaling/runs/qwen8b-tp2-smoke-immediate-pin-1786185554439251023",
+  "run_name": "qwen8b-tp2-smoke-immediate-pin",
+  "scaling_events": [
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 0.6437419839785434,
+      "engine_id": "engine-1",
+      "reason": "waiting=0, requests_per_engine=2.00"
+    },
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 5.718597893952392,
+      "engine_id": "engine-2",
+      "reason": "waiting=0, requests_per_engine=9.00"
+    },
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 10.819534323003609,
+      "engine_id": "engine-3",
+      "reason": "waiting=0, requests_per_engine=6.67"
+    },
+    {
+      "action": "SCALE_IN_START",
+      "elapsed_seconds": 26.563554032996763,
+      "engine_id": "engine-3",
+      "reason": "requests_per_engine=0.00"
+    },
+    {
+      "action": "SCALE_IN_COMPLETE",
+      "elapsed_seconds": 27.06882351997774,
+      "engine_id": "engine-3",
+      "reason": "drain empty"
+    },
+    {
+      "action": "SCALE_IN_START",
+      "elapsed_seconds": 31.613700234971475,
+      "engine_id": "engine-2",
+      "reason": "requests_per_engine=0.00"
+    },
+    {
+      "action": "SCALE_IN_COMPLETE",
+      "elapsed_seconds": 32.119018740952015,
+      "engine_id": "engine-2",
+      "reason": "drain empty"
+    },
+    {
+      "action": "SCALE_IN_START",
+      "elapsed_seconds": 36.67077031295048,
+      "engine_id": "engine-1",
+      "reason": "requests_per_engine=0.00"
+    },
+    {
+      "action": "SCALE_IN_COMPLETE",
+      "elapsed_seconds": 37.177327280980535,
+      "engine_id": "engine-1",
+      "reason": "drain empty"
+    },
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 41.746588861977216,
+      "engine_id": "engine-1",
+      "reason": "waiting=0, requests_per_engine=4.00"
+    },
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 46.9800558029674,
+      "engine_id": "engine-2",
+      "reason": "waiting=0, requests_per_engine=4.50"
+    },
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 52.30239063495537,
+      "engine_id": "engine-3",
+      "reason": "waiting=0, requests_per_engine=2.00"
+    }
+  ],
+  "successful_agents": 300,
+  "tp_size": 2
+}

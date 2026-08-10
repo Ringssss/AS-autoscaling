@@ -1,0 +1,185 @@
+{
+  "configuration": {
+    "blocked_interval_ms": 500,
+    "model": "Qwen3-32B",
+    "prefix_tokens": [
+      4096,
+      16384,
+      32768
+    ],
+    "queue_background_output_tokens": 128,
+    "queue_busy_active_decodes": 16,
+    "queue_prefix_tokens": 4096,
+    "queue_returning_agents": 1,
+    "queue_source_running_slots": 16,
+    "tensor_parallelism": 4
+  },
+  "definitions": {
+    "error_bars": "minimum and maximum across three independent repeats",
+    "next_turn_latency": "time from result availability to the next turn's first output token",
+    "queue_latency": "streaming-client TTFT for warm agents that stay on the source",
+    "reroute_by_turn": "linear interpolation of measured Qwen3-32B reroute TTFT at the trace p90 prefix for each turn",
+    "trace_prefix": "number of anonymized hash blocks times 16 tokens"
+  },
+  "inputs": {
+    "flowprefill": "/home/zhujianian/eurosys/paper1/external/FlowPrefill/trace_build/qwen-bailian-usagetraces-anon/qwen_traceA_blksz_16.jsonl",
+    "latency": "/home/zhujianian/agentshift/results/motivation-qwen32b/blocked-window-1785913618306267535.json",
+    "queue": "/home/zhujianian/agentshift/results/motivation-qwen32b/sticky-queue-qwen32b-1785913931842415038.json"
+  },
+  "latency": {
+    "reroute": {
+      "4096": {
+        "max_ms": 252.02647401602007,
+        "mean_ms": 248.16270601392412,
+        "min_ms": 242.636303009931,
+        "samples_ms": [
+          252.02647401602007,
+          242.636303009931,
+          249.82534101582132
+        ]
+      },
+      "16384": {
+        "max_ms": 745.4114000138361,
+        "mean_ms": 742.4680613330565,
+        "min_ms": 737.2538149938919,
+        "samples_ms": [
+          737.2538149938919,
+          744.7389689914417,
+          745.4114000138361
+        ]
+      },
+      "32768": {
+        "max_ms": 1644.8491199989803,
+        "mean_ms": 1636.7021066738137,
+        "min_ms": 1626.0469460103195,
+        "samples_ms": [
+          1644.8491199989803,
+          1626.0469460103195,
+          1639.2102540121414
+        ]
+      }
+    },
+    "sticky": {
+      "4096": {
+        "max_ms": 112.09661499015056,
+        "mean_ms": 110.65096199551287,
+        "min_ms": 109.86084601609036,
+        "samples_ms": [
+          109.86084601609036,
+          112.09661499015056,
+          109.99542498029768
+        ]
+      },
+      "16384": {
+        "max_ms": 118.3911660045851,
+        "mean_ms": 117.13694066080886,
+        "min_ms": 116.16287200013176,
+        "samples_ms": [
+          116.85678397770971,
+          116.16287200013176,
+          118.3911660045851
+        ]
+      },
+      "32768": {
+        "max_ms": 127.7216759917792,
+        "mean_ms": 124.25706899375655,
+        "min_ms": 120.65876898122951,
+        "samples_ms": [
+          120.65876898122951,
+          124.39076200826094,
+          127.7216759917792
+        ]
+      }
+    }
+  },
+  "queue": {
+    "busy": {
+      "burst_makespan_mean_ms": 6907.706798595609,
+      "cached_tokens_mean": 4100.0,
+      "cached_tokens_min": 4100,
+      "samples": 5,
+      "ttft_mean_ms": 6906.932999199489,
+      "ttft_p50_ms": 6919.617093983106,
+      "ttft_p95_ms": 6942.08608220797,
+      "ttft_p99_ms": 6943.495670850388
+    },
+    "idle": {
+      "burst_makespan_mean_ms": 110.29193100403063,
+      "cached_tokens_mean": 4100.0,
+      "cached_tokens_min": 4100,
+      "samples": 5,
+      "ttft_mean_ms": 109.60449239937589,
+      "ttft_p50_ms": 109.41761001595296,
+      "ttft_p95_ms": 113.66699138889089,
+      "ttft_p99_ms": 114.5050590694882
+    }
+  },
+  "trace": {
+    "metadata": {
+      "block_tokens": 16,
+      "requests": 43058
+    },
+    "prefix_by_turn": [
+      {
+        "count": 23101,
+        "p50_tokens": 752,
+        "p90_tokens": 5472,
+        "turn": 1
+      },
+      {
+        "count": 9012,
+        "p50_tokens": 1136,
+        "p90_tokens": 6144,
+        "turn": 2
+      },
+      {
+        "count": 4538,
+        "p50_tokens": 1632,
+        "p90_tokens": 6576,
+        "turn": 3
+      },
+      {
+        "count": 2474,
+        "p50_tokens": 2224,
+        "p90_tokens": 6976,
+        "turn": 4
+      },
+      {
+        "count": 1401,
+        "p50_tokens": 2848,
+        "p90_tokens": 7696,
+        "turn": 5
+      },
+      {
+        "count": 840,
+        "p50_tokens": 3280,
+        "p90_tokens": 8480,
+        "turn": 6
+      },
+      {
+        "count": 510,
+        "p50_tokens": 3696,
+        "p90_tokens": 9104,
+        "turn": 7
+      },
+      {
+        "count": 328,
+        "p50_tokens": 4112,
+        "p90_tokens": 9568,
+        "turn": 8
+      },
+      {
+        "count": 221,
+        "p50_tokens": 4432,
+        "p90_tokens": 10176,
+        "turn": 9
+      },
+      {
+        "count": 153,
+        "p50_tokens": 4720,
+        "p90_tokens": 11840,
+        "turn": 10
+      }
+    ]
+  }
+}

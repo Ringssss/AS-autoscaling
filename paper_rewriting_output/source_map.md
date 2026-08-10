@@ -25,13 +25,14 @@ support background, related-work boundaries, and writing structure.
 | S18 | `results/coding-agent-replay-1784829317183895026.json` | Eight-agent, three-turn controlled coding replay |
 | S19 | `results/migration-policy-1784829520064490654.json` | Heterogeneous-prefix migration-policy matrix |
 | S20 | `paper_rewriting_output/figures/fig_replay_policy.pdf` | Arial replay and scheduling figure generated from S18--S19 |
+| S21 | `results/long-context-128k/RESULTS.md` and raw JSON files in that directory | 130,004-token Qwen3-8B TP=1 and Qwen3-32B TP=4 relocation results |
 
 ## External Sources
 
 | Source ID | Paper | Role |
 |---|---|---|
-| R1 | FastServe, NSDI 2026 | Exemplar: measured bottleneck to scheduling mechanism |
-| R2 | Agentix, NSDI 2026 | Closest program-aware routing and agent-workload framing |
+| R1 | FastServe, arXiv:2305.05920 | Exemplar: measured bottleneck to scheduling mechanism |
+| R2 | Autellix/Agentix, arXiv 2025 / NSDI 2026 | Orthogonal program scheduling work and agent-workload framing; not an experimental baseline |
 | R3 | Symphony, NSDI 2026 | Closest disaggregated KV prefetch design |
 | R4 | BlitzScale, OSDI 2025 | Stateful elasticity composition and live provisioning exemplar |
 | R5 | Llumnix, OSDI 2024 | Active-request migration boundary |

@@ -42,6 +42,13 @@ async def run_tool(command: list[str], cwd: str):
 class RealToolAllBaselineBenchmark:
     def __init__(self, args):
         self.args = args
+        available_tools = tool_specs(args.python)
+        selected_tools = set(args.tools or ())
+        self.tools = [
+            spec
+            for spec in available_tools
+            if not selected_tools or spec[0] in selected_tools
+        ]
         self.source = SGLangAgentShiftClient("engine-a", args.source, timeout=300)
         self.destination = SGLangAgentShiftClient(
             "engine-b", args.destination, timeout=300
@@ -81,7 +88,7 @@ class RealToolAllBaselineBenchmark:
 
     async def measure_tools(self) -> list[dict[str, Any]]:
         measurements = []
-        for tool_name, command in tool_specs(self.args.python):
+        for tool_name, command in self.tools:
             samples = []
             output_bytes = 0
             for _ in range(self.args.tool_calibration_repeats):
@@ -170,7 +177,13 @@ class RealToolAllBaselineBenchmark:
             rid=f"{agent_id}-turn-1",
         )
         completed = tuple(prompt + first["output_ids"])
-        if scenario in ("on-return", "agentshift", "oracle"):
+        if scenario in (
+            "on-return",
+            "agentshift",
+            "progressive",
+            "adaptive-progressive",
+            "oracle",
+        ):
             self.store.register_agent(
                 AgentContinuation(
                     agent_id,
@@ -200,6 +213,8 @@ class RealToolAllBaselineBenchmark:
         checkpoint_id = None
         handoff_started = None
         source_hbm_release_seconds = 0.0
+        progressive_generation = None
+        execution_mode = scenario
         next_engine = self.destination
         selected_engine = "engine-b"
 
@@ -241,13 +256,49 @@ class RealToolAllBaselineBenchmark:
             handoff_started = time.perf_counter()
             migration = await self.coordinator.migrate(agent_id, "engine-b")
             destination_ready = time.perf_counter()
-        elif scenario == "agentshift":
+        elif scenario in ("agentshift", "progressive", "adaptive-progressive"):
+            use_progressive = scenario == "progressive"
+            if scenario == "adaptive-progressive":
+                expected_transfer = self.copy_estimates.get(prefix_length)
+                use_progressive = expected_transfer is not None and (
+                    self.tool_predictions[tool_name] < expected_transfer
+                )
+                execution_mode = "progressive" if use_progressive else "agentshift"
+
             handoff_started = time.perf_counter()
-            migration_task = asyncio.create_task(
-                self.coordinator.migrate(agent_id, "engine-b")
-            )
-            tool_seconds, tool_completed, stdout, stderr = await tool_task
-            migration = await migration_task
+            if use_progressive:
+
+                async def continuation_tokens_when_tool_finishes():
+                    _, _, ready_stdout, ready_stderr = await tool_task
+                    ready_result_tokens = max(
+                        16,
+                        min(
+                            self.args.max_tool_result_tokens,
+                            (len(ready_stdout) + len(ready_stderr) + 3) // 4,
+                        ),
+                    )
+                    return tuple(list(completed) + [200] * ready_result_tokens)
+
+                migration_task = asyncio.create_task(
+                    self.coordinator.migrate_and_generate_progressive(
+                        agent_id,
+                        "engine-b",
+                        token_ids=continuation_tokens_when_tool_finishes(),
+                        max_new_tokens=1,
+                        rid=f"{agent_id}-turn-2-progressive",
+                        layer_group_size=self.args.progressive_layer_group_size,
+                    )
+                )
+                tool_seconds, tool_completed, stdout, stderr = await tool_task
+                progressive_result = await migration_task
+                migration = progressive_result.migration
+                progressive_generation = progressive_result.generation
+            else:
+                migration_task = asyncio.create_task(
+                    self.coordinator.migrate(agent_id, "engine-b")
+                )
+                tool_seconds, tool_completed, stdout, stderr = await tool_task
+                migration = await migration_task
             destination_ready = time.perf_counter()
         elif scenario == "oracle":
             estimate = self.copy_estimates.get(prefix_length, 0.0)
@@ -324,7 +375,7 @@ class RealToolAllBaselineBenchmark:
         else:
             raise ValueError(f"unknown scenario: {scenario}")
 
-        if migration is not None:
+        if migration is not None and progressive_generation is None:
             previous = self.copy_estimates.get(prefix_length)
             observed = migration.transfer_seconds
             self.copy_estimates[prefix_length] = (
@@ -338,17 +389,23 @@ class RealToolAllBaselineBenchmark:
                 (len(stdout) + len(stderr) + 3) // 4,
             ),
         )
-        next_seconds, second = await timed_generate(
-            next_engine,
-            list(completed) + [200] * result_tokens,
-            max_new_tokens=1,
-            rid=f"{agent_id}-turn-2",
-        )
+        if progressive_generation is None:
+            next_seconds, second = await timed_generate(
+                next_engine,
+                list(completed) + [200] * result_tokens,
+                max_new_tokens=1,
+                rid=f"{agent_id}-turn-2",
+            )
+        else:
+            next_seconds = exposed
+            exposed = 0.0
+            second = progressive_generation
         handoff_seconds = (
             destination_ready - handoff_started if handoff_started else 0.0
         )
         record = {
             "scenario": scenario,
+            "execution_mode": execution_mode,
             "tool": tool_name,
             "command": command,
             "prefix_length": prefix_length,
@@ -402,7 +459,7 @@ async def main(args) -> None:
     for prefix_length in args.prefix_lengths:
         calibration = await benchmark.calibrate_prefix(prefix_length)
         print(json.dumps({"calibration": calibration}, sort_keys=True), flush=True)
-        warmup_tool, warmup_command = tool_specs(args.python)[0]
+        warmup_tool, warmup_command = benchmark.tools[0]
         for scenario in ("agentshift", "tokencake-source", "symphony"):
             warmup = await benchmark.run_one(
                 scenario,
@@ -413,7 +470,7 @@ async def main(args) -> None:
             )
             warmups.append(warmup)
         for repeat in range(args.repeats):
-            for tool_name, command in tool_specs(args.python):
+            for tool_name, command in benchmark.tools:
                 scenario_order = list(args.scenarios)
                 random.Random(
                     args.seed + prefix_length * 1009 + repeat * 17 + len(tool_name)
@@ -460,7 +517,14 @@ if __name__ == "__main__":
             "on-return",
             "agentshift",
             "oracle",
+            "progressive",
         ],
+    )
+    parser.add_argument(
+        "--tools",
+        nargs="+",
+        choices=("git-status", "state-store-tests", "control-plane-tests"),
+        help="Run only the selected tool workloads (default: all).",
     )
     parser.add_argument(
         "--prefix-lengths", type=int, nargs="+", default=[4096, 16384, 32768]
@@ -475,6 +539,7 @@ if __name__ == "__main__":
     parser.add_argument("--agentix-source-queue-ms", type=float, default=0.0)
     parser.add_argument("--agentix-destination-queue-ms", type=float, default=0.0)
     parser.add_argument("--poll-interval", type=float, default=0.005)
+    parser.add_argument("--progressive-layer-group-size", type=int, default=4)
     parser.add_argument("--transfer-port", type=int, default=30100)
     parser.add_argument("--tp-size", type=int, default=1)
     parser.add_argument("--seed", type=int, default=20260720)

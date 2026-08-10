@@ -1,0 +1,63 @@
+{
+  "duration_seconds": 63.64873106603045,
+  "engine_urls": [
+    "http://127.0.0.1:32000",
+    "http://127.0.0.1:32001",
+    "http://127.0.0.1:32002",
+    "http://127.0.0.1:32003"
+  ],
+  "events": 320,
+  "failed_agents": 0,
+  "first_turn_ttft_seconds": {
+    "count": 320,
+    "mean": 0.7860531090387667,
+    "p50": 0.10335042199585587,
+    "p95": 6.7937793920282274,
+    "p99": 8.12912855896866
+  },
+  "historical_reprefilled_tokens": 4642,
+  "manifest": "/home/zhujianian/agentshift/results/autoscaling/manifests/autoscaling-manifest-qwen8b-smoke-v1.json",
+  "migrated_full_prefix_hit_fraction": 0.9534883720930233,
+  "migration_bytes": 30575149056,
+  "migration_hidden_fraction": 0.8255813953488372,
+  "migration_transfer_seconds": {
+    "count": 86,
+    "mean": 0.12258431442531345,
+    "p50": 0.06779244600329548,
+    "p95": 0.10558827000204474,
+    "p99": 0.20076136494753882
+  },
+  "migrations": 86,
+  "policy": "agentshift",
+  "post_tool_ttft_seconds": {
+    "count": 320,
+    "mean": 0.10417016719584353,
+    "p50": 0.09349056001519784,
+    "p95": 0.13235060300212353,
+    "p99": 0.49064536998048425
+  },
+  "run_dir": "results/autoscaling/runs/qwen8b-tp2-smoke-1786184172321781729",
+  "run_name": "qwen8b-tp2-smoke",
+  "scaling_events": [
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 8.675893487990834,
+      "engine_id": "engine-1",
+      "reason": "waiting=0, requests_per_engine=2.00"
+    },
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 15.504671499016695,
+      "engine_id": "engine-2",
+      "reason": "waiting=6, requests_per_engine=15.50"
+    },
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 20.54509531200165,
+      "engine_id": "engine-3",
+      "reason": "waiting=0, requests_per_engine=10.00"
+    }
+  ],
+  "successful_agents": 320,
+  "tp_size": 2
+}

@@ -3,7 +3,7 @@
 | Design point | State action | Can change next-turn engine? | Preserves full prefix? | Transfers durable owner? | Remaining gap |
 |---|---|---:|---:|---:|---|
 | Sticky | Retain on source | No | Yes | No | Source hotspot remains |
-| Agentix-style routing | Choose source or destination | Sometimes | Only on source | No | Locality--balance tradeoff remains |
+| Program-aware call scheduling (Related Work only) | Prioritize and place arrived calls | Not a mobility action | Not evaluated here | No cross-turn handoff | Orthogonal objective; no performance baseline |
 | Continuum-style TTL | Retain, then evict | No | Until expiry | No | No relocation action |
 | TokenCake-style | Offload and reload | Usually no | Yes after reload | No | Memory mobility is not execution mobility |
 | Symphony-style | Prefetch from shared tier | Yes | Yes | No | Availability does not fence stale execution |

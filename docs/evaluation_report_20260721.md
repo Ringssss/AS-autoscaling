@@ -257,10 +257,20 @@ After the shadow is released, correctness still holds but cold recovery takes
 523.2 ms. The shadow therefore improves this recovery point by 10.89x. The
 pre-commit restart case first copies all 16,388 tokens, injects failure at
 `DEST_READY`, and then verifies that the source remains owner with a full hit.
-Without owner fencing, the ablation has two accepting executors; AgentShift
-permits one.
+The original no-fencing case models two accepting executors. A later real-engine
+microbenchmark replaces that modeled result with actual Qwen3-32B TP=4
+execution. Under injected duplicate delivery, router-only prefetch sends one
+`/generate` request to each engine; both hit the full 16,388-token prefix and
+generate 128 tokens. One copy is discarded, wasting 50% of decode tokens and
+25.95 GPU-seconds per logical step. With epoch and step fencing, all five stale
+source attempts are rejected before `/generate`, while the destination executes
+once. Mean stale rejection is 62.8 us.
 
-Artifact: `results/fault-matrix-1784829560507240459.json`.
+Artifacts:
+
+- `results/fault-matrix-1784829560507240459.json`;
+- `results/fencing-microbench/qwen32b-tp4-16k-128t/fencing-microbench-1786008706120873629.json`;
+- `results/fencing-microbench/qwen32b-tp4-control-overhead/fencing-microbench-1786008850759397964.json`.
 
 ## Model and TP Generality
 
@@ -296,7 +306,7 @@ Artifacts:
 | Gap overlap is a distinct contribution | 52.4 ms vs same-transport on-return 126.1 ms | Supported |
 | AgentShift relieves correlated-return hotspots | 50% owner relocation; 730.9 ms vs reroute 5579.8 ms | Supported |
 | Async copy has bounded foreground impact | 5-run arrival/TPOT/throughput experiment | Supported for one migration |
-| Durable owner transfer prevents double advancement | 8-case fault matrix and no-fencing ablation | Supported within evaluated fault model |
+| Durable owner transfer prevents double advancement | 8-case fault matrix and real Qwen3-32B duplicate-delivery ablation | Supported within evaluated fault model |
 | Source shadow improves recovery, not correctness | 48.1 ms warm vs 523.2 ms cold recovery | Supported |
 | AgentShift outperforms official Symphony/TokenCake/Continuum | No official artifact comparison | Not supported |
 | Multi-turn coding replay preserves mobility benefits | 8 agents, 3 tool turns, 16K--32K prefixes | Supported for controlled subprocess tools |

@@ -1,0 +1,63 @@
+{
+  "duration_seconds": 131.39866109198192,
+  "engine_urls": [
+    "http://127.0.0.1:32000",
+    "http://127.0.0.1:32001",
+    "http://127.0.0.1:32002",
+    "http://127.0.0.1:32003"
+  ],
+  "events": 640,
+  "failed_agents": 0,
+  "first_turn_ttft_seconds": {
+    "count": 640,
+    "mean": 0.1248146039918538,
+    "p50": 0.096694034000393,
+    "p95": 0.2726896179956384,
+    "p99": 0.6537874149507843
+  },
+  "historical_reprefilled_tokens": 0,
+  "manifest": "/home/zhujianian/agentshift/results/autoscaling/manifests/autoscaling-manifest-qwen8b-control-concurrency-stress-v1.json",
+  "migrated_full_prefix_hit_fraction": 1.0,
+  "migration_bytes": 136111030272,
+  "migration_hidden_fraction": 0.5502008032128514,
+  "migration_transfer_seconds": {
+    "count": 249,
+    "mean": 0.20989493829460934,
+    "p50": 0.09578075900208205,
+    "p95": 0.8041058670496568,
+    "p99": 1.8713735060300678
+  },
+  "migrations": 249,
+  "policy": "agentshift",
+  "post_tool_ttft_seconds": {
+    "count": 640,
+    "mean": 0.1025144549066681,
+    "p50": 0.09191118198214099,
+    "p95": 0.11829529103124514,
+    "p99": 0.5307382459868677
+  },
+  "run_dir": "results/autoscaling/runs/qwen8b-tp2-control-concurrency-stress-1786186393197050833",
+  "run_name": "qwen8b-tp2-control-concurrency-stress",
+  "scaling_events": [
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 0.5248610980343074,
+      "engine_id": "engine-1",
+      "reason": "waiting=0, requests_per_engine=2.00"
+    },
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 6.173031469981652,
+      "engine_id": "engine-2",
+      "reason": "waiting=0, requests_per_engine=15.50"
+    },
+    {
+      "action": "SCALE_OUT",
+      "elapsed_seconds": 11.250996474991553,
+      "engine_id": "engine-3",
+      "reason": "waiting=2, requests_per_engine=10.00"
+    }
+  ],
+  "successful_agents": 640,
+  "tp_size": 2
+}

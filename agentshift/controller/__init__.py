@@ -4,9 +4,16 @@ from agentshift.controller.baselines import (
     agentix_style_route,
     calibrate_ttl,
 )
+from agentshift.controller.autoscaling import (
+    EngineLifecycle,
+    EngineObservation,
+    ScalingAction,
+    WarmPoolAutoscaler,
+)
 from agentshift.controller.migration import (
     MigrationCoordinator,
     MigrationResult,
+    ProgressiveMigrationResult,
     RecoveryResult,
 )
 from agentshift.controller.placement import (
@@ -24,11 +31,16 @@ from agentshift.controller.tiered import (
 )
 
 __all__ = [
+    "EngineLifecycle",
+    "EngineObservation",
+    "ScalingAction",
+    "WarmPoolAutoscaler",
     "AgentixRoutingDecision",
     "CostBenefitPlacementPolicy",
     "EngineLoad",
     "MigrationCoordinator",
     "MigrationResult",
+    "ProgressiveMigrationResult",
     "RecoveryResult",
     "MobilityCandidate",
     "MobilityScore",

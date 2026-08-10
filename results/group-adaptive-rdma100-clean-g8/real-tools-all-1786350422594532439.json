@@ -1,0 +1,319 @@
+{
+  "baseline_implementation": "mechanism-equivalent",
+  "calibrations": {
+    "32768": {
+      "completed_tokens": 32772,
+      "kv_bytes": 4832428032,
+      "prefix_length": 32768,
+      "recompute_seconds": 0.7136114240856841,
+      "reroute_seconds": 0.7890255460515618,
+      "sticky_seconds": 0.07541412196587771,
+      "ttl_expected_cost_seconds": 0.002739987312438963,
+      "ttl_seconds": 0.0024352470063604414
+    }
+  },
+  "config": {
+    "agentix_destination_queue_ms": 0.0,
+    "agentix_source_queue_ms": 0.0,
+    "calibration_repeats": 1,
+    "destination": "http://127.0.0.1:31001",
+    "first_output_tokens": 4,
+    "kv_bytes_per_token": 147456,
+    "max_tool_result_tokens": 1024,
+    "output_dir": "results/group-adaptive-rdma100-clean-g8",
+    "poll_interval": 0.005,
+    "prefix_lengths": [
+      32768
+    ],
+    "progressive_layer_group_size": 8,
+    "python": "/home/zhujianian/miniconda3/envs/sglang-bench/bin/python",
+    "repeats": 3,
+    "scenarios": [
+      "agentshift",
+      "progressive"
+    ],
+    "seed": 20260720,
+    "source": "http://127.0.0.1:31000",
+    "tool_calibration_repeats": 2,
+    "tool_cwd": "/tmp/agentshift-group-tool-20260810",
+    "tools": [
+      "git-status"
+    ],
+    "tp_size": 2,
+    "transfer_port": 31260,
+    "ttl_hbm_cost_per_gib_second": 0.25
+  },
+  "records": [
+    {
+      "cached_tokens": 32772,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "execution_mode": "progressive",
+      "exposed_migration_seconds": 0.0,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.2808233959367499,
+      "migration_seconds": 0.25109886191785336,
+      "next_turn_seconds": 0.26796602993272245,
+      "post_tool_seconds": 0.26796602993272245,
+      "prefix_length": 32768,
+      "repeat": 0,
+      "scenario": "progressive",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "git-status",
+      "tool_output_bytes": 0,
+      "tool_prediction_seconds": 0.0024352470063604414,
+      "tool_result_tokens": 16,
+      "tool_seconds": 0.012826592079363763
+    },
+    {
+      "cached_tokens": 32772,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "execution_mode": "agentshift",
+      "exposed_migration_seconds": 0.23602454306092113,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.2478983859764412,
+      "migration_seconds": 0.22096606600098312,
+      "next_turn_seconds": 0.07991350290831178,
+      "post_tool_seconds": 0.3159380459692329,
+      "prefix_length": 32768,
+      "repeat": 0,
+      "scenario": "agentshift",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "git-status",
+      "tool_output_bytes": 0,
+      "tool_prediction_seconds": 0.0024352470063604414,
+      "tool_result_tokens": 16,
+      "tool_seconds": 0.011847426998429
+    },
+    {
+      "cached_tokens": 32772,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "execution_mode": "progressive",
+      "exposed_migration_seconds": 0.0,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.2794707140419632,
+      "migration_seconds": 0.25083169795107096,
+      "next_turn_seconds": 0.267439694958739,
+      "post_tool_seconds": 0.267439694958739,
+      "prefix_length": 32768,
+      "repeat": 1,
+      "scenario": "progressive",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "git-status",
+      "tool_output_bytes": 0,
+      "tool_prediction_seconds": 0.0024352470063604414,
+      "tool_result_tokens": 16,
+      "tool_seconds": 0.011996966088190675
+    },
+    {
+      "cached_tokens": 32772,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "execution_mode": "agentshift",
+      "exposed_migration_seconds": 0.2379676760174334,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.24977340397890657,
+      "migration_seconds": 0.2224966490175575,
+      "next_turn_seconds": 0.07744646805804223,
+      "post_tool_seconds": 0.31541414407547563,
+      "prefix_length": 32768,
+      "repeat": 1,
+      "scenario": "agentshift",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "git-status",
+      "tool_output_bytes": 0,
+      "tool_prediction_seconds": 0.0024352470063604414,
+      "tool_result_tokens": 16,
+      "tool_seconds": 0.0117839869344607
+    },
+    {
+      "cached_tokens": 32772,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "execution_mode": "agentshift",
+      "exposed_migration_seconds": 0.2362462090095505,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.24793875694740564,
+      "migration_seconds": 0.22115221293643117,
+      "next_turn_seconds": 0.0749892140738666,
+      "post_tool_seconds": 0.3112354230834171,
+      "prefix_length": 32768,
+      "repeat": 2,
+      "scenario": "agentshift",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "git-status",
+      "tool_output_bytes": 0,
+      "tool_prediction_seconds": 0.0024352470063604414,
+      "tool_result_tokens": 16,
+      "tool_seconds": 0.011663620010949671
+    },
+    {
+      "cached_tokens": 32772,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "execution_mode": "progressive",
+      "exposed_migration_seconds": 0.0,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.2856069339904934,
+      "migration_seconds": 0.25586547306738794,
+      "next_turn_seconds": 0.2736545749939978,
+      "post_tool_seconds": 0.2736545749939978,
+      "prefix_length": 32768,
+      "repeat": 2,
+      "scenario": "progressive",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "git-status",
+      "tool_output_bytes": 0,
+      "tool_prediction_seconds": 0.0024352470063604414,
+      "tool_result_tokens": 16,
+      "tool_seconds": 0.011924147955141962
+    }
+  ],
+  "state_db": "results/group-adaptive-rdma100-clean-g8/real-tools-all-state-1786350407786212275.db",
+  "tool_measurements": [
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "output_bytes": 0,
+      "prediction_seconds": 0.0024352470063604414,
+      "samples_seconds": [
+        0.0025385969784110785,
+        0.0023318970343098044
+      ],
+      "tool": "git-status"
+    }
+  ],
+  "warmups": [
+    {
+      "cached_tokens": 32772,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "execution_mode": "agentshift",
+      "exposed_migration_seconds": 0.4247494910378009,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.4376934110186994,
+      "migration_seconds": 0.25481552409473807,
+      "next_turn_seconds": 0.08713677898049355,
+      "post_tool_seconds": 0.5118862700182945,
+      "prefix_length": 32768,
+      "repeat": -1,
+      "scenario": "agentshift",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 0.0,
+      "tier_in_seconds": 0.0,
+      "tier_out_seconds": 0.0,
+      "tier_total_bytes": 0,
+      "tool": "git-status",
+      "tool_output_bytes": 0,
+      "tool_prediction_seconds": 0.0024352470063604414,
+      "tool_result_tokens": 16,
+      "tool_seconds": 0.012911617988720536
+    },
+    {
+      "cached_tokens": 32772,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "execution_mode": "tokencake-source",
+      "exposed_migration_seconds": 0.1370783729944378,
+      "full_prefix_hit": true,
+      "handoff_seconds": 0.14276129205245525,
+      "migration_seconds": 0.0,
+      "next_turn_seconds": 0.07560037600342184,
+      "post_tool_seconds": 0.21267874899785966,
+      "prefix_length": 32768,
+      "repeat": -1,
+      "scenario": "tokencake-source",
+      "selected_engine": "engine-a",
+      "source_hbm_release_seconds": 0.0775791120249778,
+      "tier_in_seconds": 0.06515519204549491,
+      "tier_out_seconds": 0.06436562596354634,
+      "tier_total_bytes": 9664856064,
+      "tool": "git-status",
+      "tool_output_bytes": 0,
+      "tool_prediction_seconds": 0.0024352470063604414,
+      "tool_result_tokens": 16,
+      "tool_seconds": 0.0056236060336232185
+    },
+    {
+      "cached_tokens": 32772,
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "execution_mode": "symphony",
+      "exposed_migration_seconds": 2.8258963759290054,
+      "full_prefix_hit": true,
+      "handoff_seconds": 2.8315199699718505,
+      "migration_seconds": 0.0,
+      "next_turn_seconds": 0.08609835896641016,
+      "post_tool_seconds": 2.9119947348954156,
+      "prefix_length": 32768,
+      "repeat": -1,
+      "scenario": "symphony",
+      "selected_engine": "engine-b",
+      "source_hbm_release_seconds": 2.1084619149332866,
+      "tier_in_seconds": 0.7230462939478457,
+      "tier_out_seconds": 2.0952514100354165,
+      "tier_total_bytes": 9664856064,
+      "tool": "git-status",
+      "tool_output_bytes": 0,
+      "tool_prediction_seconds": 0.0024352470063604414,
+      "tool_result_tokens": 16,
+      "tool_seconds": 0.0055556719889864326
+    }
+  ]
+}

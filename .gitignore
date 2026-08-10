@@ -5,6 +5,10 @@ __pycache__/
 .coverage
 results/*.db
 results/*.log
+results/**/*.db
+results/**/*.db-*
+results/**/*.log
+results/fencing-microbench/smoke/
 results/e2e-*.json
 !results/e2e-1784487320239905011.json
 !results/e2e-1784537113268610412.json
