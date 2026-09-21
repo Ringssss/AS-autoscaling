@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Callable, TypeVar
 
+from agentshift.state.descriptor import StateDescriptor
+
 
 T = TypeVar("T")
 
@@ -46,6 +48,7 @@ class EngineLoad:
     free_kv_tokens: int
     active_requests: int = 0
     kv_pressure: float = 0.0
+    free_state_snapshots: int = 0
 
 
 @dataclass(frozen=True, slots=True)
@@ -58,6 +61,8 @@ class MobilityCandidate:
     recompute_seconds: float
     future_service_seconds: float
     unknown_effect: bool = False
+    state_bytes: int | None = None
+    state_descriptor: StateDescriptor | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -89,7 +94,9 @@ class PlacementPolicy:
         ]
         if not candidates:
             return None
-        return min(candidates, key=lambda x: (x.queue_depth, x.active_requests)).engine_id
+        return min(
+            candidates, key=lambda x: (x.queue_depth, x.active_requests)
+        ).engine_id
 
     def should_move(
         self,
@@ -133,8 +140,13 @@ class CostBenefitPlacementPolicy:
         self.max_concurrent_migrations = max_concurrent_migrations
 
     def estimate_copy_seconds(self, candidate: MobilityCandidate) -> float:
+        payload_bytes = (
+            candidate.state_bytes
+            if candidate.state_bytes is not None
+            else candidate.kv_bytes
+        )
         return self.fixed_copy_seconds + (
-            candidate.kv_bytes / self.bandwidth_bytes_per_second
+            payload_bytes / self.bandwidth_bytes_per_second
         )
 
     def score(
@@ -145,7 +157,19 @@ class CostBenefitPlacementPolicy:
     ) -> MobilityScore | None:
         if candidate.unknown_effect or destination.engine_id == candidate.source_engine:
             return None
-        if destination.free_kv_tokens < candidate.prefix_tokens:
+        required_tokens = (
+            candidate.state_descriptor.token_slots
+            if candidate.state_descriptor is not None
+            else candidate.prefix_tokens
+        )
+        required_snapshots = (
+            candidate.state_descriptor.snapshot_slots
+            if candidate.state_descriptor is not None
+            else 0
+        )
+        if destination.free_kv_tokens < required_tokens:
+            return None
+        if destination.free_state_snapshots < required_snapshots:
             return None
         try:
             source = loads[candidate.source_engine]
@@ -159,7 +183,11 @@ class CostBenefitPlacementPolicy:
         queue_relief_seconds = queue_delta * candidate.future_service_seconds
         pressure_delta = max(0.0, source.kv_pressure - destination.kv_pressure)
         hbm_relief = (
-            candidate.kv_bytes
+            (
+                candidate.state_bytes
+                if candidate.state_bytes is not None
+                else candidate.kv_bytes
+            )
             / (1024**3)
             * candidate.remaining_gap_seconds
             * pressure_delta
@@ -226,8 +254,13 @@ class CostBenefitPlacementPolicy:
                 continue
             candidate = candidates_by_id[result.agent_id]
             destination = load_map[result.destination_engine]
+            required_tokens = (
+                candidate.state_descriptor.token_slots
+                if candidate.state_descriptor is not None
+                else candidate.prefix_tokens
+            )
             if (
-                reserved_tokens[result.destination_engine] + candidate.prefix_tokens
+                reserved_tokens[result.destination_engine] + required_tokens
                 > destination.free_kv_tokens
             ):
                 continue
@@ -235,5 +268,5 @@ class CostBenefitPlacementPolicy:
             selected_agents.add(result.agent_id)
             selected_engines.add(result.source_engine)
             selected_engines.add(result.destination_engine)
-            reserved_tokens[result.destination_engine] += candidate.prefix_tokens
+            reserved_tokens[result.destination_engine] += required_tokens
         return selected

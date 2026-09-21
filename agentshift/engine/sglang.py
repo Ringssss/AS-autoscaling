@@ -36,7 +36,9 @@ class SGLangAgentShiftClient:
                 result = json.loads(response.read())
         except urllib.error.HTTPError as exc:
             detail = exc.read().decode("utf-8", errors="replace")
-            raise EngineRequestError(f"{self.engine_id} {path}: {exc.code} {detail}") from exc
+            raise EngineRequestError(
+                f"{self.engine_id} {path}: {exc.code} {detail}"
+            ) from exc
         except OSError as exc:
             raise EngineRequestError(f"{self.engine_id} {path}: {exc}") from exc
         if require_success and not result.get("success", False):
@@ -52,9 +54,7 @@ class SGLangAgentShiftClient:
         *,
         require_success: bool = True,
     ) -> dict[str, Any]:
-        return await asyncio.to_thread(
-            self._post_sync, path, payload, require_success
-        )
+        return await asyncio.to_thread(self._post_sync, path, payload, require_success)
 
     async def control_post(
         self,
@@ -67,9 +67,13 @@ class SGLangAgentShiftClient:
         # request per engine. Serialize only AgentShift control traffic;
         # generation and control traffic to other engines remain concurrent.
         async with self.control_lock:
-            return await self.post(
-                path, payload, require_success=require_success
-            )
+            return await self.post(path, payload, require_success=require_success)
+
+    async def inspect_hybrid_prefix(self, token_ids: tuple[int, ...]) -> dict[str, Any]:
+        return await self.control_post(
+            "/agentshift/hybrid_state/inspect", {"token_ids": list(token_ids)},
+            require_success=False,
+        )
 
     async def pin_prefix(
         self, agent_id: str, owner_epoch: int, token_ids: tuple[int, ...]
@@ -101,6 +105,86 @@ class SGLangAgentShiftClient:
                 "group_name": group_name,
                 "backend": "nccl",
             },
+        )
+
+    async def init_hybrid_state_group(
+        self,
+        *,
+        master_address: str,
+        port: int,
+        group_rank: int,
+        group_name: str,
+    ) -> dict[str, Any]:
+        return await self.control_post(
+            "/agentshift/hybrid_state/direct_group/init",
+            {
+                "master_address": master_address,
+                "port": port,
+                "group_rank": group_rank,
+                "world_size": 2,
+                "group_name": group_name,
+                "backend": "nccl",
+            },
+        )
+
+    async def direct_transfer_hybrid_state(
+        self,
+        *,
+        role: str,
+        token_ids: tuple[int, ...],
+        group_name: str,
+        port: int,
+    ) -> dict[str, Any]:
+        return await self.control_post(
+            "/agentshift/hybrid_state/direct_transfer",
+            {
+                "role": role,
+                "token_ids": token_ids,
+                "group_name": group_name,
+                "port": port,
+            },
+            require_success=False,
+        )
+
+    async def start_async_hybrid_state_transfer(
+        self,
+        *,
+        transfer_id: str,
+        role: str,
+        token_ids: tuple[int, ...],
+        group_name: str,
+        port: int,
+        prepare_only: bool = False,
+    ) -> dict[str, Any]:
+        return await self.control_post(
+            "/agentshift/hybrid_state/direct_transfer/start",
+            {
+                "transfer_id": transfer_id,
+                "prepare_only": prepare_only,
+                "role": role,
+                "token_ids": token_ids,
+                "group_name": group_name,
+                "port": port,
+            },
+            require_success=False,
+        )
+
+    async def async_hybrid_state_transfer_status(
+        self, transfer_id: str
+    ) -> dict[str, Any]:
+        return await self.control_post(
+            f"/agentshift/hybrid_state/direct_transfer/status/{transfer_id}",
+            None,
+            require_success=False,
+        )
+
+    async def cleanup_async_hybrid_state_transfer(
+        self, transfer_id: str
+    ) -> dict[str, Any]:
+        return await self.control_post(
+            f"/agentshift/hybrid_state/direct_transfer/cleanup/{transfer_id}",
+            None,
+            require_success=False,
         )
 
     async def transfer_prefix(
@@ -263,9 +347,7 @@ def _stream_generate_sync(
         "rid": rid,
         "agentshift_pin_agent_id": agentshift_pin_agent_id,
         "agentshift_pin_owner_epoch": agentshift_pin_owner_epoch,
-        "agentshift_progressive_migration_id": (
-            agentshift_progressive_migration_id
-        ),
+        "agentshift_progressive_migration_id": (agentshift_progressive_migration_id),
         "stream": True,
         "sampling_params": {
             "max_new_tokens": max_new_tokens,
@@ -345,7 +427,5 @@ async def stream_generate(
         ignore_eos=ignore_eos,
         agentshift_pin_agent_id=agentshift_pin_agent_id,
         agentshift_pin_owner_epoch=agentshift_pin_owner_epoch,
-        agentshift_progressive_migration_id=(
-            agentshift_progressive_migration_id
-        ),
+        agentshift_progressive_migration_id=(agentshift_progressive_migration_id),
     )

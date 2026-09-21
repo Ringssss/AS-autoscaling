@@ -6,6 +6,7 @@ from agentshift.controller.placement import (
     MobilityCandidate,
     order_admissible_first,
 )
+from agentshift.state.descriptor import StateDescriptor
 
 
 def candidate(agent_id="a", **overrides):
@@ -86,6 +87,61 @@ def test_cost_benefit_policy_selects_only_disjoint_engine_pairs():
 def test_cost_benefit_policy_validates_configuration():
     with pytest.raises(ValueError):
         CostBenefitPlacementPolicy(bandwidth_bytes_per_second=0)
+
+
+def test_cost_benefit_policy_uses_heterogeneous_state_footprint():
+    descriptor = StateDescriptor.hybrid_qwen35(
+        descriptor_id="state",
+        model_identity="model",
+        branch_id="branch",
+        prefix_tokens=512,
+    )
+    hybrid = candidate(
+        kv_bytes=512 * 147_456,
+        state_bytes=descriptor.total_bytes,
+        state_descriptor=descriptor,
+    )
+    loads_with_snapshot = [
+        EngineLoad("source", queue_depth=8, free_kv_tokens=10_000, kv_pressure=0.9),
+        EngineLoad(
+            "target",
+            queue_depth=1,
+            free_kv_tokens=10_000,
+            kv_pressure=0.2,
+            free_state_snapshots=1,
+        ),
+    ]
+    loads_without_snapshot = [
+        loads_with_snapshot[0],
+        EngineLoad(
+            "target",
+            queue_depth=1,
+            free_kv_tokens=10_000,
+            kv_pressure=0.2,
+        ),
+    ]
+    policy = CostBenefitPlacementPolicy(bandwidth_bytes_per_second=1024**3)
+    selected = policy.select([hybrid], loads_with_snapshot)
+    assert len(selected) == 1
+    expected = descriptor.total_bytes / (1024**3)
+    assert selected[0].estimated_copy_seconds == expected
+    assert policy.select([hybrid], loads_without_snapshot) == []
+
+
+@pytest.mark.parametrize(
+    ("state_bytes", "expected_relief"),
+    [(None, 0.14), (0, 0.0), (1024**3, 0.14), (2 * 1024**3, 0.28)],
+)
+def test_state_memory_relief_is_scaled_to_gib_seconds(state_bytes, expected_relief):
+    policy = CostBenefitPlacementPolicy(bandwidth_bytes_per_second=100 * 1024**3)
+    engine_loads = loads()
+    result = policy.score(
+        candidate(state_bytes=state_bytes),
+        engine_loads[1],
+        {load.engine_id: load for load in engine_loads},
+    )
+    assert result is not None
+    assert result.hbm_relief_gib_seconds == pytest.approx(expected_relief)
 
 
 def test_admissible_first_defers_the_longest_deadline_breaker():

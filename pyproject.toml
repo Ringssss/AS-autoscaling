@@ -9,7 +9,7 @@ description = "Semantic hot switching for suspended-but-warm LLM agents"
 requires-python = ">=3.10"
 
 [project.optional-dependencies]
-test = ["pytest>=8"]
+test = ["pytest>=8", "numpy", "aiohttp", "psutil", "torch", "uhashring>=2.4"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -22,3 +22,18 @@ paper_rewriting_output/final_paper/*.bbl
 paper_rewriting_output/final_paper/*.blg
 paper_rewriting_output/final_paper/*.log
 paper_rewriting_output/final_paper/*.out
+
+# Generated experiment runs and local input datasets stay on the experiment host.
+/experiments/*/results/
+/experiments/*/data/
+/experiments/**/environment/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.log
+*.nsys-rep
+*.ncu-rep
+*.snapshot
+.venv/

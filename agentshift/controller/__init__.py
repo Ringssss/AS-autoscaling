@@ -16,6 +16,16 @@ from agentshift.controller.migration import (
     ProgressiveMigrationResult,
     RecoveryResult,
 )
+from agentshift.controller.hybrid_migration import (
+    HybridMigrationCoordinator,
+    HybridMigrationResult,
+)
+from agentshift.controller.global_mobility import (
+    EngineMobilityState,
+    GlobalMobilityCandidate,
+    GlobalMobilityDecision,
+    GlobalMobilityPolicy,
+)
 from agentshift.controller.placement import (
     CostBenefitPlacementPolicy,
     EngineLoad,
@@ -39,6 +49,12 @@ __all__ = [
     "CostBenefitPlacementPolicy",
     "EngineLoad",
     "MigrationCoordinator",
+    "HybridMigrationCoordinator",
+    "HybridMigrationResult",
+    "EngineMobilityState",
+    "GlobalMobilityCandidate",
+    "GlobalMobilityDecision",
+    "GlobalMobilityPolicy",
     "MigrationResult",
     "ProgressiveMigrationResult",
     "RecoveryResult",

@@ -19,7 +19,9 @@ does not migrate active decode requests or claim cross-node performance.
   the pinned upstream commit.
 - `scripts/`: end-to-end, baseline, workload, interference, elasticity, policy,
   and fault experiments.
-- `tests/`: 39 control-plane and protocol tests.
+- `tests/`: control-plane, protocol, state-mobility, and experiment-harness tests.
+- `experiments/`: hybrid-state migration, FluidKV routing and preparation,
+  FreeToken elasticity, agentic profiling, and local-pipeline reproduction tools.
 - `results/`: JSON/CSV/Markdown experiment artifacts. Runtime SQLite databases
   are intentionally excluded.
 - `paper_rewriting_output/`: paper sources, Arial-rendered figures, evidence
@@ -68,5 +70,20 @@ official artifact reproductions.
 - [USENIX paper PDF](paper_rewriting_output/final_paper/paper.pdf)
 - [Full Markdown paper](paper_rewriting_output/full_paper.md)
 
-Validation status: 39/39 AgentShift tests, 14/14 SGLang prefix/TP tests,
-PaperSpine PASS, and LaTeX guard 0 errors/0 warnings.
+## September 2026 update
+
+The control plane now includes heterogeneous state descriptors, snapshot
+discovery and materialization, hybrid migration coordination, and global
+mobility and preparation decisions. Experiment scripts and tests cover these
+paths alongside FluidKV routing, FreeToken preservation, and agentic profiling.
+
+Generated `experiments/*/results/` directories, local `experiments/*/data/`
+inputs, databases, logs, state snapshots, and profiler captures are excluded
+from this source update. Experiment reports may refer to those local artifacts;
+run the associated scripts with your own dataset and engine paths to regenerate
+them. Existing published artifacts in `results/` remain available.
+
+Some integration tests require separate pinned DualMap, FreeToken, or patched
+SGLang checkouts. A skipped test does not validate that external integration.
+The historical paper and GPU results above describe their original experiment
+runs, not a fresh GPU evaluation of this source update.
