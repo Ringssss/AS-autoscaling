@@ -124,6 +124,27 @@ def test_hybrid_byte_count_mismatch_fails_closed(tmp_path):
     assert store.get_agent("a1").owner_engine == "source"
 
 
+@pytest.mark.parametrize("failed_engine", ["source", "destination"])
+def test_explicit_failure_with_matching_counts_does_not_commit(tmp_path, failed_engine):
+    class RejectedEngine(FakeHybridEngine):
+        async def direct_transfer_hybrid_state(self, **kwargs):
+            result = await super().direct_transfer_hybrid_state(**kwargs)
+            return result | {"success": False, "message": "TP shard not installed"}
+
+    store = make_store(tmp_path)
+    engines = {
+        name: (RejectedEngine(name) if name == failed_engine else FakeHybridEngine(name))
+        for name in ("source", "destination")
+    }
+    coordinator = HybridMigrationCoordinator(store, engines)
+    with pytest.raises(RuntimeError, match="TP shard not installed"):
+        asyncio.run(coordinator.migrate("a1", "destination"))
+    agent = store.get_agent("a1")
+    assert (agent.owner_engine, agent.owner_epoch) == ("source", 7)
+    migration_id = store.conn.execute("SELECT migration_id FROM migrations").fetchone()[0]
+    assert store.get_migration(migration_id).state == MigrationState.ABORTED
+
+
 def test_hybrid_group_is_initialized_once_per_pair(tmp_path):
     store = make_store(tmp_path)
     source = FakeHybridEngine("source")

@@ -1,0 +1,71 @@
+{
+  "asset": "agentx-weka-trace-062126.tar.zst",
+  "bytes": 11770018,
+  "sha256": "27e644c1ed267a176eb8344e0bbdf7225d2e4cf9246d94eb8deb775d690e0fff",
+  "uncompressed_file_bytes": 1847994984,
+  "file_count": 13,
+  "provenance": {
+    "source": "https://huggingface.co/datasets/semianalysisai/cc-traces-weka-062126",
+    "revision": "23f152f6f0f9399a85901b89a6458def0ef16729",
+    "license": "Apache-2.0",
+    "original_trace_sha256": "29b6a19e751ff5230771519aab755f80a0f43a4ba9cf96b72d3a6a437ec99276"
+  },
+  "verified_all_member_hashes": true,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 2553,
+      "sha256": "f20332442d15fbca766cca2802388ee04a91dfe1f2b428b23c68872c84673934"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3577,
+      "sha256": "c5358865e47321e50b89e7c04168cb3e7601307c48541149462bc217853e9fcf"
+    },
+    {
+      "path": "plots/distributions_linear.png",
+      "bytes": 212749,
+      "sha256": "8d7e5a8ab9a6022354e507b7c3a73020cac815c46b8cc8b92487d086f357b213"
+    },
+    {
+      "path": "plots/distributions_log.png",
+      "bytes": 211604,
+      "sha256": "725fe3e4df8f40dd7ade07a9e40fdf3c8d218c09bfe50c8cf4eb3c5fa2c6572d"
+    },
+    {
+      "path": "plots/subagent_distributions_linear.png",
+      "bytes": 199155,
+      "sha256": "fa2184b0806d96e4fa2afa537492030827a10f314499607e76b1ce1092f1f11c"
+    },
+    {
+      "path": "plots/subagent_distributions_log.png",
+      "bytes": 200595,
+      "sha256": "5b3ba49085e6fb465131c09168dcf96541db294a38f3ca97ed1eb9381ee60e0a"
+    },
+    {
+      "path": "stats.txt",
+      "bytes": 237,
+      "sha256": "c939ba2930d56525331b331cf9419e0ccd4ced9481d3856ef191e92a1b8945a9"
+    },
+    {
+      "path": "traces.jsonl",
+      "bytes": 1847151435,
+      "sha256": "29b6a19e751ff5230771519aab755f80a0f43a4ba9cf96b72d3a6a437ec99276"
+    },
+    {
+      "path": "ATTRIBUTION.md",
+      "bytes": 775,
+      "sha256": "d7f80d1001ca93f04317abdc47301ee4864a31300e00dfb85a4f20b61bb57707"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "SCHEMA-AUDIT.json",
+      "bytes": 946,
+      "sha256": "7a19e5f6be9495462e93f1561a72c70ee6d2c8cbab8cb209b5512fd5a8b8e155"
+    }
+  ]
+}

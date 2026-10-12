@@ -1,0 +1,43 @@
+[
+  {
+    "asset": "agentx-weka-trace-062126.tar.zst",
+    "bytes": 11770018,
+    "sha256": "27e644c1ed267a176eb8344e0bbdf7225d2e4cf9246d94eb8deb775d690e0fff",
+    "uncompressed_file_bytes": 1847994984,
+    "file_count": 13,
+    "provenance": {
+      "source": "https://huggingface.co/datasets/semianalysisai/cc-traces-weka-062126",
+      "revision": "23f152f6f0f9399a85901b89a6458def0ef16729",
+      "license": "Apache-2.0",
+      "original_trace_sha256": "29b6a19e751ff5230771519aab755f80a0f43a4ba9cf96b72d3a6a437ec99276"
+    },
+    "verified_all_member_hashes": true
+  },
+  {
+    "asset": "fluidkv-results-20260928-20261012.tar.zst",
+    "bytes": 334062480,
+    "sha256": "0604d6feba5f2a5bdd40949c13ae075c408f5c7e425d1450ea6805e4639868ca",
+    "uncompressed_file_bytes": 1261619987,
+    "file_count": 1204,
+    "provenance": {
+      "repository": "https://github.com/Ringssss/AS-autoscaling",
+      "source_base_commit": "2e96af93f091808ed9e31f04eed800d0285c97b4",
+      "scope": "Historical research archive, including superseded and failed runs; not all valid performance evidence.",
+      "derived_trace_source": "https://huggingface.co/datasets/semianalysisai/cc-traces-weka-062126",
+      "derived_trace_license": "Apache-2.0"
+    },
+    "verified_all_member_hashes": true
+  },
+  {
+    "asset": "fluidkv-figures-20260930.tar.zst",
+    "bytes": 1024587,
+    "sha256": "764d5954018533bc0669e55a8e2b20b31d989fb003169aa0f42bf67ccc6f2323",
+    "uncompressed_file_bytes": 1128393,
+    "file_count": 15,
+    "provenance": {
+      "repository": "https://github.com/Ringssss/AS-autoscaling",
+      "scope": "Historical derived figures; not current performance claims."
+    },
+    "verified_all_member_hashes": true
+  }
+]

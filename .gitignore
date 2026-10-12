@@ -37,3 +37,6 @@ paper_rewriting_output/final_paper/*.out
 *.ncu-rep
 *.snapshot
 .venv/
+
+# Local release staging; large evidence bundles are GitHub Release assets.
+/.release-assets/

@@ -1,5 +1,13 @@
 # AgentShift
 
+## October 2026 FluidKV archive
+
+The current technical record, corrected six-instance results, historical evidence status,
+multi-tier state-preparation proposal, and public AgentX/Weka trace downloads are in
+[FluidKV 技术留档](docs/FLUIDKV-TECHNICAL-ARCHIVE.zh.md). Large trace/result bundles are
+published as [GitHub Release assets](https://github.com/Ringssss/AS-autoscaling/releases/tag/fluidkv-archive-20261012).
+The older results below retain their original scope; use the archive index for current conclusions.
+
 AgentShift makes a suspended-but-warm LLM agent mobile across serving engines.
 At a completed-turn boundary it moves the immutable prefix KV, durably transfers
 execution ownership, and overlaps the handoff with the tool-blocked interval.

@@ -1,10 +1,34 @@
 import asyncio
 import os
+import random
+from collections import OrderedDict
 from pathlib import Path
 
 import pytest
 
 from experiments.fluidkv.dualmap_adapter import DualMapAdapter
+
+
+def test_hybrid_index_preserves_exact_boundaries_and_lru_eviction():
+    source = os.environ.get("FLUIDKV_DUALMAP_SOURCE")
+    if not source:
+        pytest.skip("set FLUIDKV_DUALMAP_SOURCE to the pinned upstream checkout")
+    router = DualMapAdapter(Path(source), 2, 4096, 20480, 1, 0.0001, hybrid_snapshot_slots=5)
+    replica = router.replica_budgets[0]
+    reference = OrderedDict()
+    rng = random.Random(918)
+    for _ in range(100):
+        prefix = tuple(rng.randrange(5) for _ in range(rng.randrange(1, 8)))
+        replica.remember(prefix)
+        reference[prefix] = None
+        reference.move_to_end(prefix)
+        while len(reference) > 5:
+            reference.popitem(last=False)
+        queries = [prefix, prefix + (99,), tuple(rng.randrange(5) for _ in range(10))]
+        for query in queries:
+            longest = max((len(p) for p in reference if len(p) < len(query) and query[:len(p)] == p), default=0)
+            assert replica.get_num_recompute_token_ids(list(query)) == len(query) - longest
+        assert list(replica.snapshots) == list(reference)
 
 
 @pytest.mark.parametrize("mode", ["dualmap", "cache-affinity", "least-loaded", "sticky"])

@@ -1,0 +1,13 @@
+{
+  "accepted_trials": 30,
+  "accepted_requests": 6400,
+  "request_errors": 0,
+  "exact_output_length": 128,
+  "cache_rejections": 0,
+  "telemetry_gaps": 0,
+  "copy_links_verified": 5,
+  "owned_containers_removed": 6,
+  "unit_tests_passed": 24,
+  "conditional_bulk_deletion": false,
+  "reason": "Reproducible net benefit at 32 and 96 clients; user no-benefit deletion condition not met."
+}

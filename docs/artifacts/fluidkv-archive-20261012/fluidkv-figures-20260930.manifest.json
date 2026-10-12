@@ -1,0 +1,79 @@
+{
+  "asset": "fluidkv-figures-20260930.tar.zst",
+  "bytes": 1024587,
+  "sha256": "764d5954018533bc0669e55a8e2b20b31d989fb003169aa0f42bf67ccc6f2323",
+  "uncompressed_file_bytes": 1128393,
+  "file_count": 15,
+  "provenance": {
+    "repository": "https://github.com/Ringssss/AS-autoscaling",
+    "scope": "Historical derived figures; not current performance claims."
+  },
+  "verified_all_member_hashes": true,
+  "files": [
+    {
+      "path": "paper/figs/fig-capacity-2x2.pdf",
+      "bytes": 23834,
+      "sha256": "09890f41b7e64962579dd737621feda953c9685e72dda85d259ad83e216cc381"
+    },
+    {
+      "path": "paper/figs/fig-capacity-2x2.png",
+      "bytes": 209764,
+      "sha256": "9852a64515291d5b3947ca441dd2ccdbcf8d69519b746097860a0d32c330db8f"
+    },
+    {
+      "path": "paper/figs/fig-capacity-vs-hit.pdf",
+      "bytes": 21508,
+      "sha256": "28435a54dbd49d027eee4ce9f6b3b08dec88a1e0082f146f63c7ed032aa3f5bb"
+    },
+    {
+      "path": "paper/figs/fig-capacity-vs-hit.png",
+      "bytes": 146356,
+      "sha256": "afe88d3cfa696b516310f51cca0af4153e76ce35068f245b4380bb5db8272a4e"
+    },
+    {
+      "path": "paper/figs/fig-eligibility-funnel.pdf",
+      "bytes": 20775,
+      "sha256": "a141642346986e0283e1ec43f7f8918e7d1fbbd26a9ed99941ab8009980556e4"
+    },
+    {
+      "path": "paper/figs/fig-eligibility-funnel.png",
+      "bytes": 233876,
+      "sha256": "b2273800d7b6a53864f6ec4b76142aa230205a4bfee829f420d4690f5a5908a9"
+    },
+    {
+      "path": "paper/figs/fig-timeline.pdf",
+      "bytes": 21111,
+      "sha256": "a4dd882aaed9390cfcfe03a4067914a4d61ad2a6f13a6936bcf19912ef81a476"
+    },
+    {
+      "path": "paper/figs/fig-timeline.png",
+      "bytes": 139495,
+      "sha256": "da014eff630d86a5f23538ea4f7180bffdfbdd58101188c0031e807175d8b01f"
+    },
+    {
+      "path": "paper/figs/fig-tradeoff.pdf",
+      "bytes": 24913,
+      "sha256": "6c4e7d0948f690a7bf3a4014d04133e951e5304663bc4f992c0daa58a4b8ebe7"
+    },
+    {
+      "path": "paper/figs/fig-tradeoff.png",
+      "bytes": 274828,
+      "sha256": "75ac6ce9749f1fba4bde9ebb70c923fdac5e0dcccfe14198d1b629f2d0ddb70e"
+    },
+    {
+      "path": "ARCHIVE-README.md",
+      "bytes": 231,
+      "sha256": "d88e336d29e1a5efb13713a6af34abdc26eb123f7bc129388764ca80cba4a51e"
+    },
+    {
+      "path": "THIRD-PARTY-LICENSES/Apache-2.0.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "THIRD-PARTY-NOTICE.md",
+      "bytes": 344,
+      "sha256": "c428f120b79b20dd36c8715b35b24e3d8897215f57e6738da0e9d56d9dcf844b"
+    }
+  ]
+}

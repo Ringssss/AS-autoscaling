@@ -1,0 +1,196 @@
+{
+  "status": "planned-not-launched",
+  "physical_nodes": 4,
+  "physical_devices": 32,
+  "routable_engines": 16,
+  "model": "/home/zhujianian/Qwen3.6-35B-A3B",
+  "dtype": "bfloat16",
+  "context_length": 131072,
+  "max_total_tokens": 262144,
+  "max_mamba_cache_size": 128,
+  "network_plugin": "shca",
+  "network_backend": "IBext_v8",
+  "engines": [
+    {
+      "engine_id": "node27-e0",
+      "node": "node27",
+      "host": "12.11.3.27",
+      "port": 31700,
+      "devices": [
+        0,
+        1
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node27-e1",
+      "node": "node27",
+      "host": "12.11.3.27",
+      "port": 31701,
+      "devices": [
+        2,
+        3
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node27-e2",
+      "node": "node27",
+      "host": "12.11.3.27",
+      "port": 31702,
+      "devices": [
+        4,
+        5
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node27-e3",
+      "node": "node27",
+      "host": "12.11.3.27",
+      "port": 31703,
+      "devices": [
+        6,
+        7
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node28-e0",
+      "node": "node28",
+      "host": "12.11.3.28",
+      "port": 31700,
+      "devices": [
+        0,
+        1
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node28-e1",
+      "node": "node28",
+      "host": "12.11.3.28",
+      "port": 31701,
+      "devices": [
+        2,
+        3
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node28-e2",
+      "node": "node28",
+      "host": "12.11.3.28",
+      "port": 31702,
+      "devices": [
+        4,
+        5
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node28-e3",
+      "node": "node28",
+      "host": "12.11.3.28",
+      "port": 31703,
+      "devices": [
+        6,
+        7
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node29-e0",
+      "node": "node29",
+      "host": "12.11.3.29",
+      "port": 31700,
+      "devices": [
+        0,
+        1
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node29-e1",
+      "node": "node29",
+      "host": "12.11.3.29",
+      "port": 31701,
+      "devices": [
+        2,
+        3
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node29-e2",
+      "node": "node29",
+      "host": "12.11.3.29",
+      "port": 31702,
+      "devices": [
+        4,
+        5
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node29-e3",
+      "node": "node29",
+      "host": "12.11.3.29",
+      "port": 31703,
+      "devices": [
+        6,
+        7
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node30-e0",
+      "node": "node30",
+      "host": "12.11.3.30",
+      "port": 31700,
+      "devices": [
+        0,
+        1
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node30-e1",
+      "node": "node30",
+      "host": "12.11.3.30",
+      "port": 31701,
+      "devices": [
+        2,
+        3
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node30-e2",
+      "node": "node30",
+      "host": "12.11.3.30",
+      "port": 31702,
+      "devices": [
+        4,
+        5
+      ],
+      "tp_size": 2
+    },
+    {
+      "engine_id": "node30-e3",
+      "node": "node30",
+      "host": "12.11.3.30",
+      "port": 31703,
+      "devices": [
+        6,
+        7
+      ],
+      "tp_size": 2
+    }
+  ],
+  "group_port_base": 30200,
+  "group_port_stride": 4,
+  "group_policy": "on-demand with explicit cleanup; prototype coordinator must be extended before full-fleet migration",
+  "launch_gate": "exclusive allocation required; node30 and some node28 devices currently occupied by pre-existing workloads",
+  "data_gate": "native prefix-aware production ranking requires identities missing from released Kimi trace; reconstructed workload must be labeled separately"
+}

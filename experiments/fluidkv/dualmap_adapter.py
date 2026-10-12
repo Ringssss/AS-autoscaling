@@ -14,7 +14,9 @@ UPSTREAM_COMMIT = "24816acc70b8e8f4f6b47bc47b7ce0fdddddf40d"
 
 
 class DualMapAdapter:
-    def __init__(self, source, replicas, cache_tokens, bytes_per_token, slo, prefill_seconds_per_token, mode="dualmap", hybrid_snapshot_slots=0, inspect_snapshots=False):
+    def __init__(self, source, replicas, cache_tokens, bytes_per_token, slo, prefill_seconds_per_token, mode="dualmap", hybrid_snapshot_slots=0, inspect_snapshots=False, pending_prefills=1):
+        if type(pending_prefills) is not int or pending_prefills < 1:
+            raise ValueError("pending_prefills must be a positive integer")
         commit = subprocess.check_output(["git", "-C", str(source), "rev-parse", "HEAD"], text=True).strip()
         if commit != UPSTREAM_COMMIT:
             raise ValueError(f"unreviewed DualMap commit {commit}")
@@ -35,7 +37,7 @@ class DualMapAdapter:
             balance_type="dualmap", cache_capacity=cache_tokens * bytes_per_token,
             block_size=16, kv_cache_size_per_token=bytes_per_token,
             replica_slo_budget=budget, dh_first_balance_ttft_thredhold=budget // 2,
-            dh_rebalance_thredhold=budget, dh_replica_pending_req_threshold=1,
+            dh_rebalance_thredhold=budget, dh_replica_pending_req_threshold=pending_prefills,
             dh_rebalance_waiting_latency_thredhold=3, prefill_tpot=prefill_seconds_per_token,
             dh_recompute_punish_ratio=1, busy_prefill_interval=2,
         )
@@ -48,14 +50,24 @@ class DualMapAdapter:
                 def __init__(self, *arguments):
                     super().__init__(*arguments)
                     self.snapshots = OrderedDict()
+                    self._snapshot_prefixes_by_length = {}
+
+                def rebuild_snapshot_index(self):
+                    self._snapshot_prefixes_by_length = {}
+                    for prefix in self.snapshots:
+                        self._snapshot_prefixes_by_length.setdefault(len(prefix), set()).add(prefix)
 
                 def get_num_recompute_token_ids(self, ids):
                     # A matching KV block without a recurrent snapshot is not
                     # an executable hybrid prefix. This is backend metadata,
                     # shared by all policies; upstream route decisions remain.
-                    matches = [len(prefix) for prefix in self.snapshots
-                               if len(prefix) < len(ids) and tuple(ids[:len(prefix)]) == prefix]
-                    return len(ids) - max(matches, default=0)
+                    # Check each boundary length once. Scanning every snapshot
+                    # repeatedly copied the entire long input in high-BS runs;
+                    # this index preserves exact token equality and LRU policy.
+                    for length in sorted(self._snapshot_prefixes_by_length, reverse=True):
+                        if length < len(ids) and tuple(ids[:length]) in self._snapshot_prefixes_by_length[length]:
+                            return len(ids) - length
+                    return len(ids)
 
                 def remember(self, ids):
                     if inspect_snapshots:
@@ -64,9 +76,14 @@ class DualMapAdapter:
                     if not key:
                         return
                     self.snapshots[key] = None
+                    self._snapshot_prefixes_by_length.setdefault(len(key), set()).add(key)
                     self.snapshots.move_to_end(key)
                     while len(self.snapshots) > hybrid_snapshot_slots:
-                        self.snapshots.popitem(last=False)
+                        removed, _ = self.snapshots.popitem(last=False)
+                        group = self._snapshot_prefixes_by_length[len(removed)]
+                        group.remove(removed)
+                        if not group:
+                            del self._snapshot_prefixes_by_length[len(removed)]
 
                 def save_token_ids(self, ids):
                     self.remember(ids)
@@ -97,12 +114,18 @@ class DualMapAdapter:
         confirmed = self.snapshot_directory.update(physical_engine, token_ids, response)
         self.all_replicas[physical_engine].snapshots = OrderedDict(
             (prefix,None) for prefix in self.snapshot_directory.prefixes(physical_engine))
+        rebuild = getattr(self.all_replicas[physical_engine], "rebuild_snapshot_index", None)
+        if rebuild is not None:
+            rebuild()
         return confirmed
 
     def invalidate_snapshot_engine(self, physical_engine):
         if self.snapshot_directory is not None:
             self.snapshot_directory.discard_engine(physical_engine)
             self.all_replicas[physical_engine].snapshots.clear()
+            rebuild = getattr(self.all_replicas[physical_engine], "rebuild_snapshot_index", None)
+            if rebuild is not None:
+                rebuild()
 
     def dump_replica_queue_info(self, replica):
         # Upstream invokes this only to emit diagnostic logging.

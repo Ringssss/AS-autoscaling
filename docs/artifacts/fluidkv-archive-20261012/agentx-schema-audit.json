@@ -1,0 +1,33 @@
+{
+  "counts": {
+    "conversations": 393,
+    "main_requests": 56798,
+    "model_requests": 98827,
+    "input_tokens_block_estimate": 21635381376,
+    "output_tokens": 106474498,
+    "subagent_groups": 1697,
+    "subagent_requests": 42029
+  },
+  "request_fields": {
+    "t": 100524,
+    "model": 98827,
+    "in": 98827,
+    "out": 98827,
+    "hash_ids": 98827,
+    "api_time": 98827,
+    "type": 100524,
+    "ttft": 56432,
+    "think_time": 98434,
+    "agent_id": 1697,
+    "subagent_type": 1697,
+    "duration_ms": 1697,
+    "total_tokens": 1697,
+    "tool_use_count": 1697,
+    "status": 1697,
+    "requests": 1697,
+    "models": 1697
+  },
+  "trace_sha256": "29b6a19e751ff5230771519aab755f80a0f43a4ba9cf96b72d3a6a437ec99276",
+  "schema": "Block hashes, lengths, relative times and agent/model metadata; no prompt/response text fields.",
+  "checks": "All conversations checked; unknown schema fields rejected; upstream byte identity checked."
+}

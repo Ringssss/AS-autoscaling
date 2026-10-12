@@ -1,0 +1,3008 @@
+{
+  "rows": [
+    {
+      "clients": 32,
+      "arm": "blitz_copy",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 64,
+          "errors": 0,
+          "wall": 38.08793598500779,
+          "ttft_p50": 1.7150757409981452,
+          "ttft_p90": 2.6428268186951756,
+          "e2e_p50": 18.703018765998422,
+          "e2e_p90": 19.590026375002346,
+          "tpot_p50": 0.13359493998431154,
+          "tpot_p90": 0.13596395676527961,
+          "token_interval_p99": 0.2022864476108225,
+          "coalesced_tokens": 0,
+          "slo_attainment": 1.0,
+          "goodput": 1.6803220847984974,
+          "ttft_slo_attainment": 1.0,
+          "cached_tokens": 4194944,
+          "target_counts": {
+            "0": 12,
+            "4": 11,
+            "1": 11,
+            "2": 10,
+            "5": 10,
+            "3": 10
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.6803220847984974
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.6803220847984974
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.6803220847984974
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.6803220847984974
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.6803220847984974
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.6803220847984974
+            }
+          ],
+          "task_p50": 37.6843984760053,
+          "task_p90": 38.06093037620303,
+          "paid_wall": 39.08793598500779,
+          "offered_clients": 32
+        },
+        {
+          "requests": 64,
+          "errors": 0,
+          "wall": 38.59373742502066,
+          "ttft_p50": 1.63673169350659,
+          "ttft_p90": 2.642892125810613,
+          "e2e_p50": 18.873448693499085,
+          "e2e_p90": 19.742747092011268,
+          "tpot_p50": 0.13472377802758645,
+          "tpot_p90": 0.1383373238157076,
+          "token_interval_p99": 0.19854311006871284,
+          "coalesced_tokens": 0,
+          "slo_attainment": 1.0,
+          "goodput": 1.6583001354646785,
+          "ttft_slo_attainment": 1.0,
+          "cached_tokens": 4195072,
+          "target_counts": {
+            "4": 10,
+            "2": 11,
+            "5": 10,
+            "1": 11,
+            "3": 10,
+            "0": 12
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.6583001354646785
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.6583001354646785
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.6583001354646785
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.6583001354646785
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.6583001354646785
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.6583001354646785
+            }
+          ],
+          "task_p50": 37.718142160520074,
+          "task_p90": 38.57959297289781,
+          "paid_wall": 39.59373742502066,
+          "offered_clients": 32
+        }
+      ],
+      "median": {
+        "wall": 38.340836705014226,
+        "paid_wall": 39.340836705014226,
+        "task_p50": 37.70127031826269,
+        "task_p90": 38.32026167455042,
+        "ttft_p50": 1.6759037172523676,
+        "ttft_p90": 2.642859472252894,
+        "tpot_p50": 0.134159359005949,
+        "tpot_p90": 0.13715064029049362,
+        "slo_attainment": 1.0,
+        "goodput": 1.6693111101315878,
+        "ttft_slo_attainment": 1.0
+      },
+      "wall_runs": [
+        38.08793598500779,
+        38.59373742502066
+      ],
+      "prep_runs": [
+        1.9642218119988684,
+        1.9522623020166066
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 32,
+      "arm": "blitz_none",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 64,
+          "errors": 0,
+          "wall": 44.015303724008845,
+          "ttft_p50": 3.0281506860046647,
+          "ttft_p90": 4.136566971696448,
+          "e2e_p50": 21.12008051898738,
+          "e2e_p90": 23.442190598000888,
+          "tpot_p50": 0.14937543648024232,
+          "tpot_p90": 0.15225417676943678,
+          "token_interval_p99": 0.8638105889252621,
+          "coalesced_tokens": 0,
+          "slo_attainment": 1.0,
+          "goodput": 1.454039722213485,
+          "ttft_slo_attainment": 1.0,
+          "cached_tokens": 4196352,
+          "target_counts": {
+            "0": 64
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.454039722213485
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.454039722213485
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.454039722213485
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.454039722213485
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.454039722213485
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.454039722213485
+            }
+          ],
+          "task_p50": 42.82451414800016,
+          "task_p90": 44.001521391407,
+          "paid_wall": 45.015303724008845,
+          "offered_clients": 32
+        },
+        {
+          "requests": 64,
+          "errors": 0,
+          "wall": 44.935103063005954,
+          "ttft_p50": 3.428096667994396,
+          "ttft_p90": 4.564878903410863,
+          "e2e_p50": 21.38219001548714,
+          "e2e_p90": 23.458676569903037,
+          "tpot_p50": 0.1452521272244273,
+          "tpot_p90": 0.15688629806856166,
+          "token_interval_p99": 0.6295932897899184,
+          "coalesced_tokens": 0,
+          "slo_attainment": 1.0,
+          "goodput": 1.4242762481319364,
+          "ttft_slo_attainment": 1.0,
+          "cached_tokens": 4196352,
+          "target_counts": {
+            "0": 64
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.4242762481319364
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.4242762481319364
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.4242762481319364
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.4242762481319364
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.4242762481319364
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.4242762481319364
+            }
+          ],
+          "task_p50": 44.878832731512375,
+          "task_p90": 44.921203236392465,
+          "paid_wall": 45.935103063005954,
+          "offered_clients": 32
+        }
+      ],
+      "median": {
+        "wall": 44.4752033935074,
+        "paid_wall": 45.4752033935074,
+        "task_p50": 43.85167343975627,
+        "task_p90": 44.461362313899734,
+        "ttft_p50": 3.2281236769995303,
+        "ttft_p90": 4.350722937553655,
+        "tpot_p50": 0.1473137818523348,
+        "tpot_p90": 0.15457023741899922,
+        "slo_attainment": 1.0,
+        "goodput": 1.4391579851727108,
+        "ttft_slo_attainment": 1.0
+      },
+      "wall_runs": [
+        44.015303724008845,
+        44.935103063005954
+      ],
+      "prep_runs": [
+        0.0,
+        0.0
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 32,
+      "arm": "blitz_recompute",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 64,
+          "errors": 0,
+          "wall": 41.338662389985984,
+          "ttft_p50": 2.3632214989920612,
+          "ttft_p90": 4.1986218813777665,
+          "e2e_p50": 20.063477802003035,
+          "e2e_p90": 22.483001651993256,
+          "tpot_p50": 0.13999871475203604,
+          "tpot_p90": 0.14399359179766094,
+          "token_interval_p99": 0.3705801868258277,
+          "coalesced_tokens": 0,
+          "slo_attainment": 1.0,
+          "goodput": 1.5481874908343327,
+          "ttft_slo_attainment": 1.0,
+          "cached_tokens": 4194688,
+          "target_counts": {
+            "0": 38,
+            "1": 6,
+            "4": 5,
+            "3": 6,
+            "5": 5,
+            "2": 4
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.5481874908343327
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.5481874908343327
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.5481874908343327
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.5481874908343327
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.5481874908343327
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.5481874908343327
+            }
+          ],
+          "task_p50": 40.09734088499681,
+          "task_p90": 41.308963562391,
+          "paid_wall": 42.338662389985984,
+          "offered_clients": 32
+        },
+        {
+          "requests": 64,
+          "errors": 0,
+          "wall": 41.58788000000641,
+          "ttft_p50": 2.2116337205079617,
+          "ttft_p90": 4.242627376408199,
+          "e2e_p50": 20.299350373999914,
+          "e2e_p90": 22.801788738003232,
+          "tpot_p50": 0.14341292317702772,
+          "tpot_p90": 0.14613482825678964,
+          "token_interval_p99": 0.36775292802602044,
+          "coalesced_tokens": 0,
+          "slo_attainment": 1.0,
+          "goodput": 1.5389098939400165,
+          "ttft_slo_attainment": 1.0,
+          "cached_tokens": 4194688,
+          "target_counts": {
+            "0": 38,
+            "4": 5,
+            "5": 5,
+            "2": 5,
+            "3": 5,
+            "1": 6
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.5389098939400165
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.5389098939400165
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.5389098939400165
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.5389098939400165
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.5389098939400165
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.5389098939400165
+            }
+          ],
+          "task_p50": 40.668481577013154,
+          "task_p90": 41.57392395381466,
+          "paid_wall": 42.58788000000641,
+          "offered_clients": 32
+        }
+      ],
+      "median": {
+        "wall": 41.463271194996196,
+        "paid_wall": 42.463271194996196,
+        "task_p50": 40.38291123100498,
+        "task_p90": 41.441443758102835,
+        "ttft_p50": 2.2874276097500115,
+        "ttft_p90": 4.220624628892983,
+        "tpot_p50": 0.14170581896453188,
+        "tpot_p90": 0.1450642100272253,
+        "slo_attainment": 1.0,
+        "goodput": 1.5435486923871746,
+        "ttft_slo_attainment": 1.0
+      },
+      "wall_runs": [
+        41.338662389985984,
+        41.58788000000641
+      ],
+      "prep_runs": [
+        7.218250701989746,
+        7.234652476006886
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 32,
+      "arm": "blitz_recompute_wait",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 64,
+          "errors": 0,
+          "wall": 43.927823328995146,
+          "ttft_p50": 4.739303139504045,
+          "ttft_p90": 8.091099146401394,
+          "e2e_p50": 21.808669799997006,
+          "e2e_p90": 25.044031998389983,
+          "tpot_p50": 0.13315702666536314,
+          "tpot_p90": 0.1352252182896766,
+          "token_interval_p99": 0.196981561208376,
+          "coalesced_tokens": 0,
+          "slo_attainment": 1.0,
+          "goodput": 1.4569353805827194,
+          "ttft_slo_attainment": 1.0,
+          "cached_tokens": 4195264,
+          "target_counts": {
+            "3": 10,
+            "4": 10,
+            "1": 12,
+            "5": 10,
+            "2": 10,
+            "0": 12
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 0.7284676902913597
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 0.7284676902913597
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.4569353805827194
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.4569353805827194
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.4569353805827194
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.4569353805827194
+            }
+          ],
+          "task_p50": 43.66266650000762,
+          "task_p90": 43.91258535929082,
+          "paid_wall": 44.927823328995146,
+          "offered_clients": 32
+        },
+        {
+          "requests": 64,
+          "errors": 0,
+          "wall": 43.724378914019326,
+          "ttft_p50": 4.624656345506082,
+          "ttft_p90": 7.954423164401669,
+          "e2e_p50": 21.589340102509595,
+          "e2e_p90": 25.002176958401105,
+          "tpot_p50": 0.1332274898896993,
+          "tpot_p90": 0.13520198876309064,
+          "token_interval_p99": 0.2005406583525473,
+          "coalesced_tokens": 0,
+          "slo_attainment": 1.0,
+          "goodput": 1.4637143303018927,
+          "ttft_slo_attainment": 1.0,
+          "cached_tokens": 4195072,
+          "target_counts": {
+            "4": 11,
+            "5": 10,
+            "2": 10,
+            "1": 11,
+            "0": 12,
+            "3": 10
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 0.7318571651509463
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 0.7318571651509463
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.4637143303018927
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.4637143303018927
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.4637143303018927
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.4637143303018927
+            }
+          ],
+          "task_p50": 43.20831208550953,
+          "task_p90": 43.70981017371232,
+          "paid_wall": 44.724378914019326,
+          "offered_clients": 32
+        }
+      ],
+      "median": {
+        "wall": 43.826101121507236,
+        "paid_wall": 44.826101121507236,
+        "task_p50": 43.435489292758575,
+        "task_p90": 43.81119776650157,
+        "ttft_p50": 4.681979742505064,
+        "ttft_p90": 8.022761155401533,
+        "tpot_p50": 0.13319225827753123,
+        "tpot_p90": 0.13521360352638362,
+        "slo_attainment": 1.0,
+        "goodput": 1.460324855442306,
+        "ttft_slo_attainment": 1.0
+      },
+      "wall_runs": [
+        43.927823328995146,
+        43.724378914019326
+      ],
+      "prep_runs": [
+        7.241525803983677,
+        7.234543309023138
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 32,
+      "arm": "dualmap_none",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 64,
+          "errors": 0,
+          "wall": 49.642355473013595,
+          "ttft_p50": 2.5283744419866707,
+          "ttft_p90": 8.921747832308757,
+          "e2e_p50": 21.588259828509763,
+          "e2e_p90": 27.70251955561689,
+          "tpot_p50": 0.14846869384653144,
+          "tpot_p90": 0.15805694591590866,
+          "token_interval_p99": 0.32117501144763083,
+          "coalesced_tokens": 0,
+          "slo_attainment": 1.0,
+          "goodput": 1.289221661425624,
+          "ttft_slo_attainment": 1.0,
+          "cached_tokens": 3998336,
+          "target_counts": {
+            "0": 28,
+            "3": 4,
+            "2": 17,
+            "1": 15
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.640625,
+              "goodput": 0.8259076268507903
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.640625,
+              "goodput": 0.8259076268507903
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.289221661425624
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.289221661425624
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.289221661425624
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.289221661425624
+            }
+          ],
+          "task_p50": 46.02735007950105,
+          "task_p90": 48.67138541970344,
+          "paid_wall": 50.642355473013595,
+          "offered_clients": 32
+        },
+        {
+          "requests": 64,
+          "errors": 0,
+          "wall": 49.21531509500346,
+          "ttft_p50": 2.3776206515030935,
+          "ttft_p90": 8.907560757495231,
+          "e2e_p50": 21.394832979000057,
+          "e2e_p90": 27.616680711906522,
+          "tpot_p50": 0.14699480270459975,
+          "tpot_p90": 0.15827943403560277,
+          "token_interval_p99": 0.31968344743276245,
+          "coalesced_tokens": 0,
+          "slo_attainment": 1.0,
+          "goodput": 1.3004082139158657,
+          "ttft_slo_attainment": 1.0,
+          "cached_tokens": 3998208,
+          "target_counts": {
+            "0": 28,
+            "3": 4,
+            "2": 17,
+            "1": 15
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.640625,
+              "goodput": 0.8330740120398515
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.640625,
+              "goodput": 0.8330740120398515
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.3004082139158657
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.3004082139158657
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 1.3004082139158657
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 1.3004082139158657
+            }
+          ],
+          "task_p50": 45.799550853000255,
+          "task_p90": 48.29415207550919,
+          "paid_wall": 50.21531509500346,
+          "offered_clients": 32
+        }
+      ],
+      "median": {
+        "wall": 49.42883528400853,
+        "paid_wall": 50.42883528400853,
+        "task_p50": 45.91345046625065,
+        "task_p90": 48.482768747606315,
+        "ttft_p50": 2.452997546744882,
+        "ttft_p90": 8.914654294901993,
+        "tpot_p50": 0.1477317482755656,
+        "tpot_p90": 0.1581681899757557,
+        "slo_attainment": 1.0,
+        "goodput": 1.2948149376707447,
+        "ttft_slo_attainment": 1.0
+      },
+      "wall_runs": [
+        49.642355473013595,
+        49.21531509500346
+      ],
+      "prep_runs": [
+        0.0,
+        0.0
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 96,
+      "arm": "blitz_copy",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 192,
+          "errors": 0,
+          "wall": 44.90341692700167,
+          "ttft_p50": 4.261711236991687,
+          "ttft_p90": 5.369786786803161,
+          "e2e_p50": 21.653567703498993,
+          "e2e_p90": 23.83017274500453,
+          "tpot_p50": 0.13792948245678616,
+          "tpot_p90": 0.1456787101336843,
+          "token_interval_p99": 0.3849539527975139,
+          "coalesced_tokens": 0,
+          "slo_attainment": 1.0,
+          "goodput": 4.275843869791234,
+          "ttft_slo_attainment": 1.0,
+          "cached_tokens": 12585024,
+          "target_counts": {
+            "2": 32,
+            "4": 31,
+            "5": 32,
+            "3": 32,
+            "1": 32,
+            "0": 33
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.53125,
+              "goodput": 2.271542055826593
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.53125,
+              "goodput": 2.271542055826593
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 4.275843869791234
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 4.275843869791234
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 4.275843869791234
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 4.275843869791234
+            }
+          ],
+          "task_p50": 43.96106611999858,
+          "task_p90": 44.55889763099549,
+          "paid_wall": 45.90341692700167,
+          "offered_clients": 96
+        },
+        {
+          "requests": 192,
+          "errors": 0,
+          "wall": 45.58758522401331,
+          "ttft_p50": 5.085553844983224,
+          "ttft_p90": 5.68392077490862,
+          "e2e_p50": 22.326734409987694,
+          "e2e_p90": 23.36503552889335,
+          "tpot_p50": 0.13712110361414337,
+          "tpot_p90": 0.14737385023003957,
+          "token_interval_p99": 0.37365670420753305,
+          "coalesced_tokens": 0,
+          "slo_attainment": 1.0,
+          "goodput": 4.211672960007186,
+          "ttft_slo_attainment": 1.0,
+          "cached_tokens": 12584704,
+          "target_counts": {
+            "4": 33,
+            "5": 32,
+            "2": 32,
+            "0": 31,
+            "3": 32,
+            "1": 32
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.4947916666666667,
+              "goodput": 2.083900683336889
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.4947916666666667,
+              "goodput": 2.083900683336889
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 4.211672960007186
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 4.211672960007186
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 4.211672960007186
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 4.211672960007186
+            }
+          ],
+          "task_p50": 45.326097228506114,
+          "task_p90": 45.549433150998084,
+          "paid_wall": 46.58758522401331,
+          "offered_clients": 96
+        }
+      ],
+      "median": {
+        "wall": 45.24550107550749,
+        "paid_wall": 46.24550107550749,
+        "task_p50": 44.643581674252346,
+        "task_p90": 45.054165390996786,
+        "ttft_p50": 4.673632540987455,
+        "ttft_p90": 5.52685378085589,
+        "tpot_p50": 0.13752529303546476,
+        "tpot_p90": 0.14652628018186192,
+        "slo_attainment": 1.0,
+        "goodput": 4.24375841489921,
+        "ttft_slo_attainment": 1.0
+      },
+      "wall_runs": [
+        44.90341692700167,
+        45.58758522401331
+      ],
+      "prep_runs": [
+        1.973089331004303,
+        2.0017857020138763
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 96,
+      "arm": "blitz_none",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 192,
+          "errors": 0,
+          "wall": 71.83346205000998,
+          "ttft_p50": 6.275477240502369,
+          "ttft_p90": 26.062129291621385,
+          "e2e_p50": 23.102092642497155,
+          "e2e_p90": 46.59271200991061,
+          "tpot_p50": 0.14212844910237143,
+          "tpot_p90": 0.15324083648204498,
+          "token_interval_p99": 0.5368061859856244,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.59375,
+          "goodput": 1.5870041168367182,
+          "ttft_slo_attainment": 0.59375,
+          "cached_tokens": 12255936,
+          "target_counts": {
+            "0": 93,
+            "4": 19,
+            "1": 21,
+            "5": 19,
+            "2": 20,
+            "3": 20
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 1.3364245194414468
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 1.3364245194414468
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.59375,
+              "goodput": 1.5870041168367182
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.59375,
+              "goodput": 1.5870041168367182
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.8854166666666666,
+              "goodput": 2.3665850865108955
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.8854166666666666,
+              "goodput": 2.3665850865108955
+            }
+          ],
+          "task_p50": 52.34246580951731,
+          "task_p90": 70.83088073851832,
+          "paid_wall": 72.83346205000998,
+          "offered_clients": 96
+        },
+        {
+          "requests": 192,
+          "errors": 0,
+          "wall": 69.31345536699519,
+          "ttft_p50": 5.809090021502925,
+          "ttft_p90": 25.384590943297372,
+          "e2e_p50": 22.54580223999801,
+          "e2e_p90": 45.665501727894295,
+          "tpot_p50": 0.14253183156694194,
+          "tpot_p90": 0.1564131506937547,
+          "token_interval_p99": 0.6391148200095631,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.640625,
+          "goodput": 1.774547226779414,
+          "ttft_slo_attainment": 0.640625,
+          "cached_tokens": 12256256,
+          "target_counts": {
+            "0": 96,
+            "5": 19,
+            "4": 19,
+            "3": 19,
+            "1": 19,
+            "2": 20
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 1.3850124696814938
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 1.3850124696814938
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.640625,
+              "goodput": 1.774547226779414
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.640625,
+              "goodput": 1.774547226779414
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.8854166666666666,
+              "goodput": 2.452626248394312
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.8854166666666666,
+              "goodput": 2.452626248394312
+            }
+          ],
+          "task_p50": 50.965314118002425,
+          "task_p90": 64.53367327900196,
+          "paid_wall": 70.31345536699519,
+          "offered_clients": 96
+        }
+      ],
+      "median": {
+        "wall": 70.57345870850259,
+        "paid_wall": 71.57345870850259,
+        "task_p50": 51.653889963759866,
+        "task_p90": 67.68227700876014,
+        "ttft_p50": 6.042283631002647,
+        "ttft_p90": 25.72336011745938,
+        "tpot_p50": 0.14233014033465669,
+        "tpot_p90": 0.15482699358789984,
+        "slo_attainment": 0.6171875,
+        "goodput": 1.6807756718080662,
+        "ttft_slo_attainment": 0.6171875
+      },
+      "wall_runs": [
+        71.83346205000998,
+        69.31345536699519
+      ],
+      "prep_runs": [
+        0.0,
+        0.0
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 96,
+      "arm": "blitz_recompute",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 192,
+          "errors": 0,
+          "wall": 72.19464007599163,
+          "ttft_p50": 5.135941053493298,
+          "ttft_p90": 26.867298216203928,
+          "e2e_p50": 22.151852979994146,
+          "e2e_p90": 47.33033150459232,
+          "tpot_p50": 0.14265654922848453,
+          "tpot_p90": 0.1566114290323618,
+          "token_interval_p99": 0.5699266853978042,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.59375,
+          "goodput": 1.5790645937150503,
+          "ttft_slo_attainment": 0.59375,
+          "cached_tokens": 12563200,
+          "target_counts": {
+            "4": 19,
+            "1": 19,
+            "5": 18,
+            "3": 19,
+            "2": 19,
+            "0": 98
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 1.3297386052337266
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 1.3297386052337266
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.59375,
+              "goodput": 1.5790645937150503
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.59375,
+              "goodput": 1.5790645937150503
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.859375,
+              "goodput": 2.2854882277454673
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.859375,
+              "goodput": 2.2854882277454673
+            }
+          ],
+          "task_p50": 52.86801202400238,
+          "task_p90": 71.4890996220056,
+          "paid_wall": 73.19464007599163,
+          "offered_clients": 96
+        },
+        {
+          "requests": 192,
+          "errors": 0,
+          "wall": 70.28017065202584,
+          "ttft_p50": 5.115776017511962,
+          "ttft_p90": 26.33364123341744,
+          "e2e_p50": 22.25157048999972,
+          "e2e_p90": 45.428825752902775,
+          "tpot_p50": 0.14188974840952887,
+          "tpot_p90": 0.15466990915810466,
+          "token_interval_p99": 0.6552418616076465,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.609375,
+          "goodput": 1.6647654511155836,
+          "ttft_slo_attainment": 0.609375,
+          "cached_tokens": 12563328,
+          "target_counts": {
+            "5": 19,
+            "4": 18,
+            "2": 18,
+            "3": 18,
+            "1": 19,
+            "0": 100
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 1.3659613957871455
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 1.3659613957871455
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.609375,
+              "goodput": 1.6647654511155836
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.609375,
+              "goodput": 1.6647654511155836
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.859375,
+              "goodput": 2.3477461490091565
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.859375,
+              "goodput": 2.3477461490091565
+            }
+          ],
+          "task_p50": 52.27376801450737,
+          "task_p90": 69.32288511301158,
+          "paid_wall": 71.28017065202584,
+          "offered_clients": 96
+        }
+      ],
+      "median": {
+        "wall": 71.23740536400874,
+        "paid_wall": 72.23740536400874,
+        "task_p50": 52.570890019254875,
+        "task_p90": 70.40599236750859,
+        "ttft_p50": 5.12585853550263,
+        "ttft_p90": 26.600469724810683,
+        "tpot_p50": 0.1422731488190067,
+        "tpot_p90": 0.15564066909523322,
+        "slo_attainment": 0.6015625,
+        "goodput": 1.621915022415317,
+        "ttft_slo_attainment": 0.6015625
+      },
+      "wall_runs": [
+        72.19464007599163,
+        70.28017065202584
+      ],
+      "prep_runs": [
+        7.298466884007212,
+        7.290206362027675
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 96,
+      "arm": "blitz_recompute_wait",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 192,
+          "errors": 0,
+          "wall": 50.733961230987916,
+          "ttft_p50": 7.550336877990048,
+          "ttft_p90": 10.842501609795727,
+          "e2e_p50": 24.627245052994112,
+          "e2e_p90": 29.03215625489247,
+          "tpot_p50": 0.13729445016131678,
+          "tpot_p90": 0.14429932449360866,
+          "token_interval_p99": 0.3771607111906633,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.53125,
+          "goodput": 2.0104876009109884,
+          "ttft_slo_attainment": 0.53125,
+          "cached_tokens": 12584704,
+          "target_counts": {
+            "2": 33,
+            "4": 32,
+            "1": 31,
+            "0": 32,
+            "3": 32,
+            "5": 32
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.46875,
+              "goodput": 1.773959647862637
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.46875,
+              "goodput": 1.773959647862637
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.53125,
+              "goodput": 2.0104876009109884
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.53125,
+              "goodput": 2.0104876009109884
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 3.7844472487736254
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 3.7844472487736254
+            }
+          ],
+          "task_p50": 50.12607512349496,
+          "task_p90": 50.69680669649097,
+          "paid_wall": 51.733961230987916,
+          "offered_clients": 96
+        },
+        {
+          "requests": 192,
+          "errors": 0,
+          "wall": 49.20536669198191,
+          "ttft_p50": 6.635412208997877,
+          "ttft_p90": 10.713747580882046,
+          "e2e_p50": 23.900947548492695,
+          "e2e_p90": 29.24161834088445,
+          "tpot_p50": 0.13765525434239068,
+          "tpot_p90": 0.1453641055512066,
+          "token_interval_p99": 0.3482376405037939,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.6197916666666666,
+          "goodput": 2.4184353862236585,
+          "ttft_slo_attainment": 0.6197916666666666,
+          "cached_tokens": 12585088,
+          "target_counts": {
+            "2": 33,
+            "5": 32,
+            "4": 32,
+            "1": 32,
+            "0": 32,
+            "3": 31
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 1.95100669813001
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 1.95100669813001
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.6197916666666666,
+              "goodput": 2.4184353862236585
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.6197916666666666,
+              "goodput": 2.4184353862236585
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 3.90201339626002
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 3.90201339626002
+            }
+          ],
+          "task_p50": 48.52032282699656,
+          "task_p90": 49.168596967996564,
+          "paid_wall": 50.20536669198191,
+          "offered_clients": 96
+        }
+      ],
+      "median": {
+        "wall": 49.96966396148491,
+        "paid_wall": 50.96966396148491,
+        "task_p50": 49.32319897524576,
+        "task_p90": 49.932701832243765,
+        "ttft_p50": 7.092874543493963,
+        "ttft_p90": 10.778124595338888,
+        "tpot_p50": 0.13747485225185374,
+        "tpot_p90": 0.14483171502240763,
+        "slo_attainment": 0.5755208333333333,
+        "goodput": 2.2144614935673235,
+        "ttft_slo_attainment": 0.5755208333333333
+      },
+      "wall_runs": [
+        50.733961230987916,
+        49.20536669198191
+      ],
+      "prep_runs": [
+        7.234054283006117,
+        7.235818255983759
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 96,
+      "arm": "dualmap_none",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 192,
+          "errors": 0,
+          "wall": 55.82269058798556,
+          "ttft_p50": 4.281581389994244,
+          "ttft_p90": 13.546463860091173,
+          "e2e_p50": 24.252549287994043,
+          "e2e_p90": 33.00481650199799,
+          "tpot_p50": 0.15317143302747255,
+          "tpot_p90": 0.1651888242348209,
+          "token_interval_p99": 0.3257668309204746,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.671875,
+          "goodput": 2.310888254242694,
+          "ttft_slo_attainment": 0.671875,
+          "cached_tokens": 12258624,
+          "target_counts": {
+            "0": 42,
+            "5": 29,
+            "3": 33,
+            "2": 29,
+            "1": 27,
+            "4": 32
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5364583333333334,
+              "goodput": 1.845127830906957
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5364583333333334,
+              "goodput": 1.845127830906957
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.671875,
+              "goodput": 2.310888254242694
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.671875,
+              "goodput": 2.310888254242694
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 3.439461587710056
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 3.439461587710056
+            }
+          ],
+          "task_p50": 52.649233346499386,
+          "task_p90": 54.850514229998225,
+          "paid_wall": 56.82269058798556,
+          "offered_clients": 96
+        },
+        {
+          "requests": 192,
+          "errors": 0,
+          "wall": 56.69991484499769,
+          "ttft_p50": 4.058731874494697,
+          "ttft_p90": 14.16053921620478,
+          "e2e_p50": 24.20577394751308,
+          "e2e_p90": 34.05344572070171,
+          "tpot_p50": 0.15404819338969744,
+          "tpot_p90": 0.16321395275047357,
+          "token_interval_p99": 0.3333087853420875,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.671875,
+          "goodput": 2.27513569204912,
+          "ttft_slo_attainment": 0.671875,
+          "cached_tokens": 12257600,
+          "target_counts": {
+            "0": 36,
+            "5": 28,
+            "3": 29,
+            "2": 41,
+            "4": 29,
+            "1": 29
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5416666666666666,
+              "goodput": 1.8342179222721589
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5416666666666666,
+              "goodput": 1.8342179222721589
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.671875,
+              "goodput": 2.27513569204912
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.671875,
+              "goodput": 2.27513569204912
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 3.3862484718870625
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 3.3862484718870625
+            }
+          ],
+          "task_p50": 52.75958250000258,
+          "task_p90": 55.73494879950886,
+          "paid_wall": 57.69991484499769,
+          "offered_clients": 96
+        }
+      ],
+      "median": {
+        "wall": 56.26130271649163,
+        "paid_wall": 57.26130271649163,
+        "task_p50": 52.70440792325098,
+        "task_p90": 55.29273151475354,
+        "ttft_p50": 4.1701566322444705,
+        "ttft_p90": 13.853501538147977,
+        "tpot_p50": 0.153609813208585,
+        "tpot_p90": 0.16420138849264723,
+        "slo_attainment": 0.671875,
+        "goodput": 2.293011973145907,
+        "ttft_slo_attainment": 0.671875
+      },
+      "wall_runs": [
+        55.82269058798556,
+        56.69991484499769
+      ],
+      "prep_runs": [
+        0.0,
+        0.0
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 192,
+      "arm": "blitz_copy",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 384,
+          "errors": 0,
+          "wall": 58.54855292098364,
+          "ttft_p50": 10.224869517987827,
+          "ttft_p90": 11.701819850006723,
+          "e2e_p50": 28.883996940989164,
+          "e2e_p90": 29.91894660500693,
+          "tpot_p50": 0.14085813015357931,
+          "tpot_p90": 0.15340987066371645,
+          "token_interval_p99": 0.5039927119386275,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.18229166666666666,
+          "goodput": 1.1955889002836857,
+          "ttft_slo_attainment": 0.18229166666666666,
+          "cached_tokens": 25169088,
+          "target_counts": {
+            "2": 64,
+            "1": 64,
+            "5": 64,
+            "4": 64,
+            "3": 64,
+            "0": 64
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.015625,
+              "goodput": 0.10247904859574448
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.015625,
+              "goodput": 0.10247904859574448
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.18229166666666666,
+              "goodput": 1.1955889002836857
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.18229166666666666,
+              "goodput": 1.1955889002836857
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 6.558659110127647
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 6.558659110127647
+            }
+          ],
+          "task_p50": 58.00559301149042,
+          "task_p90": 58.47698417028587,
+          "paid_wall": 59.54855292098364,
+          "offered_clients": 192
+        },
+        {
+          "requests": 384,
+          "errors": 0,
+          "wall": 58.15956067098887,
+          "ttft_p50": 10.78412045550067,
+          "ttft_p90": 11.148728397887316,
+          "e2e_p50": 28.67833523049194,
+          "e2e_p90": 29.197912066697608,
+          "tpot_p50": 0.14069585675189428,
+          "tpot_p90": 0.14552642042839378,
+          "token_interval_p99": 0.4472490730963164,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.13541666666666666,
+          "goodput": 0.8940920357732107,
+          "ttft_slo_attainment": 0.13541666666666666,
+          "cached_tokens": 25169088,
+          "target_counts": {
+            "3": 64,
+            "1": 64,
+            "2": 64,
+            "5": 64,
+            "4": 64,
+            "0": 64
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.015625,
+              "goodput": 0.10316446566613971
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.015625,
+              "goodput": 0.10316446566613971
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.13541666666666666,
+              "goodput": 0.8940920357732107
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.13541666666666666,
+              "goodput": 0.8940920357732107
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 6.602525802632941
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 6.602525802632941
+            }
+          ],
+          "task_p50": 57.599044130998664,
+          "task_p90": 58.08972135130025,
+          "paid_wall": 59.15956067098887,
+          "offered_clients": 192
+        }
+      ],
+      "median": {
+        "wall": 58.35405679598625,
+        "paid_wall": 59.35405679598625,
+        "task_p50": 57.80231857124454,
+        "task_p90": 58.28335276079306,
+        "ttft_p50": 10.504494986744248,
+        "ttft_p90": 11.42527412394702,
+        "tpot_p50": 0.1407769934527368,
+        "tpot_p90": 0.14946814554605511,
+        "slo_attainment": 0.15885416666666666,
+        "goodput": 1.0448404680284482,
+        "ttft_slo_attainment": 0.15885416666666666
+      },
+      "wall_runs": [
+        58.54855292098364,
+        58.15956067098887
+      ],
+      "prep_runs": [
+        2.0048514230002183,
+        3.567330279009184
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 192,
+      "arm": "blitz_none",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 384,
+          "errors": 0,
+          "wall": 105.83417486899998,
+          "ttft_p50": 8.400350518495543,
+          "ttft_p90": 49.96882587280698,
+          "e2e_p50": 25.515738482499728,
+          "e2e_p90": 70.32245562961315,
+          "tpot_p50": 0.14586354835040494,
+          "tpot_p90": 0.1487559573660929,
+          "token_interval_p99": 0.5450643729954027,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.5,
+          "goodput": 1.8141588030298799,
+          "ttft_slo_attainment": 0.5,
+          "cached_tokens": 24839360,
+          "target_counts": {
+            "0": 179,
+            "3": 41,
+            "2": 42,
+            "1": 42,
+            "5": 39,
+            "4": 41
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 1.8141588030298799
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 1.8141588030298799
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 1.8141588030298799
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 1.8141588030298799
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.018229166666666668,
+              "goodput": 0.06614120636046437
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5833333333333334,
+              "goodput": 2.11651860353486
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5833333333333334,
+              "goodput": 2.11651860353486
+            }
+          ],
+          "task_p50": 77.83573969300778,
+          "task_p90": 104.81568517941923,
+          "paid_wall": 106.83417486899998,
+          "offered_clients": 192
+        },
+        {
+          "requests": 384,
+          "errors": 0,
+          "wall": 102.63986166400719,
+          "ttft_p50": 7.179624826996587,
+          "ttft_p90": 49.25362514480356,
+          "e2e_p50": 24.515446244506165,
+          "e2e_p90": 70.48591369861958,
+          "tpot_p50": 0.14636168552367346,
+          "tpot_p90": 0.16501894149921034,
+          "token_interval_p99": 0.7194317262235678,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.5,
+          "goodput": 1.8706182655283996,
+          "ttft_slo_attainment": 0.5,
+          "cached_tokens": 24839168,
+          "target_counts": {
+            "0": 175,
+            "4": 42,
+            "1": 43,
+            "5": 40,
+            "3": 42,
+            "2": 42
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 1.8706182655283996
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 1.8706182655283996
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 1.8706182655283996
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 1.8706182655283996
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0390625,
+              "goodput": 0.14614205199440622
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.7317708333333334,
+              "goodput": 2.737727774028543
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.7317708333333334,
+              "goodput": 2.737727774028543
+            }
+          ],
+          "task_p50": 70.87540907799848,
+          "task_p90": 93.71981157121482,
+          "paid_wall": 103.63986166400719,
+          "offered_clients": 192
+        }
+      ],
+      "median": {
+        "wall": 104.23701826650358,
+        "paid_wall": 105.23701826650358,
+        "task_p50": 74.35557438550313,
+        "task_p90": 99.26774837531703,
+        "ttft_p50": 7.789987672746065,
+        "ttft_p90": 49.61122550880527,
+        "tpot_p50": 0.1461126169370392,
+        "tpot_p90": 0.15688744943265162,
+        "slo_attainment": 0.5,
+        "goodput": 1.8423885342791397,
+        "ttft_slo_attainment": 0.5
+      },
+      "wall_runs": [
+        105.83417486899998,
+        102.63986166400719
+      ],
+      "prep_runs": [
+        0.0,
+        0.0
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 192,
+      "arm": "blitz_recompute",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 384,
+          "errors": 0,
+          "wall": 107.02376659301808,
+          "ttft_p50": 6.007451753510395,
+          "ttft_p90": 52.431926182517785,
+          "e2e_p50": 23.14836731100513,
+          "e2e_p90": 73.89112957472389,
+          "tpot_p50": 0.14038663633077453,
+          "tpot_p90": 0.14817650562207724,
+          "token_interval_p99": 0.5260340723732954,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.5520833333333334,
+          "goodput": 1.9808684252926514,
+          "ttft_slo_attainment": 0.5520833333333334,
+          "cached_tokens": 25146368,
+          "target_counts": {
+            "2": 41,
+            "4": 41,
+            "3": 41,
+            "1": 41,
+            "5": 39,
+            "0": 181
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 1.7939940455480616
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 1.7939940455480616
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5520833333333334,
+              "goodput": 1.9808684252926514
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5520833333333334,
+              "goodput": 1.9808684252926514
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.018229166666666668,
+              "goodput": 0.06540603291060641
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5703125,
+              "goodput": 2.046274458203258
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5703125,
+              "goodput": 2.046274458203258
+            }
+          ],
+          "task_p50": 85.66805251601909,
+          "task_p90": 106.500820492208,
+          "paid_wall": 108.02376659301808,
+          "offered_clients": 192
+        },
+        {
+          "requests": 384,
+          "errors": 0,
+          "wall": 106.31766283899196,
+          "ttft_p50": 5.37446022349468,
+          "ttft_p90": 53.42176150759042,
+          "e2e_p50": 22.558862145990133,
+          "e2e_p90": 74.5714964977029,
+          "tpot_p50": 0.14438347314167255,
+          "tpot_p90": 0.15599438052200051,
+          "token_interval_p99": 0.6504894452518784,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.5520833333333334,
+          "goodput": 1.9940242697119286,
+          "ttft_slo_attainment": 0.5520833333333334,
+          "cached_tokens": 25146304,
+          "target_counts": {
+            "2": 41,
+            "3": 41,
+            "1": 41,
+            "5": 39,
+            "4": 41,
+            "0": 181
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 1.8059087725692937
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 1.8059087725692937
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5520833333333334,
+              "goodput": 1.9940242697119286
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5520833333333334,
+              "goodput": 1.9940242697119286
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0390625,
+              "goodput": 0.14108662285697607
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5911458333333334,
+              "goodput": 2.1351108925689046
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5911458333333334,
+              "goodput": 2.1351108925689046
+            }
+          ],
+          "task_p50": 71.45147557349992,
+          "task_p90": 105.75406117869134,
+          "paid_wall": 107.31766283899196,
+          "offered_clients": 192
+        }
+      ],
+      "median": {
+        "wall": 106.67071471600502,
+        "paid_wall": 107.67071471600502,
+        "task_p50": 78.5597640447595,
+        "task_p90": 106.12744083544968,
+        "ttft_p50": 5.690955988502537,
+        "ttft_p90": 52.9268438450541,
+        "tpot_p50": 0.14238505473622354,
+        "tpot_p90": 0.15208544307203886,
+        "slo_attainment": 0.5520833333333334,
+        "goodput": 1.9874463475022899,
+        "ttft_slo_attainment": 0.5520833333333334
+      },
+      "wall_runs": [
+        107.02376659301808,
+        106.31766283899196
+      ],
+      "prep_runs": [
+        7.297084542020457,
+        7.283863263990497
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 192,
+      "arm": "blitz_recompute_wait",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 384,
+          "errors": 0,
+          "wall": 62.91801562701585,
+          "ttft_p50": 12.619520236505195,
+          "ttft_p90": 15.189369928717497,
+          "e2e_p50": 30.029522611992434,
+          "e2e_p90": 33.69551451112202,
+          "tpot_p50": 0.14249814594497695,
+          "tpot_p90": 0.1501395586559294,
+          "token_interval_p99": 0.6343287470244106,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.08854166666666667,
+          "goodput": 0.5403857648905415,
+          "ttft_slo_attainment": 0.08854166666666667,
+          "cached_tokens": 25168960,
+          "target_counts": {
+            "2": 64,
+            "5": 64,
+            "3": 63,
+            "0": 66,
+            "1": 63,
+            "4": 64
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.015625,
+              "goodput": 0.0953621938042132
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.015625,
+              "goodput": 0.0953621938042132
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.08854166666666667,
+              "goodput": 0.5403857648905415
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.08854166666666667,
+              "goodput": 0.5403857648905415
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 6.103180403469644
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 6.103180403469644
+            }
+          ],
+          "task_p50": 62.08745059151261,
+          "task_p90": 62.845797544321975,
+          "paid_wall": 63.91801562701585,
+          "offered_clients": 192
+        },
+        {
+          "requests": 384,
+          "errors": 0,
+          "wall": 62.04594295899733,
+          "ttft_p50": 11.429693239013432,
+          "ttft_p90": 16.082242469704944,
+          "e2e_p50": 28.716201040515443,
+          "e2e_p90": 35.93341362149804,
+          "tpot_p50": 0.14677340591346522,
+          "tpot_p90": 0.16164968067942384,
+          "token_interval_p99": 0.7996631794408313,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.5,
+          "goodput": 3.094481135162729,
+          "ttft_slo_attainment": 0.5,
+          "cached_tokens": 25170048,
+          "target_counts": {
+            "1": 63,
+            "5": 66,
+            "4": 63,
+            "3": 64,
+            "2": 64,
+            "0": 64
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.109375,
+              "goodput": 0.676917748316847
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.109375,
+              "goodput": 0.676917748316847
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.5,
+              "goodput": 3.094481135162729
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.5,
+              "goodput": 3.094481135162729
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 1.0,
+              "goodput": 6.188962270325458
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 1.0,
+              "goodput": 6.188962270325458
+            }
+          ],
+          "task_p50": 59.58670065950719,
+          "task_p90": 61.423799358308315,
+          "paid_wall": 63.04594295899733,
+          "offered_clients": 192
+        }
+      ],
+      "median": {
+        "wall": 62.48197929300659,
+        "paid_wall": 63.48197929300659,
+        "task_p50": 60.8370756255099,
+        "task_p90": 62.13479845131515,
+        "ttft_p50": 12.024606737759314,
+        "ttft_p90": 15.63580619921122,
+        "tpot_p50": 0.14463577592922108,
+        "tpot_p90": 0.15589461966767662,
+        "slo_attainment": 0.2942708333333333,
+        "goodput": 1.8174334500266354,
+        "ttft_slo_attainment": 0.2942708333333333
+      },
+      "wall_runs": [
+        62.91801562701585,
+        62.04594295899733
+      ],
+      "prep_runs": [
+        7.237968895002268,
+        7.240751612989698
+      ],
+      "cache_mismatches": 0
+    },
+    {
+      "clients": 192,
+      "arm": "dualmap_none",
+      "repeats": 2,
+      "summaries": [
+        {
+          "requests": 384,
+          "errors": 0,
+          "wall": 74.12189053199836,
+          "ttft_p50": 10.631722672493197,
+          "ttft_p90": 20.00388979471172,
+          "e2e_p50": 32.02892240849906,
+          "e2e_p90": 41.97409822420158,
+          "tpot_p50": 0.17442931342910328,
+          "tpot_p90": 0.19754031458514373,
+          "token_interval_p99": 0.42539638342772296,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.4114583333333333,
+          "goodput": 2.131623989431186,
+          "ttft_slo_attainment": 0.4661458333333333,
+          "cached_tokens": 24843264,
+          "target_counts": {
+            "0": 73,
+            "5": 62,
+            "3": 59,
+            "1": 51,
+            "2": 75,
+            "4": 64
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.21354166666666666,
+              "goodput": 1.1062858679326408
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.2604166666666667,
+              "goodput": 1.3491291072349278
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.4114583333333333,
+              "goodput": 2.131623989431186
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.4661458333333333,
+              "goodput": 2.4149411019505207
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.8333333333333334,
+              "goodput": 4.317213143151769
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.8984375,
+              "goodput": 4.654495419960501
+            }
+          ],
+          "task_p50": 67.61363567200897,
+          "task_p90": 71.97456356449693,
+          "paid_wall": 75.12189053199836,
+          "offered_clients": 192
+        },
+        {
+          "requests": 384,
+          "errors": 0,
+          "wall": 72.673206595995,
+          "ttft_p50": 10.430992236491875,
+          "ttft_p90": 19.24995105019479,
+          "e2e_p50": 31.361283365491545,
+          "e2e_p90": 41.52538636579993,
+          "tpot_p50": 0.17359575840546457,
+          "tpot_p90": 0.196501869662971,
+          "token_interval_p99": 0.37204189619747924,
+          "coalesced_tokens": 0,
+          "slo_attainment": 0.421875,
+          "goodput": 2.2291571761872384,
+          "ttft_slo_attainment": 0.4739583333333333,
+          "cached_tokens": 24844736,
+          "target_counts": {
+            "0": 71,
+            "1": 55,
+            "3": 57,
+            "5": 60,
+            "2": 75,
+            "4": 66
+          },
+          "slo_grid": [
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.22916666666666666,
+              "goodput": 1.21090019447208
+            },
+            {
+              "ttft_limit": 5.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.2682291666666667,
+              "goodput": 1.4173036367116392
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.421875,
+              "goodput": 2.2291571761872384
+            },
+            {
+              "ttft_limit": 10.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.4739583333333333,
+              "goodput": 2.5043617658399837
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.1,
+              "attainment": 0.0,
+              "goodput": 0.0
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.2,
+              "attainment": 0.8463541666666666,
+              "goodput": 4.472074581857115
+            },
+            {
+              "ttft_limit": 20.0,
+              "tpot_limit": 0.4,
+              "attainment": 0.921875,
+              "goodput": 4.871121236853595
+            }
+          ],
+          "task_p50": 66.8335201729933,
+          "task_p90": 70.87491526138619,
+          "paid_wall": 73.673206595995,
+          "offered_clients": 192
+        }
+      ],
+      "median": {
+        "wall": 73.39754856399668,
+        "paid_wall": 74.39754856399668,
+        "task_p50": 67.22357792250114,
+        "task_p90": 71.42473941294156,
+        "ttft_p50": 10.531357454492536,
+        "ttft_p90": 19.626920422453257,
+        "tpot_p50": 0.17401253591728394,
+        "tpot_p90": 0.19702109212405738,
+        "slo_attainment": 0.41666666666666663,
+        "goodput": 2.1803905828092125,
+        "ttft_slo_attainment": 0.4700520833333333
+      },
+      "wall_runs": [
+        74.12189053199836,
+        72.673206595995
+      ],
+      "prep_runs": [
+        0.0,
+        0.0
+      ],
+      "cache_mismatches": 0
+    }
+  ],
+  "comparisons": [
+    {
+      "clients": 32,
+      "best_routing": "blitz_none",
+      "best_recompute": "blitz_recompute",
+      "copy_vs_routing_pct": 13.792779392637211,
+      "copy_vs_recompute_pct": 7.530603350848953,
+      "copy_slo": 1.0,
+      "baseline_slo": 1.0
+    },
+    {
+      "clients": 96,
+      "best_routing": "dualmap_none",
+      "best_recompute": "blitz_recompute_wait",
+      "copy_vs_routing_pct": 19.57971306937961,
+      "copy_vs_recompute_pct": 9.45406174758081,
+      "copy_slo": 1.0,
+      "baseline_slo": 0.671875
+    },
+    {
+      "clients": 192,
+      "best_routing": "dualmap_none",
+      "best_recompute": "blitz_recompute_wait",
+      "copy_vs_routing_pct": 20.49590492098483,
+      "copy_vs_recompute_pct": 6.606580879364621,
+      "copy_slo": 0.15885416666666666,
+      "baseline_slo": 0.41666666666666663
+    }
+  ],
+  "accepted_trials": 30,
+  "telemetry_gaps": [],
+  "main_status": "failed",
+  "control_status": "complete"
+}

@@ -68,6 +68,7 @@ def main() -> None:
     parser.add_argument("--prefix-tokens", type=int, default=2048)
     parser.add_argument("--continuation-tokens", type=int, default=16)
     parser.add_argument("--rendezvous-port", type=int, default=29710)
+    parser.add_argument("--master-address", default="127.0.0.1")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--output-name", default="direct_two_engine_result.json")
     args = parser.parse_args()
@@ -98,7 +99,7 @@ def main() -> None:
         args.destination,
         "/agentshift/hybrid_state/direct_group/init",
         {
-            "master_address": "127.0.0.1",
+            "master_address": args.master_address,
             "port": args.rendezvous_port,
             "group_rank": 0,
             "world_size": 2,
@@ -106,7 +107,7 @@ def main() -> None:
             "backend": "nccl",
         },
         {
-            "master_address": "127.0.0.1",
+            "master_address": args.master_address,
             "port": args.rendezvous_port,
             "group_rank": 1,
             "world_size": 2,

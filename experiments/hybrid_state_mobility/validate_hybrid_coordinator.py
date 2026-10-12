@@ -40,6 +40,7 @@ def main() -> None:
     parser.add_argument("--prefix-tokens", type=int, default=2048)
     parser.add_argument("--continuation-tokens", type=int, default=16)
     parser.add_argument("--base-port", type=int, default=29760)
+    parser.add_argument("--master-address", default="127.0.0.1")
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
@@ -73,6 +74,7 @@ def main() -> None:
             store,
             {"source": source, "destination": destination},
             base_port=args.base_port,
+            master_address=args.master_address,
         )
         result = asyncio.run(coordinator.migrate("hybrid-agent", "destination"))
         migration = store.get_migration(result.migration_id)

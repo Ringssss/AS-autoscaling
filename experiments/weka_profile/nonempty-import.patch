@@ -1,0 +1,30 @@
+--- hygon_hybrid_control.py
++++ hygon_hybrid_control.py
+@@ -178,7 +178,10 @@
+                     raise ValueError("exact completed hybrid boundary unavailable")
+                 indices, mamba = match.device_indices, match.last_device_node.mamba_value
+             else:
+-                if self.s.tree_cache.root_node.children:
++                # Opt-in nonempty import. Reserve a complete private copy;
++                # vendor insert() frees duplicate prefix indices atomically
++                # while the scheduler is idle. No other cache is flushed.
++                if self.s.tree_cache.root_node.children and os.environ.get("AGENTSHIFT_NONEMPTY_IMPORT") != "1":
+                     raise ValueError("destination cache must be empty; flush before migration")
+                 indices = self.s.token_to_kv_pool_allocator.alloc(len(tokens))
+                 mamba = self.pool.mamba_pool.alloc(1)
+@@ -220,7 +223,14 @@
+             if role == "destination":
+                 inserted = self.s.tree_cache.insert(InsertParams(key=RadixKey(tokens), value=indices, mamba_value=mamba))
+                 installed = True
+-                if inserted.prefix_len != 0 or inserted.mamba_exist:
++                if os.environ.get("AGENTSHIFT_NONEMPTY_IMPORT") == "1":
++                    # MambaRadixCache._insert_helper frees duplicate KV slots
++                    # but deliberately leaves redundant recurrent state to
++                    # its caller. An existing executable snapshot wins.
++                    if inserted.mamba_exist:
++                        self.pool.mamba_pool.free(mamba)
++                    self.s.tree_cache.sanity_check()
++                elif inserted.prefix_len != 0 or inserted.mamba_exist:
+                     raise RuntimeError("unexpected destination prefix collision")
+             ready = self.gather(len(self.match(tokens).device_indices) == len(tokens))
+             store.set(f"{seq}/ready/{rank}", json.dumps(ready))

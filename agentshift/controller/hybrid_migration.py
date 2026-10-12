@@ -140,6 +140,16 @@ class HybridMigrationCoordinator:
             )
             elapsed = time.perf_counter() - started
 
+            for engine, transfer_result in (
+                (source_engine, source_result),
+                (destination_engine, destination_result),
+            ):
+                if transfer_result.get("success") is False:
+                    raise RuntimeError(
+                        f"{engine} hybrid transfer failed: "
+                        f"{transfer_result.get('message', 'request failed')}"
+                    )
+
             token_count = int(source_result["token_count"])
             bytes_transferred = int(source_result["bytes_transferred"])
             if destination_result["token_count"] != token_count:
