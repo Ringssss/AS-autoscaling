@@ -149,7 +149,8 @@ def main():
         'results/native-relocation-space-20261010','results/state-preparation-20261011',
         'results/concurrency-sweep-20261011','results/six-worker-quick-20261012',
         'results/archive-20260930','experiments/fluidkv/results','experiments/hygon_runtime/results',
-        'experiments/weka_baselines/results','experiments/weka_baselines/data',
+        'experiments/weka_baselines/results','experiments/weka_baselines/oracle/results',
+        'experiments/weka_baselines/data',
         'experiments/weka_gravity/results','experiments/weka_profile/results',
         'experiments/multinode/results','experiments/multinode/archive','docs/review']
     files={}

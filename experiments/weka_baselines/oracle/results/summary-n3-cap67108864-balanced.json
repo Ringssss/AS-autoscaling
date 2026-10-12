@@ -1,0 +1,85 @@
+[
+  {
+    "policy": "sticky",
+    "engines": 3,
+    "cap_tokens": 67108864,
+    "requests": 384,
+    "total_input_tokens": 15881792,
+    "uncached_tokens": 6012672,
+    "hit_tokens": 9869120,
+    "hit_ratio": 0.6214109843523955,
+    "reusability_achieved": 0.6214109843523955,
+    "uncached_p50": 4384.0,
+    "uncached_p90": 46124.8,
+    "uncached_p99": 77939.8400000001,
+    "uncached_mean": 15658.0,
+    "per_engine_requests": {
+      "0": 120,
+      "2": 123,
+      "1": 141
+    },
+    "imbalance": 1.1015625
+  },
+  {
+    "policy": "p2c-ring",
+    "engines": 3,
+    "cap_tokens": 67108864,
+    "requests": 384,
+    "total_input_tokens": 15881792,
+    "uncached_tokens": 8657920,
+    "hit_tokens": 7223872,
+    "hit_ratio": 0.4548524498998602,
+    "reusability_achieved": 0.4548524498998602,
+    "uncached_p50": 17952.0,
+    "uncached_p90": 50624.0,
+    "uncached_p99": 85948.1600000003,
+    "uncached_mean": 22546.666666666668,
+    "per_engine_requests": {
+      "0": 264,
+      "1": 120
+    },
+    "imbalance": 2.0625
+  },
+  {
+    "policy": "cacheroute",
+    "engines": 3,
+    "cap_tokens": 67108864,
+    "requests": 384,
+    "total_input_tokens": 15881792,
+    "uncached_tokens": 8659776,
+    "hit_tokens": 7222016,
+    "hit_ratio": 0.4547355865131592,
+    "reusability_achieved": 0.4547355865131592,
+    "uncached_p50": 18368.0,
+    "uncached_p90": 49984.0,
+    "uncached_p99": 89772.80000000022,
+    "uncached_mean": 22551.5,
+    "per_engine_requests": {
+      "0": 214,
+      "2": 84,
+      "1": 86
+    },
+    "imbalance": 1.671875
+  },
+  {
+    "policy": "oracle-home",
+    "engines": 3,
+    "cap_tokens": 67108864,
+    "requests": 384,
+    "total_input_tokens": 15881792,
+    "uncached_tokens": 6089536,
+    "hit_tokens": 9792256,
+    "hit_ratio": 0.6165712282341942,
+    "reusability_achieved": 0.6165712282341942,
+    "uncached_p50": 4544.0,
+    "uncached_p90": 46585.59999999999,
+    "uncached_p99": 74115.20000000017,
+    "uncached_mean": 15858.166666666666,
+    "per_engine_requests": {
+      "1": 126,
+      "0": 153,
+      "2": 105
+    },
+    "imbalance": 1.1953125
+  }
+]

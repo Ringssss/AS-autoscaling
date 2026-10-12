@@ -1,0 +1,15 @@
+{
+  "streams": 128,
+  "requests": 1152,
+  "total_input_tokens": 60591232,
+  "consecutive_pairs": 1024,
+  "zero_lcp_pairs": 42,
+  "reusable_tokens_consecutive": 50984960,
+  "reusable_tokens_best_prior": 51475520,
+  "lcp_tokens_percentiles": {
+    "10": 24128,
+    "50": 48960,
+    "90": 77120,
+    "99": 110080
+  }
+}

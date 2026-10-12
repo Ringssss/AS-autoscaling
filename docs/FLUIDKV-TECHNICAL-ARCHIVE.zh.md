@@ -53,6 +53,8 @@ GPU 上的可续算状态复制在已验证的共享长前缀突发场景中有�
 |10月11日并发扫描及v2|`results/concurrency-sweep-20261011/`|包括传输失败、客户端限制与边界估计问题；表面18.4%优势已撤回，见`v2/pause-reason.json`|
 |10月12日六实例|`results/six-worker-quick-20261012/`|保留初次门禁失败、旧DualMap超时及补充对照；有效集合由`v2/FINAL-REPORT.zh.md`及`p10_final_report.py`定义|
 
+早期oracle分析的小型JSON/JSONL直接保存在`experiments/weka_baselines/oracle/results/`，包括9月30日审计引用的`ceilings.json`。根目录`FINDINGS.zh.md`也作为旧解释留档，顶部标明后续纠正入口。
+
 历史审阅：[9月30日证据审计](review/REVIEW-2026-09-30.zh.md)、[10月1–3日命令核对](review/COMMAND-AUDIT-2026-10-01-03.zh.md)、[Blitz比较](review/BLITZ-LMETRIC-COMPARISON-2026-10-10.zh.md)。历史文件中的相对结果链接在还原结果包后可用。
 
 ## 4. 多级状态准备方案（待实现）

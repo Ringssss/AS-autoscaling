@@ -1,0 +1,10 @@
+{
+  "requests": 384,
+  "input_tokens": 15881792,
+  "own_ceiling": 0.5962369989482296,
+  "global_ceiling": 0.6462102009647274,
+  "irreducible_requests": 120,
+  "irreducible_token_share": 0.26812087703956833,
+  "residual_uncached_mean": 16699.166666666668,
+  "residual_p99": 77939.8400000001
+}

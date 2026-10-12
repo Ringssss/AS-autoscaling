@@ -1,0 +1,126 @@
+[
+  {
+    "policy": "loadaware",
+    "spread": 0.0,
+    "engines": 3,
+    "hit_ratio": 0.2445745627485179,
+    "requests": 13366,
+    "input_tokens": 1103807808,
+    "imbalance": 1.005087535537932,
+    "per_engine": {
+      "1": 4444,
+      "0": 4444,
+      "2": 4478
+    }
+  },
+  {
+    "policy": "loadaware",
+    "spread": 0.02,
+    "engines": 3,
+    "hit_ratio": 0.24750781251947804,
+    "requests": 13366,
+    "input_tokens": 1103807808,
+    "imbalance": 1.3238066736495586,
+    "per_engine": {
+      "1": 5898,
+      "2": 3373,
+      "0": 4095
+    }
+  },
+  {
+    "policy": "loadaware",
+    "spread": 0.05,
+    "engines": 3,
+    "hit_ratio": 0.24750781251947804,
+    "requests": 13366,
+    "input_tokens": 1103807808,
+    "imbalance": 1.3238066736495586,
+    "per_engine": {
+      "1": 5898,
+      "2": 3373,
+      "0": 4095
+    }
+  },
+  {
+    "policy": "loadaware",
+    "spread": 0.1,
+    "engines": 3,
+    "hit_ratio": 0.24750781251947804,
+    "requests": 13366,
+    "input_tokens": 1103807808,
+    "imbalance": 1.3238066736495586,
+    "per_engine": {
+      "1": 5898,
+      "2": 3373,
+      "0": 4095
+    }
+  },
+  {
+    "policy": "loadaware",
+    "spread": 0.2,
+    "engines": 3,
+    "hit_ratio": 0.24750781251947804,
+    "requests": 13366,
+    "input_tokens": 1103807808,
+    "imbalance": 1.3238066736495586,
+    "per_engine": {
+      "1": 5898,
+      "2": 3373,
+      "0": 4095
+    }
+  },
+  {
+    "policy": "loadaware",
+    "spread": 0.5,
+    "engines": 3,
+    "hit_ratio": 0.24750781251947804,
+    "requests": 13366,
+    "input_tokens": 1103807808,
+    "imbalance": 1.3238066736495586,
+    "per_engine": {
+      "1": 5898,
+      "2": 3373,
+      "0": 4095
+    }
+  },
+  {
+    "policy": "loadaware",
+    "spread": 1.0,
+    "engines": 3,
+    "hit_ratio": 0.24750781251947804,
+    "requests": 13366,
+    "input_tokens": 1103807808,
+    "imbalance": 1.3238066736495586,
+    "per_engine": {
+      "1": 5898,
+      "2": 3373,
+      "0": 4095
+    }
+  },
+  {
+    "policy": "affinity",
+    "spread": 0.0,
+    "engines": 3,
+    "hit_ratio": 0.24750781251947804,
+    "requests": 13366,
+    "input_tokens": 1103807808,
+    "imbalance": 1.3238066736495586,
+    "per_engine": {
+      "1": 5898,
+      "2": 3373,
+      "0": 4095
+    }
+  },
+  {
+    "policy": "balance",
+    "spread": 0.0,
+    "engines": 3,
+    "hit_ratio": 0.2480659096769136,
+    "requests": 13366,
+    "input_tokens": 1103807808,
+    "imbalance": 3.0,
+    "per_engine": {
+      "0": 13366
+    }
+  }
+]
